@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/add-user.css">
+</head>
+
+<body class="d-flex flex-column">
+  <%- include('../includes/navigation.ejs') %>
+  <main class="d-flex align-items-center justify-content-center vh-100">
+    <section class="add-user-container">
+      <h1>Ajouter un utilisateur</h1>
+      <% if (error.length > 0) { %>
+        <div class="alert alert-danger align-middle">
+          <p><%= error %></p>
+        </div>
+      <% } %> 
+      <div class="content">
+        <div class="content-form">
+          <form action="/users/add-user" method="POST">
+            <label for="name">Nom</label>
+            <input type="text" name="name" id="name">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+            <label for="password">Confirmation du mot de passe</label>
+            <input type="password" name="passwordConfirm" id="password">
+            <button type="submit" class="btn btn-success">Ajouter</button>
+          </form>
+        </div>
+        <div class="content-img">
+          <img src="/images/user.png" alt="">
+        </div>
+      </div>
+    </section>
+  </main>
+<%- include('../includes/end.ejs') %>

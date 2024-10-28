@@ -3,6 +3,8 @@ const catwayController = require('../controllers/catway');
 const router = express.Router();
 
 
+router.get('/', catwayController.getHome);
+
 router.get('/catways', catwayController.getCatways);
 
 router.get('/catways/:id', catwayController.getOneCatway);
