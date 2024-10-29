@@ -10,6 +10,9 @@ const methodOverride = require('method-override');
 const catwayRoutes = require('./routes/catway');
 const reservationRoutes = require('./routes/reservations');
 const usersRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
+
+const User = require('./models/user');
 
 const app = express();
 const store = new MongoDBStore({
@@ -38,11 +41,36 @@ app.use(
   })
 );
 app.use(flash());
+app.use(async (req, res, next) => {
+  try{
+    if (!req.session.user) {
+      return next();
+    }
+
+    const user = await User.findById(req.session.user._id);
+    if (user){
+      req.user = user;
+      
+    }
+  } catch(error){
+    console.log(error);
+  }
+  next();
+});
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.user = req.user;
+  //res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
+
 
 // Rotas aqui...
 app.use(catwayRoutes);
 app.use(reservationRoutes);
-app.use(usersRoutes);
+app.use('/users', usersRoutes);
+app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

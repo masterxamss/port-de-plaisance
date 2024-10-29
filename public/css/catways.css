@@ -1,9 +1,9 @@
-body{
+/* body{
   background-image: url('../images/private-yachts-port.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .catways-container{
   width: 90%;
@@ -23,16 +23,16 @@ body{
   justify-content: center;
   align-items: center;
   height: 5rem;
-  background-color: rgb(13, 110, 253, 0.8);
-  color: white;
+  background-color: #157448cc;
+  color: #ffffff;
   border-radius: 10px;
-  border: 1px solid rgb(255, 255, 255);
+  border: 1px solid #ffffff;
   margin: 5px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
   &:hover{
     transform: scale(1.1);
-    background-color: rgb(12, 78, 176, 0.8);
+    background-color: #0a4c2ccc;
   }
 }

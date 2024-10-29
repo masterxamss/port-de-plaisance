@@ -21,46 +21,57 @@
       <div class="d-flex">
         <ul class="navbar-nav align-self-center d-flex align-self-center">
           <li class="nav-item">
-            <a class="nav-link <% if (path === '/') { %> active <% } %>" aria-current="page" href="/">Accueil</a>
+            <a class="nav-link <%= path === '/' ? 'active' : '' %>" aria-current="page" href="/">Accueil</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link <% if (path === '/catways') { %> active <% } %>" href="/catways">Catways</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Réservations</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <% if (path === '/users') { %> active <% } %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Users
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item text-primary" href="/users">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/>
-                  </svg>
-                   Liste d'utilisateurs
-                </a>
-                <a class="dropdown-item text-primary" href="/users/add-user">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-                  </svg>
-                   Créer un utilisateur
-                </a>
-              </li>
-            </ul>
-          </li>
+          <% if (isAuthenticated) { %>
+            <li class="nav-item">
+              <a class="nav-link <%=path === '/catways' ? 'active' : '' %>" href="/catways">Catways</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Réservations</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <% if (path === '/users') { %> active <% } %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Users
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item text-success" href="/users/list-users">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                      <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/>
+                    </svg>
+                    Liste d'utilisateurs
+                  </a>
+                  <a class="dropdown-item text-success" href="/users/add-user">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                      <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                      <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                    </svg>
+                    Créer un utilisateur
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <% } %>
           <li class="nav-item">
             <a class="nav-link" href="#">FAQs</a>
           </li>
         </ul>
       </div>
-
-      <div>
-        <a href="#" class="btn btn-primary">Logout</a>
-      </div>
-
+      <% if (isAuthenticated) { %>
+        <div class="d-flex flex-row align-items-center">
+          <span class="me-2">Bonjour <%= user.name %></span>
+          <form action="/auth/logout" method="POST">
+            <button type="submit" class="btn btn-success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+              </svg>
+              Logout
+            </button>
+          </form>
+        </div>
+      <% } %>
     </div>
     
   </div>

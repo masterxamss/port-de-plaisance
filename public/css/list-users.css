@@ -4,7 +4,7 @@ h1 {
 
 .users-container {
   width: 80%;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.521);
   border-radius: 10px;
   padding: 2rem;
   margin: 2rem auto;
