@@ -1,12 +1,38 @@
 const Catway = require('../models/catway');
 
+
+exports.getHome = (req, res) => {
+  res.render('catways/index',{
+    pageTitle: 'Accueil',
+    path: '/'
+  });
+};
+
 exports.getCatways = async (req, res) => {
-  try {
-    const catways = await Catway.find();
-    res.json(catways);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+  Catway.find().sort({ _id: "asc" })
+    .then((catways) => {
+      //console.log(catways);
+      res.render('catways/catways-list', {
+        pageTitle: 'Catways list',
+        catways: catways,
+        path: '/catways',
+      })    
+    })
+    .catch((error) => {
+      res.status(400).json({ error: error.message });
+    });
+
+
+
+
+
+  
+  // try {
+  //   const catways = await Catway.find();
+  //   res.json(catways);
+  // } catch (error) {
+  //   res.status(400).json({ message: error.message });
+  // }
 };
 
 exports.getOneCatway = async (req, res) => {
