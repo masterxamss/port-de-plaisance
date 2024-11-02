@@ -4,18 +4,22 @@ const router = express.Router();
 const isAuth = require('../middlewares/is-auth');
 
 
-router.get('/', catwayController.getHome);
+router.get('/list', isAuth, catwayController.getCatways);
 
-router.get('/catways', isAuth, catwayController.getCatways);
+router.get('/get-add', isAuth, catwayController.getAddCatway);
 
-router.get('/catways/:id', isAuth, catwayController.getOneCatway);
+router.post('/add', isAuth, catwayController.createCatway);
 
-router.post('/catways', isAuth, catwayController.createCatway);
+router.get('/get-catway/:id', isAuth, catwayController.getOneCatway);
 
-router.put('/catways/:id', isAuth, catwayController.replaceCatway);
+router.get('/get-edit/:id', isAuth, catwayController.getEditCatway);
 
-router.patch('/catways/:id', isAuth, catwayController.updateCatway);
+router.put('/edit/:id', isAuth, catwayController.replaceCatway);
 
-router.delete('/catways/:id', isAuth, catwayController.deleteCatway);
+router.patch('/edit-state/:id', isAuth, catwayController.updateCatway);
+
+router.delete('/delete/:id', isAuth, catwayController.deleteCatway);
+
+
 
 module.exports = router;

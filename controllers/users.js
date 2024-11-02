@@ -7,7 +7,7 @@ const User = require('../models/user');
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
-    return res.render('users/users-list', {
+    return res.status(200).render('users/users-list', {
       pageTitle: 'Users list',
       users: users,
       path: '/users',
@@ -69,7 +69,11 @@ exports.createUser = async (req, res) => {
 
     // Cria o novo utilizador
     const hashedPassword = await bcrypt.hash(password, 10); // 10 é o salt rounds
-    const user = new User({ name: name, email: email, password: hashedPassword });
+    const user = new User({
+      name: name,
+      email: email,
+      password: hashedPassword 
+    });
 
     await user.save();
     req.flash('success', 'Utilisateur créé avec succès');
@@ -126,10 +130,10 @@ exports.updateUser = async (req, res) => {
       return res.redirect('/users/edit-user/' + userId + '?edit=true');
     }
 
-    if (password.length < 8) {
-      req.flash('error', 'Le mot passe doit contenir au moins 8 caractères');
-      return res.redirect('/users/edit-user/' + userId + '?edit=true');
-    }
+    // if (password.length < 8) {
+    //   req.flash('error', 'Le mot passe doit contenir au moins 8 caractères');
+    //   return res.redirect('/users/edit-user/' + userId + '?edit=true');
+    // }
 
     // Verifica se o email já existe em outro utilizador
     const existingUser = await User.findOne({ email: email });

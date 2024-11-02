@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const catwaySchema = new mongoose.Schema({
   catwayNumber: {
-    type: String,
+    type: Number,
     required: true,
     unique: true
   },
   type: {
     type: String,
     enum: ['long', 'short'],
-    required: true
+    required: true,
   },
   catwayState: {
     type: String,
