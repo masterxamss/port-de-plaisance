@@ -1,12 +1,11 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/add-user.css">
 </head>
 
 <body class="d-flex flex-column">
   <%- include('../includes/navigation.ejs') %>
   <main class="d-flex align-items-center justify-content-center vh-100">
-    <section class="add-user-container">
+    <section class="form-container">
       <h1><% if (editMode) { %>Modifier un utilisateur<% } else { %>Ajouter un utilisateur<% } %></h1>
       <% if (error.length > 0) { %>
         <div class="alert alert-danger align-middle">

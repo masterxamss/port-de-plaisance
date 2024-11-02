@@ -20,7 +20,6 @@ exports.postLogin = async(req, res) => {
 
     if (!user) {
       req.flash('error', 'Les informations fournies sont invalides');
-      res.redirect('/auth/login');
       return res.redirect('/auth/login');
     }
 
@@ -36,7 +35,7 @@ exports.postLogin = async(req, res) => {
           console.log(err);
           res.redirect('/');
         }
-        res.redirect('/catways');
+        res.redirect('/catways/list');
       });
     }
   }

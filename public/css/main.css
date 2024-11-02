@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 body{
-  /* background-image: url('../images/private-yachts-port.jpg'), linear-gradient(red, yellow); */
   background: linear-gradient(
     to bottom,
     rgba(0,0,0, 0),
@@ -31,4 +32,127 @@ body{
 
 .active{
   color: #157347 !important;
+}
+
+
+.form-container {  
+  width: 70%;
+  padding: 5rem;
+  border-radius: 10px;
+  background-color: #ffffffb4;
+}
+
+.form-container h1{
+  margin-bottom: 2rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.content .content-form {
+  width: 50%;
+}
+
+.content-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.content-form form input{
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #adabab;
+
+  &:focus {
+    outline: 1px solid #157347;
+    background-color: antiquewhite;
+  }
+}
+
+.content .content-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.content-img img {
+  width: 50%;
+}
+
+.accordion {
+  --bs-accordion-active-bg: #157347;
+  --bs-accordion-active-color: white;
+  --bs-accordion-btn-focus-box-shadow: none;
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+  transition: all 0.5s;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+}
+
+.flash-message{
+  position: fixed;
+  bottom: 60px;
+  right: 10px;
+  z-index: 1000;
+  width: fit-content;
+  height: fit-content;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d1cbcb;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: gray;
+}
+
+.flash-message-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d1cbcb;
+  padding: .5rem;
+}
+
+.flash-message-header h3{
+  font-size: 1rem;
+  margin: 0;
+}
+
+.flash-message-success .flash-message-header span{
+  height: 18px;
+  width: 18px;
+  background-color: #21a007;
+  border-radius: 5px;
+}
+
+.flash-message-error .flash-message-header span{
+  height: 18px;
+  width: 18px;
+  background-color: #eb0f0f;
+  border-radius: 5px;
+}
+
+.flash-message-body{
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flash-message-body p{
+  margin: 0;
 }

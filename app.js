@@ -11,8 +11,10 @@ const catwayRoutes = require('./routes/catway');
 const reservationRoutes = require('./routes/reservations');
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
+const homeRoutes = require('./routes/home');
 
 const User = require('./models/user');
+const errorController = require('./controllers/error');
 
 const app = express();
 const store = new MongoDBStore({
@@ -67,10 +69,13 @@ app.use((req, res, next) => {
 
 
 // Rotas aqui...
-app.use(catwayRoutes);
+app.use(homeRoutes);
+app.use('/catways', catwayRoutes);
 app.use(reservationRoutes);
 app.use('/users', usersRoutes);
 app.use('/auth', authRoutes);
+
+app.use(errorController.get404);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

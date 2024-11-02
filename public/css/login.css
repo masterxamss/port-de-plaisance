@@ -1,10 +1,32 @@
 .login-container{
-  width: 30%;
-  background-color: rgba(255, 255, 255, 0.521);
+  width: 25%;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255);
   padding: 2rem;
   margin: 2rem auto;
-  
+  backdrop-filter: blur(2px);
+}
+
+.login-container form input{
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255);
+  border-radius: 0;
+  margin-bottom: 3rem;
+
+  &::placeholder{
+    color: rgba(255, 255, 255);
+  }
+
+  &:focus{
+    box-shadow: none;
+    background-color: transparent;
+
+    &::placeholder{
+      color: #0B5ED7;
+    }
+  }
 }
 
 h1{

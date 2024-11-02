@@ -2,16 +2,96 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/catways.css">
 </head>
-
 <body class="d-flex flex-column">
   <%- include('../includes/navigation.ejs') %>
-  <main class="d-flex align-items-center justify-content-center vh-100">
+  <main class="">
     <section class="catways-container">
-      <% catways.forEach((catway) => { %>
-        <div class="catway-card">
-          <h2>Catway : <%= catway.catwayNumber %></h2>
-        </div>
-      <% }) %>
+      <div class="wrapper">
+        <% if (catways.length === 0) { %>
+          <h1>Aucun catway n'a encore été crée</h1>
+        <% } else { %>
+          <header class="wrapper-header">
+            <div class="wrapper-header-btn">
+              <a href="/catways/get-add" class="btn btn-success btn-sm m-3">Créer catway</a>
+            </div>
+            <div class="wrapper-header-options">
+              <div class="wrapper-header-totals">
+                <p class="m-0 text-body bg-light border p-1">
+                  <img src="/images/anchor.png" alt="helm">
+                  Total des catways : <%= catways.length %>
+                </p>
+                <p class="m-0 text-body bg-light border p-1">
+                  <img src="/images/reserved.png" alt="helm">
+                  Total des reservations : <%= reservations.length %>
+                </p>
+              </div>
+
+              <p class="text-body bg-light border p-1"><%= moment(Date.now()).format('DD/MM/YYYY') %></p>
+            </div>
+          </header>
+          <main>
+            <div class="catways-content">  
+              <% catways.forEach((catway) => { %>
+                <% const isReserved = reservations.some(reservation => reservation.catwayNumber === catway.catwayNumber); %>
+                <div class="card text-white <%= isReserved ? 'occupied-catway' : 'free-catway' %> mb-3" style="max-width: 18rem;">
+                  <header class="card-header">
+                    <p>Catway : <%= catway.catwayNumber %></p>
+                    <% if (isReserved) { %>
+                      <span>
+                        <img src="/images/boat.png" alt="Boat image">
+                      </span>
+                    <% } else {%>
+                      <span>
+                        <img src="/images/free.png" alt="Tag free">
+                      </span>
+                    <% } %>
+                  </header>
+                  <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                      <a href="/catways/get-catway/<%= catway._id %>" class="text-light card-details">
+                        Détails
+                      </a>
+                      <% if(catway.type === 'long') {%>
+                        <img src="/images/tag-long.png" alt="tag">
+                      <% } else {%>
+                        <img src="/images/tag-short.png" alt="tag">
+                      <% } %>
+                    </div>
+                    <div class="card-options d-flex flex-column mt-2">
+                      
+                      <a href="#" class="btn btn-light btn-sm">
+                        Réserver
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>   
+          </main>
+        <% } %>
+      </div>
     </section>
+    <% if (success && success.length > 0) { %>
+      <div id="flash-message" class="flash-message flash-message-success">
+        <div class="flash-message-header">
+          <h3>Success</h3>
+          <span></span>
+        </div>
+        <div class="flash-message-body">
+          <p><%= success[0] %></p>
+        </div>
+      </div>
+    <% } %>
+    <% if (error && error.length > 0) { %>
+      <div id="flash-message" class="flash-message flash-message-error">
+        <div class="flash-message-header">
+          <h3>Error</h3>
+          <span></span>
+        </div>
+        <div class="flash-message-body">
+          <p><%= success[0] %></p>
+        </div>
+      </div>
+    <% } %>
   </main>
 <%- include('../includes/end.ejs') %>
