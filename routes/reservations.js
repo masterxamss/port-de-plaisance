@@ -1,22 +1,17 @@
 const express = require('express');
 const reservationController = require('../controllers/reservations');
 const router = express.Router();
+const isAuth = require('../middlewares/is-auth');
 
 
-// Obter todas as reservas
-router.get('/reservations', reservationController.getReservations);
+router.get('/catways/:id/reservations', isAuth, reservationController.getReservationsByCatway);
 
-// Obter todas as reservas de um catway específico
-router.get('/catways/:catwayNumber/reservations', reservationController.getReservationsByCatway);
+router.get('/catways/:id/reservations/get-add', isAuth, reservationController.getAddReservation);
 
-// Obter uma reserva específica de um catway específico
-router.get('/catways/:catwayNumber/reservations/:idReservation', reservationController.getReservationByCatwayAndId);
+router.post('/catways/:id/reservations', isAuth, reservationController.addReservation);
 
-// Criar uma nova reserva para um catway específico
-router.post('/catways/:catwayNumber/reservations', reservationController.createReservation);
+router.delete('/catways/:id/reservations/:idReservation', isAuth, reservationController.deleteReservation);
 
-// Apagar uma reserva específica de um catway específico
-router.delete('/catways/:catwayNumber/reservations/:idReservation', reservationController.deleteReservationByCatwayAndId);
-
+router.get('/catway/:id/reservation/:idReservation', isAuth, reservationController.getReservationById);
 
 module.exports = router;

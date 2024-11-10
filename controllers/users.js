@@ -30,13 +30,18 @@ exports.getUsers = async (req, res) => {
 
 exports.getAddUser = async (req, res) => {
   const error = req.flash('error');
+  const success = req.flash('success');
+  const users = await User.find();
 
   try {
     res.render('users/add-user', {
       pageTitle: 'Ajout d\'un utilisateur',
       path: '/users',
+      users: users,
       error: error,
-      editMode: false
+      editMode: false,
+      moment: moment,
+      success: success
     })  
   }
   catch(error){
@@ -89,7 +94,9 @@ exports.createUser = async (req, res) => {
 exports.getEditUser = async (req, res) => {
   const editMode = req.query.edit;
   const error = req.flash('error');
+  const success = req.flash('success');
   const userId = req.params.id;
+  const users = await User.find();
 
   try{
     if(!editMode){
@@ -105,7 +112,10 @@ exports.getEditUser = async (req, res) => {
       path: '/users',
       editMode: editMode,
       user: user,
-      error: error
+      users: users,
+      moment: moment,
+      error: error,
+      success: success
     });
   }
   catch(error){
