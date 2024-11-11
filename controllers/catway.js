@@ -17,7 +17,7 @@ exports.getCatways = async (req, res) => {
       path: '/catways',
       error: error,
       success: success,
-      moment: moment,
+      moment: moment
     })  
   }
   catch (error) {

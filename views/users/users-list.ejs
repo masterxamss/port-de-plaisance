@@ -12,13 +12,7 @@
     </header>
     <section class="section-container__body">
       <aside class="body-aside">
-        <a href="/catways/list" class="btn btn-secondary w-75 text-start">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
-            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-          </svg>
-          Retour
-        </a>
+        <%- include('../includes/dashboard-menu.ejs') %>
       </aside>
       <div class="body-content">
         <div class="body-content__data">
@@ -28,16 +22,14 @@
           </header>
           <div class="body-content__body">
             <aside class="body-content__aside">
-              <a href="/users/add-user" class="btn btn-primary btn-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                </svg>
+              <a href="/users/add-user" class="button-md">
+                <img src="/images/add.png" alt="adding">
                 Ajouter
               </a>
             </aside>
             <div class="body-content__users">
-              <table class="table table-bordered table-hover border-primary">
-                <thead class="table-primary text-dark border-primary">
+              <table class="table table-hover">
+                <thead class="text-light table-dark ">
                   <tr>
                     <th scope="col">Nom utilisateur</th>
                     <th scope="col">Email</th>
@@ -53,7 +45,7 @@
                       <td class="align-middle"><%= user.email %></td>
                       <td class="align-middle"><%= moment(user.createdAt).format('DD/MM/YYYY') %></td>
                       <td class="align-middle"><%= moment(user.updatedAt).format('DD/MM/YYYY') %></td>
-                      <td class="d-flex justify-content-center gap-1">
+                      <td class="align-middle text-center">
                         <a href="/users/edit-user/<%= user._id %>?edit=true" class="btn btn-warning btn-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                               <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
@@ -91,10 +83,9 @@
                     </tr>
                   <% }) %>
                 </tbody>
-            </div>
+              </div>
             </table>
-          </div>
-          
+          </div>      
         </div>
         <footer class="body-content__footer"></footer>
       </div>
@@ -111,28 +102,7 @@
       </div>
     </footer>
   </section>
-  <% if (success && success.length > 0) { %>
-    <div id="flash-message" class="flash-message flash-message-success">
-      <div class="flash-message-header">
-        <h3>Success</h3>
-        <span></span>
-      </div>
-      <div class="flash-message-body">
-        <p><%= success[0] %></p>
-      </div>
-    </div>
-  <% } %>
-  <% if (error && error.length > 0) { %>
-    <div id="flash-message" class="flash-message flash-message-error">
-      <div class="flash-message-header">
-        <h3>Error</h3>
-        <span></span>
-      </div>
-      <div class="flash-message-body">
-        <p><%= error[0] %></p>
-      </div>
-    </div>
-  <% } %>
+  <%- include('../includes/error-message.ejs') %>
 </main>
 <%- include('../includes/end.ejs') %>
 

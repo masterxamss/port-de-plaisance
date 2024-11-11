@@ -2,6 +2,29 @@ const moment = require('moment');
 
 const Reservation = require('../models/reservations');
 
+
+exports.getAllReservations = async (req, res) => {
+  try {
+    const reservations = await Reservation.find();
+    const error = req.flash('error');
+    const success = req.flash('success');
+    return res.render('reservations/reservations-list', {
+      reservations: reservations,
+      path: '/reservations',
+      pageTitle: 'Reservations',
+      moment: moment,
+      error: error,
+      success: success
+    });
+  } catch (error) {
+    console.error(error);
+    req.flash('error', 'Une erreur s\'est produite lors de l\'obtention des reservations');
+    return res.redirect('/dashboard');
+  }
+};
+
+
+
 exports.getReservationsByCatway = async (req, res) => {
   const { id } = req.params;
   const error = req.flash('error');
@@ -122,13 +145,12 @@ exports.deleteReservation = async (req, res) => {
     const reservations = await Reservation.find({ catwayNumber: catwayNumber });
     if (!reservations.length) {
       req.flash('success', 'Réservation supprimé avec succès');
-      return res.redirect('/catways/list');
+      return res.redirect('/catways/reservations');
     } else {
       req.flash('success', 'Reservation supprimé avec succès');
       return res.redirect('/catways/'+ catwayNumber + '/reservations');  
     }
-    
-    
+      
   } catch (error) {
       req.flash('error', 'Une erreur s\'est produite lors de la suppression de la reservation');
       return res.redirect('/catways/'+ catwayNumber + '/reservations');

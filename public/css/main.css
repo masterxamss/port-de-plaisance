@@ -4,8 +4,8 @@
   --bg-header-container: #cecece;
   --bg-container: #ffffff7a;
   --bg-color-container-aside: #dbdbdb;
-  --color-border-container: #b4b0b0;
-  --tc-header-container: #7b8e9c;
+  --color-border-container: #b5b0b0;
+  --tc-header-container: #3A5062;
   --color-free-card: #65d269;
   --color-occupied-card: #7b8e9c;
   --color-card-hover: #0B5ED7;
@@ -173,7 +173,6 @@ main{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  align-items: center;
   border-top: 1px solid var(--color-border-container);
 
   & div:nth-child(1){
@@ -219,5 +218,117 @@ main{
     & p{
       margin: 0 1rem 0 0;
     }
+  }
+}
+
+.dashboard-menu{
+  & ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & li{
+      display: flex;
+      padding: .5rem;
+      justify-content: left;
+      width: 100%;
+
+      & a{
+        text-decoration: none;
+        color: #3A5062;
+        margin-left: .5rem;
+
+        &:hover{
+          color: #969191;
+        }
+      }
+
+      & button{
+        background-color: transparent;
+        border: none;
+        color: #3A5062;
+
+        &:hover{
+          color: #969191;
+        }
+      }
+    }
+  }
+}
+
+.add-catway{
+  text-decoration: none;
+  background-color: var(--bg-color-container-aside);
+  & .card-header{
+    background-color: var(--bg-header-container);
+    color: var(--tc-header-container);
+  }
+
+  & .card-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+}
+
+.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 80%;
+  max-height: 250px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.orange .circle {
+  stroke: #ff9f00;
+}
+
+.percentage {
+  fill: #666;
+  font-family: sans-serif;
+  font-size: 0.5em;
+  text-anchor: middle;
+}
+
+.button-md{
+  width: 75%;
+  padding: .3rem;
+  text-decoration: none;
+  color: #3A5062;
+  margin-bottom: .5rem;
+  border: 1px solid #3A5062;
+  border-radius: 5px;
+  background-color: transparent;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: .5rem;
+
+  &:hover{
+    color: #ffffff;
+    background-color: #3A5062;
+    
   }
 }
