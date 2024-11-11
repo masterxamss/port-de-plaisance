@@ -14,4 +14,6 @@ router.delete('/catways/:id/reservations/:idReservation', isAuth, reservationCon
 
 router.get('/catway/:id/reservation/:idReservation', isAuth, reservationController.getReservationById);
 
+router.get('/catways/reservations', isAuth, reservationController.getAllReservations);
+
 module.exports = router;

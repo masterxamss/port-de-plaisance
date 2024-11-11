@@ -35,7 +35,7 @@ exports.postLogin = async(req, res) => {
           console.log(err);
           res.redirect('/');
         }
-        res.redirect('/catways/list');
+        res.redirect('/dashboard');
       });
     }
   }

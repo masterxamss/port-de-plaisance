@@ -1,0 +1,212 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body class="d-flex flex-column">
+<%- include('includes/navigation.ejs') %>
+<main>
+  <section class="section-container">
+
+    <header class="section-container__header">
+      <img src="/images/helm32x32.png" alt="logo">
+      <h1>Dashboard</h1>
+    </header>
+
+    <section class="dashboard section-container__body">
+
+      <aside class="body-aside">
+        <%- include('includes/dashboard-menu.ejs') %>
+      </aside>
+
+      <div class="body-content">
+        <div class="dashboard-catways">
+          <header>
+            <img src="/images/anchor_.png" alt="anchor">
+            <h2>Catways</h2>
+          </header>
+          <section>
+            <div class="catways-info">
+              <% if (catwayError.length > 0) { %>
+                <h1 class="text-danger"><%= catwayError %></h1>        
+              <% } else { %>
+                <div>
+                  <h3>Dernier catway ajouté</h3>
+                  <p><strong>Number : </strong> <%= lastCatway.catwayNumber  %></p>
+                  <p><strong>Création :</strong> <%= moment(lastCatway.createdAt).format('DD/MM/YYYY') %></p>
+                </div>
+                <div>
+                  <h3 class="mt-4">Disponibilité</h3>
+                  <p><strong>Catways occupées: </strong> <%= ocupiedCatways %></p>
+                  <p><strong>Catways disponibles: </strong> <%= availableCatways %></p>
+                </div>
+                <div>
+                  <h3 class="mt-4">Total</h3>
+                  <p><strong>Total catways : </strong> <%= catways.length %></p>
+                </div>
+              <% } %>
+              <div>
+                <a href="/catways/get-add" class="btn btn-primary btn-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                  </svg>
+                  Ajouter catway
+                </a>
+              </div>
+            </div>
+
+            <div class="catways-ocupation">
+              <h3>Taux d'occupation</h3>
+              <svg viewBox="0 0 36 36" class="circular-chart orange">
+                    <path class="circle-bg"
+                      d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                    <path class="circle"
+                      stroke-dasharray="<%= ocupation%>, 100"
+                      d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                    <text x="18" y="20.35" class="percentage"><%= ocupation%>%</text>
+              </svg>
+            </div>
+          </section>
+        </div>
+
+        <div class="dashboard-reservations">
+          <header>
+            <img src="/images/booking.png" alt="reservations">
+            <h2>Reservations</h2>
+          </header>
+          <section>
+            <div class="reservations-info">
+              <% if (reservationError.length > 0) { %>
+                <h1 class="text-danger"><%= reservationError %></h1>        
+              <% } else { %>
+                <div>
+                  <h3>Prochaine réservation à expirer</h3>
+                  <ul>
+                    <% if (nextReservationToExpire === null) { %>
+                      <li>Aucune prochaine réservation à expirer</li>
+                    <% } else { %>
+                      <li>
+                        <img src="/images/anchor.png" alt="catway">
+                        <strong>Catway : </strong>
+                        <%= nextReservationToExpire.catwayNumber %>
+                      </li>
+                      <li>
+                        <img src="/images/user-client.png" alt="client">
+                        <strong>Nom du client : </strong>
+                        <%= nextReservationToExpire.clientName %>
+                      </li>
+                      <li>
+                        <img src="/images/sailing-boat.png" alt="Boat">
+                        <strong>Nom du bateau : </strong>
+                        <%= nextReservationToExpire.boatName %>
+                      </li>
+                      <li>
+                        <img src="/images/booking.png" alt="checkin">
+                        <strong>Date de debut : </strong>
+                        <%= moment(nextReservationToExpire.checkIn).format('DD/MM/YYYY') %>
+                      </li>
+                      <li>
+                        <img src="/images/booking.png" alt="checkout">
+                        <strong>Date de fin : </strong>
+                        <%= moment(nextReservationToExpire.checkOut).format('DD/MM/YYYY') %>
+                      </li>
+                    <% } %>
+                  </ul>
+                </div>
+                <div>
+                  <h3>Dernier réservation</h3>  
+                  <ul>
+                    <% recentBookings.forEach(recentBooking => { %>
+                      <li>
+                        <div>
+                          <p>
+                            <img src="/images/anchor.png" alt="catway">
+                            <strong>Catway : </strong>
+                            <%= recentBooking.catwayNumber %>
+                          </p>
+                          <p>
+                            <img src="/images/user-client.png" alt="client">
+                            <strong>Nom du client : </strong>
+                            <%= recentBooking.clientName %>
+                          </p>
+                          <p>
+                            <img src="/images/sailing-boat.png" alt="Boat">
+                            <strong>Nom du bateau : </strong>
+                            <%= recentBooking.boatName %>
+                          </p>
+                          <p>
+                            <img src="/images/booking.png" alt="checkin">
+                            <strong>Date de debut : </strong>
+                            <%= moment(recentBooking.checkIn).format('DD/MM/YYYY') %>
+                          </p>
+                          <p>
+                            <img src="/images/booking.png" alt="checkout">
+                            <strong>Date de fin : </strong>
+                            <%= moment(recentBooking.checkOut).format('DD/MM/YYYY') %>
+                          </p>
+                        </div>
+                      </li>
+                    <% }) %>
+                  </ul>
+                </div>
+                <div>
+                  <h3>Statistiques</h3>
+                  <p><strong>Duree moyenne des réservations : </strong><%= averageDuration %> jours</p>
+                </div>
+                <div>
+                  <h3>Total</h3>
+                  <p><strong>Total réserves actives : </strong><%= totalActiveReserves %></p>
+                  <p><strong>Total réserves : </strong><%= reservations.length %></p>
+                </div>
+              <% } %>
+            </div>
+          </section>
+        </div>
+
+        <div class="dashboard-users">
+          <header>
+            <img src="/images/user.png" alt="user">
+            <h2>Users</h2>
+          </header>
+          <section>
+            <div class="users-info">
+              <% if (usersError.length > 0) { %>
+                <h1 class="text-danger"><%= usersError %></h1>        
+              <% } else { %>
+                <div>
+                  <h3>Total utilisateurs : </h3>
+                  <p><%= users.length %></p>
+                </div>
+                <div>
+                  <h3>Utilisateur connecté : </h3>
+                  <p><%= user.email %></p>
+                </div>
+                <div>
+                  <a href="/users/add-user" class="btn btn-primary btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                    </svg>
+                    Ajouter utilisateur
+                  </a>
+                </div>
+              <% } %>
+            </div>
+          </section>
+        </div> 
+
+      </div>
+
+    </section>
+
+    <footer class="section-container__footer">
+
+    </footer>
+  </section>
+
+</main>
+<%- include('includes/end.ejs') %>
