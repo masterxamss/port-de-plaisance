@@ -8,6 +8,7 @@ exports.getAllReservations = async (req, res) => {
     const reservations = await Reservation.find();
     const error = req.flash('error');
     const success = req.flash('success');
+
     return res.render('reservations/reservations-list', {
       reservations: reservations,
       path: '/reservations',
@@ -34,7 +35,7 @@ exports.getReservationsByCatway = async (req, res) => {
     const reservations = await Reservation.find({ catwayNumber: id});
     if (!reservations.length) {
       req.flash('error', 'Aucunne reservation pour ce catway');
-      return res.redirect('/catways/get-catway/' + id);
+      return res.redirect('/catways/' + id);
     }
     return res.render('reservations/reservation-by-catway', {
       reservations: reservations,
@@ -48,7 +49,7 @@ exports.getReservationsByCatway = async (req, res) => {
   } catch (error) {
     console.error(error);
     req.flash('error', 'Erreur dans l\'obtention des réservations');
-    return res.redirect('/catways/get-catway/' + id);
+    return res.redirect('/catways/' + id);
   }
 };
 
@@ -71,7 +72,7 @@ exports.getAddReservation = async (req, res) => {
   catch(error){
     console.log(error);
     req.flash('error', 'Une erreur s\'est produite lors de l\'ajout de la reservation');
-    return res.redirect('/catways/list');
+    return res.redirect('/catways');
   }
 };
 
@@ -123,11 +124,11 @@ exports.addReservation = async (req, res) => {
     
     await reservation.save();
     req.flash('success', 'Reservation ajoute avec succès');
-    return res.redirect('/catways/list');
+    return res.redirect('/catways');
   } catch (error) {
     console.log(error);
     req.flash('error', 'Une erreur s\'est produite lors de l\'ajout de la reservation');
-    return res.redirect('/catways/list');
+    return res.redirect('/catways');
   }
 };
 
@@ -145,7 +146,7 @@ exports.deleteReservation = async (req, res) => {
     const reservations = await Reservation.find({ catwayNumber: catwayNumber });
     if (!reservations.length) {
       req.flash('success', 'Réservation supprimé avec succès');
-      return res.redirect('/catways/reservations');
+      return res.redirect('/reservations');
     } else {
       req.flash('success', 'Reservation supprimé avec succès');
       return res.redirect('/catways/'+ catwayNumber + '/reservations');  
@@ -179,28 +180,3 @@ exports.getReservationById = async (req, res) => {
     return res.redirect('/catways/'+ id + '/reservations');
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

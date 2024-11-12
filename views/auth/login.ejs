@@ -14,12 +14,11 @@
         </div>
       <% } %>
       <form action="/auth/login" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="mb-3">
-          <!-- <label for="email" class="form-label">Email</label> -->
           <input type="email" class="form-control" id="email" name="email" placeholder="&#xf007;   Email" style="font-family: Arial, 'Font Awesome 5 Free'">
         </div>
         <div class="mb-3">
-          <!-- <label for="password" class="form-label">Mot de passe</label> -->
           <input type="password" class="form-control" id="password" name="password" placeholder="&#xf023;   Password" style="font-family: Arial, 'Font Awesome 5 Free'">
         </div>
         <button type="submit" class="btn btn-light text-dark w-100">

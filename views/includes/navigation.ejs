@@ -20,12 +20,12 @@
     >
       <div class="d-flex">
         <ul class="navbar-nav align-self-center d-flex align-self-center">
-          <li class="nav-item">
-            <a class="nav-link <%= path === '/dashboard' ? 'active' : '' %>" aria-current="page" href="/dashboard">Dashboard</a>
-          </li>
           <% if (isAuthenticated) { %>
             <li class="nav-item">
-              <a class="nav-link<% if (path === '/catways') { %> active <% } %>" href="/catways/list">Catways</a>
+              <a class="nav-link <%= path === '/dashboard' ? 'active' : '' %>" aria-current="page" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link<% if (path === '/catways') { %> active <% } %>" href="/catways">Catways</a>
             </li>
             <li class="nav-item">
               <a class="nav-link <% if (path === '/reservations') { %> active <% } %>" href="/catways/reservations">Réservations</a>
