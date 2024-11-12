@@ -51,18 +51,20 @@
                               <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
                             </svg>
                         </a>
-                        <div class="modal fade" id="ModalToggle" aria-hidden="true" aria-labelledby="ModalToggleLabel" tabindex="-1">
+                        <div class="modal fade" id="ModalToggle<%= user._id %>" aria-hidden="true" aria-labelledby="ModalToggleLabel<%= user._id %>" tabindex="-1">
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                               <div class="modal-header bg-light">
-                                <h1 class="modal-title fs-5" id="ModalToggleLabel">Éliminer Réservation ?</h1>
+                                <h1 class="modal-title fs-5" id="ModalToggleLabel<%= user._id %>">Éliminer Réservation ?</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body bg-light">
                                 <p class="mb-0">Êtes-vous sûr de vouloir supprimer cette réservation ?</p>
+                                <p><%= user._id %></p>
                               </div>
                               <div class="modal-footer bg-light">
                                 <form action="/users/delete-user/<%= user._id %>?_method=DELETE" method="post">
+                                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                   <button class="btn btn-danger" data-bs-target="ModalToggle2" data-bs-toggle="modal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                       <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
@@ -74,7 +76,7 @@
                             </div>
                           </div>
                         </div>
-                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#ModalToggle" role="button">
+                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#ModalToggle<%= user._id %>" role="button">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
                           </svg>
@@ -105,106 +107,3 @@
   <%- include('../includes/error-message.ejs') %>
 </main>
 <%- include('../includes/end.ejs') %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/list-users.css">
-</head>
-
-<body class="d-flex flex-column">
-  <%- include('../includes/navigation.ejs') %>
-  <main class="d-flex align-items-center justify-content-center vh-100">
-    <section class="users-container w-75">
-      <% if (users.length > 0) { %>
-        <h1>Liste des utilisateurs</h1>
-        <% if (error.length > 0) { %>
-          <div class="alert alert-danger align-middle">
-            <p><%= error %></p>
-          </div>
-        <% } %>
-        <% if (success.length > 0) { %>
-          <div class="alert alert-success align-middle">
-            <p><%= success %></p>
-          </div>
-        <% } %> 
-        <table class="table table-bordered table-hover border-dark">
-          <thead class="table-dark text-light border-dark">
-            <tr>
-              <th scope="col">Nom</th>
-              <th scope="col">E-mail</th>
-              <th scope="col">Date de création</th>
-              <th scope="col">Dernière mise à jour</th>
-              <th scope="col" class="text-center">Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% users.forEach((user) => { %>
-              <tr>
-                <a href="">
-                  <td class="align-middle"><%= user.name %></td>
-                  <td class="align-middle"><%= user.email %></td>
-                  <td class="align-middle"><%= moment(user.createdAt).format('DD/MM/YYYY') %></td>
-                  <td class="align-middle"><%= moment(user.updatedAt).format('DD/MM/YYYY') %></td>
-                  <td class="align-middle text-center td-options">
-                    <a href="/users/edit-user/<%= user._id %>?edit=true" class="btn btn-warning">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
-                      </svg>
-                      Modifier
-                    </a>
-                    <form action="/users/delete-user/<%= user._id %>?_method=DELETE" method="post">
-                      <button type="submit" class="btn btn-danger">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                        </svg>
-                        Suprimer
-                      </button>
-                    </form>
-                  </td>
-                </a>
-              </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      <% } else { %>
-        <h1>Aucun utilisateur</h1>
-      <% } %>
-    </section>
-  </main>
-<%- include('../includes/end.ejs') %> -->

@@ -3,6 +3,7 @@ const reservationController = require('../controllers/reservations');
 const router = express.Router();
 const isAuth = require('../middlewares/is-auth');
 
+router.get('/reservations', isAuth, reservationController.getAllReservations);
 
 router.get('/catways/:id/reservations', isAuth, reservationController.getReservationsByCatway);
 
@@ -13,7 +14,5 @@ router.post('/catways/:id/reservations', isAuth, reservationController.addReserv
 router.delete('/catways/:id/reservations/:idReservation', isAuth, reservationController.deleteReservation);
 
 router.get('/catway/:id/reservation/:idReservation', isAuth, reservationController.getReservationById);
-
-router.get('/catways/reservations', isAuth, reservationController.getAllReservations);
 
 module.exports = router;

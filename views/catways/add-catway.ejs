@@ -16,7 +16,8 @@
         <%- include('../includes/dashboard-menu.ejs') %>
       </aside>
       <div class="body-content">
-        <form action="<% if (editMode) { %>/catways/edit/<%= catway._id %>?_method=PUT<% } else { %>/catways/add<% } %>" method="POST" class="body-content__form">
+        <form action="<% if (editMode) { %>/catways/<%= catway._id %>?_method=PUT<% } else { %>/catways<% } %>" method="POST" class="body-content__form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <header class="header-from">
             <img src="/images/helm32x32.png" alt="logo">
             <h2><%= editMode ? 'Modifier un catway' : 'Ajouter un catway' %></h2>
@@ -38,7 +39,7 @@
                 <img src="/images/cancel.png" alt="cancel">
                 Annuler
               </button>
-              <a href="<% if (editMode) { %>/catways/get-catway/<%= catway.catwayNumber %><% } else { %>/catways/list<% } %>" class="button-md w-75">
+              <a href="<% if (editMode) { %>/catways/<%= catway.catwayNumber %><% } else { %>/catways<% } %>" class="button-md w-75">
                 <img src="/images/exit.png" alt="exit">
                 Retour
               </a>

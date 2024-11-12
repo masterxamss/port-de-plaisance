@@ -16,6 +16,7 @@
       </aside>
       <div class="body-content">
         <form action="/catways/<%= catwayNumber %>/reservations" method="POST" class="body-content__form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <header class="header-from">
             <img src="/images/helm32x32.png" alt="logo">
             <h2>Ajouter une reservation</h2>
@@ -30,7 +31,7 @@
                 <img src="/images/cancel.png" alt="cancel">
                 Annuler
               </button>
-              <a href="/catways/list" class="button-md w-75">
+              <a href="/catways" class="button-md w-75">
                 <img src="/images/exit.png" alt="exit">
                 Retour
               </a>

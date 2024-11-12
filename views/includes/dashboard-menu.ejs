@@ -8,13 +8,13 @@
     </li>
     <li>
       <img src="/images/anchor_.png" alt="anchor">
-      <a href="/catways/list">
+      <a href="/catways">
         Catways
       </a>
     </li>
     <li>
       <img src="/images/booking.png" alt="reservation">
-      <a href="/catways/reservations">
+      <a href="/reservations">
         Reservations
       </a>
     </li>
@@ -26,6 +26,7 @@
     </li>
     <li>
       <form action="/auth/logout" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <img src="/images/logout.png" alt="logout">
         <button type="submit">
           Logout
