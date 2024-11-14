@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: csrfProtection</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: csrfProtection</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Middleware function that adds CSRF (Cross-Site Request Forgery) protection to the application.</p>
+<p>This middleware protects against CSRF attacks by generating a token that is unique to the user's session.
+It sets a secure, HTTP-only cookie with the CSRF token, which must be included in the headers or body of any
+state-changing HTTP request (e.g., POST, PUT, DELETE). This prevents malicious requests from being made by
+an attacker on behalf of an authenticated user.</p>
+<p>The token can be validated using the CSRF token included in the request by using the middleware on relevant routes.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cookie</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The cookie configuration for the CSRF token.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>httpOnly</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ensures the cookie is not accessible via JavaScript on the client-side.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secure</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ensures the cookie is only sent over HTTPS (in production).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sameSite</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ensures the cookie is only sent in first-party contexts (strict).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_csrfProtection.js.html">middlewares/csrfProtection.js</a>, <a href="middlewares_csrfProtection.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>The CSRF middleware function to be used in Express.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Usage example:
+const csrfProtection = require('./middlewares/csrfProtection');
+
+// Apply CSRF protection to a POST route
+app.post('/submit-form', csrfProtection, (req, res) => {
+  // Handle form submission
+  res.send('Form submitted');
+});</code></pre>
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-404.html">404</a></li><li><a href="module-authentication.html">authentication</a></li><li><a href="module-catways.html">catways</a></li><li><a href="module-csrfProtection.html">csrfProtection</a></li><li><a href="module-dashboard.html">dashboard</a></li><li><a href="module-setLocals.html">setLocals</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authUser">authUser</a></li><li><a href="global.html#basicMiddlewares">basicMiddlewares</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#is-auth">is-auth</a></li><li><a href="global.html#sessionConfig">sessionConfig</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Nov 13 2024 19:00:53 GMT+0100 (Hora padrão da Europa Central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

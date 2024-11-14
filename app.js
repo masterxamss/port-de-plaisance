@@ -1,10 +1,10 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/database');
-const session = require('./middlewares/session');
+const session = require('./middlewares/sessionConfig');
 const csrfProtection = require('./middlewares/csrfProtection');
 const authUser = require('./middlewares/authUser');
-const locals = require('./middlewares/locals');
+const locals = require('./middlewares/setLocals');
 const basicMiddlewares = require('./middlewares/basicMiddlewares');
 
 const catwayRoutes = require('./routes/catway');

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon app.js",
     "dev": "concurrently \"npm run start\" \"npm run test\"",
-    "test": "cross-env NODE_ENV=test mocha tests/**/*.test.js"
+    "test": "cross-env NODE_ENV=test mocha tests/**/*.test.js",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "concurrently": "^9.1.0",
     "cross-env": "^7.0.3",
+    "jsdoc": "^4.0.4",
     "mocha": "^10.8.2"
   }
 }
