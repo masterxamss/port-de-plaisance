@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="csrfProtection"><span class="type-signature">(constant) </span>csrfProtection<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Middleware function that adds CSRF (Cross-Site Request Forgery) protection to the application.</p>
+<p>This middleware protects against CSRF attacks by generating a token that is unique to the user's session.
+It sets a secure, HTTP-only cookie with the CSRF token, which must be included in the headers or body of any
+state-changing HTTP request (e.g., POST, PUT, DELETE). This prevents malicious requests from being made by
+an attacker on behalf of an authenticated user.</p>
+<p>The token can be validated using the CSRF token included in the request by using the middleware on relevant routes.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_csrfProtection.js.html">middlewares/csrfProtection.js</a>, <a href="middlewares_csrfProtection.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Usage example:
+const csrfProtection = require('./middlewares/csrfProtection');
+
+// Apply CSRF protection to a POST route
+app.post('/submit-form', csrfProtection, (req, res) => {
+  // Handle form submission
+  res.send('Form submitted');
+});</code></pre>
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="authUser"><span class="type-signature"></span>authUser<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Middleware function that verifies the user session and sets the req.user property.</p>
+<p>This middleware checks if the user is logged in by verifying the session. If the session is valid,
+it retrieves the user document from the database using the user's ID stored in the session
+and assigns it to <code>req.user</code>. If no session exists or the session is invalid,
+it calls <code>next()</code> to continue the request cycle.</p>
+<p>This middleware is useful for routes that require user authentication and access to user data.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The request object containing the incoming HTTP request.
+It may have a <code>session</code> property that stores the user's session data.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The response object used to send a response back to the client.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The next middleware function to call after the current one completes.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_authUser.js.html">middlewares/authUser.js</a>, <a href="middlewares_authUser.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>This function does not return anything but either continues the request cycle or redirects.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Usage example
+// This middleware can be used to ensure that the user is authenticated
+// before accessing a protected route like a dashboard.
+app.use('/dashboard', authUser, (req, res) => {
+  if (req.user) {
+    res.render('dashboard', { user: req.user });
+  } else {
+    res.redirect('/login');
+  }
+});</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="basicMiddlewares"><span class="type-signature"></span>basicMiddlewares<span class="signature">(app)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Configures essential middlewares for the Express application, including body parsing,
+method overriding, and static file serving.</p>
+<p>This function applies the following middlewares:</p>
+<ul>
+<li><code>bodyParser.urlencoded</code>: Parses incoming request bodies with <code>application/x-www-form-urlencoded</code> format.</li>
+<li><code>methodOverride</code>: Allows for HTTP method overriding via a query parameter (<code>_method</code>).</li>
+<li><code>express.static</code>: Serves static files from the <code>public</code> directory.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>app</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Express application instance to configure.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_basicMiddlewares.js.html">middlewares/basicMiddlewares.js</a>, <a href="middlewares_basicMiddlewares.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>This function does not return anything but configures the app with necessary middlewares.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Apply all necessary middlewares in your app
+const app = express();
+require('./middlewares')(app);</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="connectDB"><span class="type-signature">(async) </span>connectDB<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>This function establishes a connection to MongoDB using Mongoose.
+It reads the MongoDB URI from environment variables and attempts to connect to the database.
+If the connection is successful, it logs a success message to the console.
+If the connection fails, it logs an error message with the details of the failure.</p>
+<p>This function should be called at the start of the application to ensure that your application
+can communicate with the MongoDB database.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="config_database.js.html">config/database.js</a>, <a href="config_database.js.html#line8">line 8</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <ul>
+<li>If the connection to MongoDB fails, an error is thrown and logged to the console.</li>
+</ul>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>A promise that resolves when the connection is successfully established.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Usage example
+const connectDB = require('./connectDB');
+connectDB();</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="is-auth"><span class="type-signature"></span>is-auth<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Middleware function that verifies the JWT token from the cookies, and refreshes it if valid.</p>
+<p>This middleware checks if a token is present in the cookies. If the token is valid, it decodes it and
+generates a new token with the same user data, setting it as a cookie in the response.
+If the token is invalid or missing, it redirects the user to the login page.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The request object containing the incoming HTTP request.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The response object used to send a response back to the client.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The next middleware function to call after the current one completes.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_is-auth.js.html">middlewares/is-auth.js</a>, <a href="middlewares_is-auth.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>This function does not return anything but either continues the request cycle or redirects.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// This middleware can be used to protect routes that require authentication.
+app.use('/dashboard', isAuth);</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sessionConfig"><span class="type-signature"></span>sessionConfig<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Middleware that configures the session management for the application using <code>express-session</code>
+and <code>connect-mongodb-session</code>. It stores session data in MongoDB, ensuring persistence across server restarts.</p>
+<p>This middleware uses a MongoDB database to store session data. The session will be secured using the <code>JWT_SECRET</code>
+environment variable and will set cookies with appropriate security settings for production and development environments.</p>
+<p>The session cookie will have a <code>httpOnly</code> flag for security, ensuring it can't be accessed by JavaScript, and a
+<code>maxAge</code> of 24 hours.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The request object, which will be enhanced with session data.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The response object, which will send the session cookie to the client.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The next middleware function in the chain to be called after session setup.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_sessionConfig.js.html">middlewares/sessionConfig.js</a>, <a href="middlewares_sessionConfig.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>This function does not return anything. It configures the session and allows the request cycle to continue.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Usage example:
+// This middleware should be used in your Express application to manage user sessions.
+const sessionConfig = require('./middlewares/sessionConfig');
+app.use(sessionConfig);</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Authentication-controller.html">Authentication-controller</a></li><li><a href="module-Dashboard-Controller.html">Dashboard-Controller</a></li><li><a href="module-Page-404.html">Page-404</a></li><li><a href="module-Reservations-controller.html">Reservations-controller</a></li><li><a href="module-Users-controller.html">Users-controller</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authUser">authUser</a></li><li><a href="global.html#basicMiddlewares">basicMiddlewares</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#csrfProtection">csrfProtection</a></li><li><a href="global.html#is-auth">is-auth</a></li><li><a href="global.html#sessionConfig">sessionConfig</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Nov 13 2024 22:51:29 GMT+0100 (Hora padrão da Europa Central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
