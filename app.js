@@ -35,6 +35,8 @@ connectDB();
  */
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.set('trust proxy', 1);
+
 
 /**
  * Configures middleware for the application.

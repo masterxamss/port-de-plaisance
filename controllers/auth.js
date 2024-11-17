@@ -156,7 +156,7 @@ exports.postLogin = async (req, res) => {
     });
   } catch (error) {
     console.error("Error in postLogin:", error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Internal Server Errorssss");
   }
 };
 
