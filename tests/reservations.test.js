@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { expect } = require('chai');
 const Reservation = require('../models/reservations');
-require('dotenv').config({ path: './env/.env.test' });
+require('dotenv').config({ path: './env/.env.test.local' });
 
 /**
  * Test suite for the Reservation model.
@@ -19,7 +19,7 @@ describe('Reservations Tests', function () {
    * @async
    */
   before(async function () {
-    const dbURI = process.env.MONGO_URI_TESTS;
+    const dbURI = process.env.MONGO_URI;
     await mongoose.connect(dbURI, {
       serverSelectionTimeoutMS: 10000,
     });

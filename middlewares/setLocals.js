@@ -29,18 +29,13 @@
  * // <input type="hidden" name="_csrf" value="<%= csrfToken %>">
  */
 module.exports = (req, res, next) => {
-  // Set the authentication status
-  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.isAuthenticated = req.session.isLoggedIn;  // Set the authentication status
+  res.locals.user = req.user;                           // Set the user data if available
 
-  // Set the user data if available
-  res.locals.user = req.user;
-
-  // Set the CSRF token if available
-  if (req.csrfToken) {
+  if (req.csrfToken) {                                  // Set the CSRF token if available
     res.locals.csrfToken = req.csrfToken();
   }
 
-  // Proceed to the next middleware
-  next();
+  next();                                               // Proceed to the next middleware
 };
 

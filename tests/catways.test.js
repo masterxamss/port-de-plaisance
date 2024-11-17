@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { expect } = require('chai');
 const Catway = require('../models/catway');
 
-require('dotenv').config({ path: './env/.env.test' });
+require('dotenv').config({ path: './env/.env.test.local' });
 
 /**
  * Test suite for the Catway model.
@@ -20,7 +20,7 @@ describe('Catways Tests', function () {
    * @async
    */
   before(async function () {
-    const dbURI = process.env.MONGO_URI_TESTS;
+    const dbURI = process.env.MONGO_URI;
     await mongoose.connect(dbURI, {
       serverSelectionTimeoutMS: 10000,
     });
