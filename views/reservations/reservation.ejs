@@ -14,8 +14,7 @@
       <aside class="body-aside">
         <%- include('../includes/dashboard-menu.ejs') %>
       </aside>
-      <div class="body-content">
-        
+      <div class="body-content">  
         <section class="reservation-content">
           <header class="reservation-content__header">
               <img src="/images/helm32x32.png" alt="logo">
@@ -27,7 +26,7 @@
                   <img src="/images/delete.png" alt="delete">
                   Delete
                 </a>
-                <a href="/catways/<%= reservation.catwayNumber %>/reservations" class="button-md w-75">
+                <a href="/reservations" class="button-md w-75">
                   <img src="/images/exit.png" alt="exit">
                   Back
                 </a>
@@ -63,8 +62,7 @@
                   <strong>Release date : </strong>
                   <%= moment(reservation.checkIn).format('DD/MM/YYYY') %>
                 </p>
-              </div>
-              
+              </div>    
           </div>
           <footer class="reservation-content__footer"></footer>
         </section>
@@ -72,7 +70,7 @@
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header bg-light">
-                <h1 class="modal-title fs-5" id="ModalToggleLabel">Éliminer réservation ?</h1>
+                <h1 class="modal-title fs-5" id="ModalToggleLabel">Delete reservation ?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body bg-light">

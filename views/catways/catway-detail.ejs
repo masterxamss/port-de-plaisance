@@ -15,13 +15,11 @@
         <%- include('../includes/dashboard-menu.ejs') %>
       </aside>
       <section class="body-content">
-
         <section class="body-content__details">
           <header class="body-content__header">
             <img src="/images/helm32x32.png" alt="logo">
             <h2>Catway details</h2>
           </header>
-
           <div class="body-content__body">
             <aside class="body-content__aside">
               <a href="/catways/<%= catway.catwayNumber %>/reservations" class="button-md">
@@ -36,7 +34,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header bg-light">
-                      <h1 class="modal-title fs-5" id="ModalToggleLabel">Éliminer catway <%= catway.catwayNumber %> ?</h1>
+                      <h1 class="modal-title fs-5" id="ModalToggleLabel">Delete catway <%= catway.catwayNumber %> ?</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-light">
@@ -65,14 +63,11 @@
                 Back
               </a>
             </aside>
-
             <div class="body-content__data">
-
               <div>
                 <h3 class="mb-2 text-center display-4 mt-5 text-success"><strong>Catway : </strong></h3>
                 <p class="text-center display-1 text-success"><%= catway.catwayNumber %></p>
               </div>
-
               <div>
                 <p class="mb-2 bg-secondary p-1 text-body bg-light border"><strong>Type : </strong><%= catway.type %></p>
                 <p class="mb-2 bg-secondary p-1 text-body bg-light border"><strong>State : </strong></p>
@@ -92,15 +87,11 @@
                   </button>
                 </form>
               </div>
-
             </div>
           </div>
-
           <footer class="body-content__footer">
-
           </footer>
         </section>
-        
       </section>
     </section>
     <footer class="section-container__footer">
