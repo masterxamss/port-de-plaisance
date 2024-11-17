@@ -1,0 +1,10 @@
+{
+  "login": {
+    "name": "login-tutorial",
+    "title": "Login"
+  },
+  "create-catway": {
+    "name": "create-catway-tutorial",
+    "title": "Catways"
+  }
+}

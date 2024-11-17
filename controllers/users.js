@@ -1,6 +1,7 @@
 /**
- * @module Users-controller
+ * @module controllers/users
  * @description Controller for managing users. Handles operations like listing, adding, and editing users.
+ * @requires models/user
  */
 
 const bcrypt = require("bcryptjs");
@@ -35,7 +36,7 @@ exports.getUsers = async (req, res) => {
     console.log(error);
     req.flash(
       "error",
-      "La liste des utilisateurs n'a pas pu être téléchargée."
+      "The user list could not be downloaded."
     );
     res.render("users/users-list", {
       pageTitle: "Users list",
@@ -66,7 +67,7 @@ exports.getAddUser = async (req, res) => {
 
   try {
     res.render("users/add-user", {
-      pageTitle: "Ajout d'un utilisateur",
+      pageTitle: "Add a user",
       path: "/users",
       users: users,
       error: error,
@@ -97,18 +98,18 @@ exports.createUser = async (req, res) => {
 
   try {
     const userDoc = await User.findOne({ email: email });
-    if (userDoc) {
-      req.flash("error", "Les données fournies sont invalides");
+    if (!userDoc) {
+      req.flash("error", "The data provided is invalid");
       return res.redirect("/users/add-user");
     }
 
     if (password !== passwordConfirm) {
-      req.flash("error", "Les mots passe ne sont pas identiques");
+      req.flash("error", "Passwords are not identical");
       return res.redirect("/users/add-user");
     }
 
     if (password.length < 8) {
-      req.flash("error", "Le mot passe doit contenir au moins 8 caractères");
+      req.flash("error", "The password must contain at least 8 characters");
       return res.redirect("/users/add-user");
     }
 
@@ -120,13 +121,13 @@ exports.createUser = async (req, res) => {
     });
 
     await user.save();
-    req.flash("success", "Utilisateur créé avec succès");
+    req.flash("success", "User successfully created");
     return res.redirect("/users/list-users");
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la création de l'utilisateur"
+      "An error has occurred while creating the user"
     );
     return res.redirect("/users/add-user");
   }
@@ -161,7 +162,7 @@ exports.getEditUser = async (req, res) => {
       return res.redirect("/");
     }
     res.render("users/add-user", {
-      pageTitle: "Editer un utilisateur",
+      pageTitle: "Edit a user",
       path: "/users",
       editMode: editMode,
       user: user,
@@ -196,18 +197,18 @@ exports.updateUser = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      req.flash("error", "Cet utilisateur n'existe pas");
+      req.flash("error", "This user does not exist");
       return res.redirect("/users/list-users");
     }
 
     if (password !== passwordConfirm) {
-      req.flash("error", "Les mots passe ne sont pas identiques");
+      req.flash("error", "Passwords are not identical");
       return res.redirect("/users/edit-user/" + userId + "?edit=true");
     }
 
     const existingUser = await User.findOne({ email: email });
     if (existingUser && existingUser._id.toString() !== userId) {
-      req.flash("error", "Adresse électronique invalide");
+      req.flash("error", "Invalid e-mail address");
       return res.redirect("/users/edit-user/" + userId + "?edit=true");
     }
 
@@ -218,13 +219,13 @@ exports.updateUser = async (req, res) => {
 
     await user.save();
 
-    req.flash("success", "Utilisateur mis à jour avec succès");
+    req.flash("success", "User successfully updated");
     return res.redirect("/users/list-users");
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la mise à jour de l'utilisateur"
+      "An error occurred while updating the user"
     );
     return res.redirect("/users/edit-user/" + userId);
   }
@@ -247,15 +248,15 @@ exports.deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
-      req.flash("error", "Cet utilisateur n'existe pas");
+      req.flash("error", "This user does not exist");
       return res.redirect("/users/list-users");
     }
-    req.flash("success", "Utilisateur supprimé avec succès");
+    req.flash("success", "User successfully deleted");
     return res.redirect("/users/list-users");
   } catch (error) {
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la suppression de l'utilisateur"
+      "An error occurred while deleting the user"
     );
     return res.redirect("/users/list-users");
   }

@@ -1,3 +1,10 @@
+/**
+ * @file Main entry point for the application.
+ * Sets up middleware and routes.
+ * Connects to the database and configures view engine.
+ */
+
+// Import dependencies
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/database');
@@ -7,6 +14,7 @@ const authUser = require('./middlewares/authUser');
 const locals = require('./middlewares/setLocals');
 const basicMiddlewares = require('./middlewares/basicMiddlewares');
 
+// Import route handlers
 const catwayRoutes = require('./routes/catway');
 const reservationRoutes = require('./routes/reservations');
 const usersRoutes = require('./routes/users');
@@ -14,29 +22,51 @@ const authRoutes = require('./routes/auth');
 const homeRoutes = require('./routes/home');
 const errorController = require('./controllers/error');
 
+// Create an Express application
 const app = express();
 
+/**
+ * Connects to the database.
+ */
 connectDB();
 
+/**
+ * Sets the view engine and views directory for the application.
+ */
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-basicMiddlewares(app); // Configura middlewares básicos
-app.use(session);       // Configura a sessão
-app.use(cookieParser('secrect-key'));
-app.use(csrfProtection); // Configura o middleware CSRF
-app.use(require('connect-flash')()); // Flash messages
-app.use(authUser);      // Autentica o utilizador
-app.use(locals);        // Configura variáveis locais
+/**
+ * Configures middleware for the application.
+ */
+basicMiddlewares(app);                    // Configures basic middleware
+app.use(session);                         // Configures session
+app.use(cookieParser('secrect-key'));     // Parses cookies with a secret key
+app.use(csrfProtection);                  // Adds CSRF protection
+app.use(require('connect-flash')());      // Enables flash messages
+app.use(authUser);                        // Authenticates the user
+app.use(locals);                          // Sets local variables
 
-app.use(homeRoutes);
-app.use(catwayRoutes);
-app.use(reservationRoutes);
-app.use('/users', usersRoutes);
-app.use('/auth', authRoutes);
+/**
+ * Mounts route handlers.
+ */
+app.use(homeRoutes);                      // Handles home routes
+app.use(catwayRoutes);                    // Handles catway-related routes
+app.use(reservationRoutes);               // Handles reservation-related routes
+app.use('/users', usersRoutes);           // Handles user-related routes
+app.use('/auth', authRoutes);             // Handles authentication-related routes
 
-app.use(errorController.get404);
+app.use(errorController.get404);          // Handles 404 page
 
+module.exports = app;
+
+
+
+/**
+ * @global
+ * @constant {number} DEFAULT_PORT
+ * Starts the server on the specified port.
+ */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

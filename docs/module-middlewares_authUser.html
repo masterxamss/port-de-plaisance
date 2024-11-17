@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: middlewares/authUser</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: middlewares/authUser</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>This module exports a middleware function that verifies user authentication and populates the req.user property with the authenticated user's data.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_authUser.js.html">middlewares/authUser.js</a>, <a href="middlewares_authUser.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:middlewares/authUser"><span class="type-signature"></span>(require("middlewares/authUser"))<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Middleware function that verifies the user session and sets the req.user property.</p>
+<p>This middleware checks if the user is logged in by verifying the session. If the session is valid,
+it retrieves the user document from the database using the user's ID stored in the session
+and assigns it to <code>req.user</code>. If no session exists or the session is invalid,
+it calls <code>next()</code> to continue the request cycle.</p>
+<p>This middleware is useful for routes that require user authentication and access to user data.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The request object containing the incoming HTTP request.
+It may have a <code>session</code> property that stores the user's session data.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The response object used to send a response back to the client.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The next middleware function to call after the current one completes.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_authUser.js.html">middlewares/authUser.js</a>, <a href="middlewares_authUser.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>This function does not return anything but either continues the request cycle or redirects.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Usage example
+// This middleware can be used to ensure that the user is authenticated
+// before accessing a protected route like a dashboard.
+app.use('/dashboard', authUser, (req, res) => {
+  if (req.user) {
+    res.render('dashboard', { user: req.user });
+  } else {
+    res.redirect('/login');
+  }
+});</code></pre>
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li><a href="module-models_user.html">module:models/user</a></li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~user"><span class="type-signature">(inner, constant) </span>user<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Find the user by the ID stored in the session</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middlewares_authUser.js.html">middlewares/authUser.js</a>, <a href="middlewares_authUser.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 16 2024 23:29:31 GMT+0100 (Hora padrão da Europa Central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

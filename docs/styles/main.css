@@ -1,0 +1,12 @@
+.titles{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  & h3{
+    margin: 0;
+  }
+}
+
+strong{
+  color: #0095dd;
+}

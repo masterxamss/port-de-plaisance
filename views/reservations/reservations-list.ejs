@@ -6,28 +6,26 @@
 <%- include('../includes/navigation.ejs') %>
 <main>
   <section class="section-container">
-
     <header class="section-container__header">
       <img src="/images/helm32x32.png" alt="logo">
       <h1>Dashboard</h1>
     </header>
-
     <section class="section-container__body">
       <aside class="body-aside">
         <%- include('../includes/dashboard-menu.ejs') %>
       </aside>
       <div class="body-content">
         <% if (reservations.length === 0) { %>
-          <h1 class="text-center text-danger">Aucune reservation</h1>
+          <h1 class="text-center text-danger">No reservations</h1>
         <% } else { %>
           <table class="table table-hover">
             <thead class="text-light table-dark ">
               <tr>
-                <th scope="col">Número catway</th>
-                <th scope="col">Nom client</th>
-                <th scope="col">Nom bateau</th>
-                <th scope="col">Date de check-in</th>
-                <th scope="col">Date de check-out</th>
+                <th scope="col">Catway number</th>
+                <th scope="col">Client name</th>
+                <th scope="col">Boat name</th>
+                <th scope="col">Check-in date</th>
+                <th scope="col">Check-out date</th>
                 <th scope="col" class="text-center">Options</th>
               </tr>
             </thead>
@@ -39,7 +37,6 @@
                   <td class="align-middle"><%= reservation.boatName %></td>
                   <td class="align-middle"><%= moment(reservation.checkIn).format('DD/MM/YYYY') %></td>
                   <td class="align-middle"><%= moment(reservation.checkOut).format('DD/MM/YYYY') %></td>
-
                   <td class="align-middle text-center">
                     <a class="btn btn-success btn-sm" href="/catway/<%= reservation.catwayNumber%>/reservation/<%= reservation._id %>">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
@@ -52,15 +49,10 @@
               <% }) %>
             </tbody>
           </table>
-            
-            
-
         <% } %>
-        
       </div>
     </section>
     <footer class="section-container__footer">
-
     </footer>
   </section>
   <%- include('../includes/error-message.ejs') %>

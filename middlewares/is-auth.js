@@ -1,8 +1,18 @@
+/**
+ * @module middlewares/is-auth
+ * @description This module exports a middleware function that verifies the JWT token from the cookies, and refreshes it if valid.
+ * @requires jsonwebtoken
+ * 
+ */
+
+
 const jwt = require("jsonwebtoken");
+/**
+ * @constant SECRET_KEY - A secret key used to sign and verify JWT tokens.
+ */
 const SECRET_KEY = process.env.JWT_SECRET;
 
 /**
- * @module is-auth
  * 
  * @description Middleware function that verifies the JWT token from the cookies, and refreshes it if valid.
  * 

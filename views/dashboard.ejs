@@ -30,14 +30,14 @@
                 <h1 class="text-danger"><%= catwayError %></h1>        
               <% } else { %>
                 <div>
-                  <h3>Dernier catway ajouté</h3>
+                  <h3>Last catway added</h3>
                   <p><strong>Number : </strong> <%= lastCatway.catwayNumber  %></p>
-                  <p><strong>Création :</strong> <%= moment(lastCatway.createdAt).format('DD/MM/YYYY') %></p>
+                  <p><strong>Creation :</strong> <%= moment(lastCatway.createdAt).format('DD/MM/YYYY') %></p>
                 </div>
                 <div>
-                  <h3 class="mt-4">Disponibilité</h3>
-                  <p><strong>Catways occupées: </strong> <%= ocupiedCatways %></p>
-                  <p><strong>Catways disponibles: </strong> <%= availableCatways %></p>
+                  <h3 class="mt-4">Availability</h3>
+                  <p><strong>Occupied catways: </strong> <%= ocupiedCatways %></p>
+                  <p><strong>Available catways: </strong> <%= availableCatways %></p>
                 </div>
                 <div>
                   <h3 class="mt-4">Total</h3>
@@ -49,13 +49,13 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                   </svg>
-                  Ajouter catway
+                  Add catway
                 </a>
               </div>
             </div>
 
             <div class="catways-ocupation">
-              <h3>Taux d'occupation</h3>
+              <h3>Occupancy rate</h3>
               <svg viewBox="0 0 36 36" class="circular-chart orange">
                     <path class="circle-bg"
                       d="M18 2.0845
@@ -85,10 +85,10 @@
                 <h1 class="text-danger"><%= reservationError %></h1>        
               <% } else { %>
                 <div>
-                  <h3>Prochaine réservation à expirer</h3>
+                  <h3>Next reservation to expire</h3>
                   <ul>
                     <% if (nextReservationToExpire === null) { %>
-                      <li>Aucune prochaine réservation à expirer</li>
+                      <li>No next reservation to expire</li>
                     <% } else { %>
                       <li>
                         <img src="/images/anchor.png" alt="catway">
@@ -97,29 +97,29 @@
                       </li>
                       <li>
                         <img src="/images/user-client.png" alt="client">
-                        <strong>Nom du client : </strong>
+                        <strong>Client name : </strong>
                         <%= nextReservationToExpire.clientName %>
                       </li>
                       <li>
                         <img src="/images/sailing-boat.png" alt="Boat">
-                        <strong>Nom du bateau : </strong>
+                        <strong>Boat name : </strong>
                         <%= nextReservationToExpire.boatName %>
                       </li>
                       <li>
                         <img src="/images/booking.png" alt="checkin">
-                        <strong>Date de debut : </strong>
+                        <strong>Start date : </strong>
                         <%= moment(nextReservationToExpire.checkIn).format('DD/MM/YYYY') %>
                       </li>
                       <li>
                         <img src="/images/booking.png" alt="checkout">
-                        <strong>Date de fin : </strong>
+                        <strong>End date : </strong>
                         <%= moment(nextReservationToExpire.checkOut).format('DD/MM/YYYY') %>
                       </li>
                     <% } %>
                   </ul>
                 </div>
                 <div>
-                  <h3>Dernier réservation</h3>  
+                  <h3>Last reservation</h3>  
                   <ul>
                     <% recentBookings.forEach(recentBooking => { %>
                       <li>
@@ -131,22 +131,22 @@
                           </p>
                           <p>
                             <img src="/images/user-client.png" alt="client">
-                            <strong>Nom du client : </strong>
+                            <strong>Client name : </strong>
                             <%= recentBooking.clientName %>
                           </p>
                           <p>
                             <img src="/images/sailing-boat.png" alt="Boat">
-                            <strong>Nom du bateau : </strong>
+                            <strong>Boat name : </strong>
                             <%= recentBooking.boatName %>
                           </p>
                           <p>
                             <img src="/images/booking.png" alt="checkin">
-                            <strong>Date de debut : </strong>
+                            <strong>Start date : </strong>
                             <%= moment(recentBooking.checkIn).format('DD/MM/YYYY') %>
                           </p>
                           <p>
                             <img src="/images/booking.png" alt="checkout">
-                            <strong>Date de fin : </strong>
+                            <strong>End date : </strong>
                             <%= moment(recentBooking.checkOut).format('DD/MM/YYYY') %>
                           </p>
                         </div>
@@ -155,13 +155,13 @@
                   </ul>
                 </div>
                 <div>
-                  <h3>Statistiques</h3>
-                  <p><strong>Duree moyenne des réservations : </strong><%= averageDuration %> jours</p>
+                  <h3>Statistics</h3>
+                  <p><strong>Average booking duration : </strong><%= averageDuration %> days</p>
                 </div>
                 <div>
                   <h3>Total</h3>
-                  <p><strong>Total réserves actives : </strong><%= totalActiveReserves %></p>
-                  <p><strong>Total réserves : </strong><%= reservations.length %></p>
+                  <p><strong>Total active reserves : </strong><%= totalActiveReserves %></p>
+                  <p><strong>Total reserves : </strong><%= reservations.length %></p>
                 </div>
               <% } %>
             </div>
@@ -179,11 +179,11 @@
                 <h1 class="text-danger"><%= usersError %></h1>        
               <% } else { %>
                 <div>
-                  <h3>Total utilisateurs : </h3>
+                  <h3>Total users : </h3>
                   <p><%= users.length %></p>
                 </div>
                 <div>
-                  <h3>Utilisateur connecté : </h3>
+                  <h3>User logged in : </h3>
                   <p><%= user.email %></p>
                 </div>
                 <div>
@@ -191,7 +191,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                     </svg>
-                    Ajouter utilisateur
+                    Add user
                   </a>
                 </div>
               <% } %>

@@ -1,10 +1,18 @@
+/**
+ * @module middlewares/basicMiddlewares
+ * @description This module exports a function that configures essential middlewares for the Express application.
+ * @requires express 
+ * @requires bodyParser
+ * @requires method-override
+ * @requires path
+ */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const path = require('path');
 
 /**
- * @module basicMiddlewares
  * 
  * @description Configures essential middlewares for the Express application, including body parsing,
  * method overriding, and static file serving.
@@ -25,13 +33,24 @@ const path = require('path');
  * require('./middlewares')(app);
  */
 module.exports = (app) => {
-  // Parse application/x-www-form-urlencoded data
+  /**
+   * @description Parses incoming request bodies with `application/x-www-form-urlencoded` format.
+   */
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  // Enable method overriding (for PUT/DELETE support via _method query parameter)
+  /**
+   * @description Allows for HTTP method overriding via a query parameter (`_method`).
+   */
   app.use(methodOverride('_method'));
 
-  // Serve static files from the 'public' folder
+  /**
+   * @description Serves static files from the `public` directory.
+   */
   app.use(express.static(path.join(__dirname, '../public')));
+
+  /**
+   * @description Serves static files from the `docs` directory.
+   */
+  app.use('/docs', express.static(path.join(__dirname, '../docs')));
 };
 

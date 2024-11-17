@@ -20,45 +20,45 @@
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <header class="header-from">
             <img src="/images/helm32x32.png" alt="logo">
-            <h2><%= editMode ? 'Modifier un catway' : 'Ajouter un catway' %></h2>
+            <h2><%= editMode ? 'Edit catway' : 'Add catway' %></h2>
           </header>
           <div class="body-form">
             <aside class="body-form__aside">
               <% if (editMode) { %>
                 <button type="submit" class="button-md w-75">
                   <img src="/images/check.png" alt="check">
-                  Sauvegarder
+                  Save
                 </button>
               <% } else { %>
                 <button type="submit" class="button-md w-75">
                   <img src="/images/add.png" alt="adding">
-                  Ajouter
+                  Add
                 </button>
               <% } %>
               <button type="reset" class="button-md w-75">
                 <img src="/images/cancel.png" alt="cancel">
-                Annuler
+                Cancel
               </button>
               <a href="<% if (editMode) { %>/catways/<%= catway.catwayNumber %><% } else { %>/catways<% } %>" class="button-md w-75">
                 <img src="/images/exit.png" alt="exit">
-                Retour
+                Back
               </a>
             </aside>
             <div class="body-form__data">
               <div class="mb-3">
-                <label for="catway_number" class="form-label">Numéro Catway</label>
+                <label for="catway_number" class="form-label">Number Catway</label>
                 <input type="number" class="form-control" name="catway_number" id="catway_number" readonly value="<%= editMode ? catway.catwayNumber : nextCatway %>">
               </div>
               <div class="mb3">
                 <label for="type" class="form-label">Type</label>
                 <select name="type" id="type" class="form-select">
-                    <option value="" class="form-option">Choisir une option</option>
+                    <option value="" class="form-option">Chose a option</option>
                     <option value="long" class="form-option" <% if (editMode && catway.type == 'long') { %> selected <% } %>>Long</option>
                     <option value="short" class="form-option" <% if (editMode && catway.type == 'short') { %> selected <% } %>>Short</option>
                 </select>
               </div>
               <div class="mb3">
-                <label for="catway_state" class="form-label">État</label>
+                <label for="catway_state" class="form-label">State</label>
                 <textarea name="catway_state" class="form-control" id="catway_state" rows="5" style="resize:none"><%= editMode ? catway.catwayState : '' %></textarea>
               </div>
             </div>  
@@ -78,7 +78,7 @@
           Total Catways : [<%= catways.length %>]
         </p>
         <p>
-          Total Réserves : [<%= reservations.length %>]
+          Total Reservations : [<%= reservations.length %>]
         </p>
       </div>
       <div>

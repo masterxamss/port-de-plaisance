@@ -1,3 +1,10 @@
+/**
+ * @module middlewares/csrfProtection
+ * @description This module exports a middleware function that adds CSRF (Cross-Site Request Forgery) protection to the application.
+ * @requires csurf
+ */
+
+
 const csrf = require("csurf");
 
 /**

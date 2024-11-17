@@ -1,6 +1,6 @@
 /**
  * @module controllers/catway
- * @description Controller for managing reservations. Handles operations like viewing, adding, and deleting reservations.
+ * @description Controller for managing reservations. Handles operations like viewing, adding, and deleting reservations - See {@tutorial program-tutorial}.
  * @requires models/catway
  * @requires models/reservations
  */
@@ -28,7 +28,7 @@ exports.getCatways = async (req, res) => {
     const error = req.flash("error");
     const success = req.flash("success");
 
-    res.render("catways/catways-list", {
+    res.status(200).render("catways/catways-list", {
       pageTitle: "Catways list",
       catways: catways,
       reservations: reservations,
@@ -39,13 +39,13 @@ exports.getCatways = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.render("catways/catways-list", {
+    res.status(500).render("catways/catways-list", {
       pageTitle: "Catways list",
       catways: [],
       path: "/catways",
       error: res.flash(
         "error",
-        "La liste des Catways n'a pas pu être telechargee"
+        "Catways list could not be downloaded"
       )
     });
   }
@@ -71,10 +71,10 @@ exports.getOneCatway = async (req, res) => {
       catwayNumber: catwayNumber
     });
     if (!catway) {
-      req.flash("error", "Ce Catway n'existe pas");
+      req.flash("error", "This Catway doesn't exist");
       return res.redirect("/catways");
     }
-    res.render("catways/catway-detail", {
+    res.status(200).render("catways/catway-detail", {
       pageTitle: "Detail du Catway",
       catway: catway[0],
       reservations: reservations,
@@ -85,13 +85,8 @@ exports.getOneCatway = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    req.flash("error", "Le Catway n'a pas pu être telechargee");
-    res.render("catways/catways-list", {
-      pageTitle: "Catways list",
-      catways: this.getCatways,
-      path: "/catways",
-      error: error
-    });
+    req.flash("error", "Catway could not be downloaded");
+    res.redirect("/catways");
   }
 };
 
@@ -115,8 +110,8 @@ exports.getAddCatway = async (req, res) => {
   const nextCatway = catways.length + 1;
 
   try {
-    res.render("catways/add-catway", {
-      pageTitle: "Ajout d'un Catway",
+    res.status(200).render("catways/add-catway", {
+      pageTitle: "Adding a Catway",
       path: "/catways",
       error: error,
       success: success,
@@ -130,7 +125,7 @@ exports.getAddCatway = async (req, res) => {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de l'obtention des Catways"
+      "An error has occurred"
     );
     return res.redirect("/catways");
   }
@@ -152,14 +147,14 @@ exports.createCatway = async (req, res) => {
   const { catway_number, type, catway_state } = req.body;
 
   if (!catway_number || !type || !catway_state) {
-    req.flash("error", "Veuillez renseigner tous les champs");
+    req.flash("error", "Please fill in all fields");
     return res.redirect("/catways/get-add");
   }
 
   try {
     const exists = await Catway.exists({ catwayNumber: catway_number });
     if (exists) {
-      req.flash("error", "Ce Catway existe déja");
+      req.flash("error", "This Catway exists");
       return res.redirect("/catways/get-add");
     }
 
@@ -170,11 +165,11 @@ exports.createCatway = async (req, res) => {
     });
     await catway.save();
 
-    req.flash("success", "Catway ajoute avec succès");
+    req.flash("success", "Catway successfully adds");
     res.redirect("/catways");
   } catch (error) {
-    console.error("Erro ao criar Catway:", error);
-    req.flash("error", "Une erreur s'est produite lors de l'ajout du Catway");
+    console.error(error);
+    req.flash("error", "An error occurred when adding the Catway");
     res.redirect("/catways");
   }
 };
@@ -200,11 +195,11 @@ exports.getEditCatway = async (req, res) => {
     const error = req.flash("error");
     const success = req.flash("success");
     if (!catway) {
-      req.flash("error", "Ce Catway n'existe pas");
-      return res.redirect("/catways");
+      req.flash("error", "This Catway doesn't exist");
+      return res.status(404).redirect("/catways");
     }
-    res.render("catways/add-catway", {
-      pageTitle: "Editer un Catway",
+    res.status(200).render("catways/add-catway", {
+      pageTitle: "Edit a Catway",
       path: "/catways",
       editMode: editMode,
       catway: catway,
@@ -235,21 +230,18 @@ exports.replaceCatway = async (req, res) => {
   const { catway_number, type, catway_state } = req.body;
 
   try {
-    // Verifica se todos os campos foram preenchidos
     if (!catway_number || !type.trim() || !catway_state.trim()) {
-      req.flash("error", "Veuillez renseigner tous les champs");
-      return res.redirect("/catways/get-edit/" + req.params.id + "?edit=true");
+      req.flash("error", "Please fill in all fields");
+      return res.status(400).redirect("/catways/get-edit/" + req.params.id + "?edit=true");
     }
 
-    // Busca o documento do Catway pelo ID
     const catwayDoc = await Catway.findById(req.params.id);
 
     if (!catwayDoc) {
-      req.flash("error", "Ce Catway n'existe pas");
-      return res.redirect("/catways");
+      req.flash("error", "This Catway doesn't exist");
+      return res.status(404).redirect("/catways");
     }
 
-    //Verifica se o catwayNumber já existe em outro documento
     const filter = { catwayNumber: catway_number };
     const update = {
       catwayNumber: catway_number,
@@ -258,13 +250,13 @@ exports.replaceCatway = async (req, res) => {
     };
 
     await Catway.findOneAndUpdate(filter, update, { new: true });
-    req.flash("success", "Catway modifié avec succès");
-    return res.redirect("/catways/get-edit/" + req.params.id + "?edit=true");
+    req.flash("success", "Catway successfully modified");
+    return res.status(200).redirect("/catways/get-edit/" + req.params.id + "?edit=true");
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la modification du Catway"
+      "An error occurred while modifying the Catway"
     );
     return res.redirect("/catways");
   }
@@ -287,26 +279,26 @@ exports.updateCatway = async (req, res) => {
   const state = req.body.catwayState;
   try {
     if (!state.trim()) {
-      req.flash("error", "Veuillez renseigner le état du Catway");
+      req.flash("error", "Please enter the Catway state");
       return res.redirect("/catways/" + req.params.id);
     }
 
     const updatedCatway = await Catway.find({ catwayNumber: id });
 
     if (!updatedCatway) {
-      req.flash("error", "Ce Catway n'existe pas");
+      req.flash("error", "This Catway doesn't exist");
       return res.redirect("/catways");
     }
 
-    updatedCatway[0].catwayState = state;
+    updatedCatway[0].catwayState = state.trim();
     await updatedCatway[0].save();
-    req.flash("success", "État modifié avec succès");
+    req.flash("success", "State successfully modified");
     return res.redirect("/catways/" + req.params.id);
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la mise à jour du état du Catway"
+      "An error occurred while updating the Catway status"
     );
     return res.redirect("/catways/" + req.params.id);
   }
@@ -329,8 +321,9 @@ exports.deleteCatway = async (req, res) => {
     const reservations = await Reservations.find({
       catwayNumber: req.params.id
     });
-    if (reservations.length > 0) {
-      req.flash("error", "Ce Catway contient des reservations");
+
+    if (reservations[0].checkOut > new Date()) {
+      req.flash("error", "This Catway contains active reservations");
       return res.redirect("/catways/" + req.params.id);
     }
 
@@ -338,16 +331,16 @@ exports.deleteCatway = async (req, res) => {
       catwayNumber: req.params.id
     });
     if (!deletedCatway) {
-      req.flash("error", "Ce Catway n'existe pas");
+      req.flash("error", "This Catway doesn't exist");
       return res.redirect("/catways");
     }
 
-    req.flash("success", "Catway supprimé avec succès");
+    req.flash("success", "Catway successfully deleted");
     return res.redirect("/catways");
   } catch (error) {
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la suppression du Catway"
+      "An error occurred while deleting the Catway"
     );
     return res.redirect("/catways");
   }

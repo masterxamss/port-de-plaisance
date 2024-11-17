@@ -1,3 +1,11 @@
+/**
+ * @module config/database
+ * @description Module for connecting to MongoDB using Mongoose.
+ * @see {@link https://mongoosejs.com/docs/connections.html}
+ * @requires mongoose
+ * @requires dotenv
+ */
+
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
@@ -6,9 +14,6 @@ require('dotenv').config({ path: './env/.env' });
 dotenv.config();
 
 /**
- * @global
- * @module Database-connect
- * 
  * @description This function establishes a connection to MongoDB using Mongoose. 
  * It reads the MongoDB URI from environment variables and attempts to connect to the database.
  * If the connection is successful, it logs a success message to the console.

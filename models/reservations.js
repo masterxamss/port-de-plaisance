@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-
 /**
- * The Catway schema represents a catway in the system.
+ * The Reservation schema represents a reservation in the system.
  * 
  * @module models/reservations
  * @model Reservations

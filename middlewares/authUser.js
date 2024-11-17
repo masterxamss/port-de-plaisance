@@ -1,7 +1,12 @@
+/**
+ * @module middlewares/authUser
+ * @description This module exports a middleware function that verifies user authentication and populates the req.user property with the authenticated user's data.
+ * @requires models/user
+ */
+
 const User = require('../models/user');
 
 /**
- * @module authUser
  * 
  * @description Middleware function that verifies the user session and sets the req.user property.
  * 
@@ -34,15 +39,16 @@ const User = require('../models/user');
  */
 module.exports = async (req, res, next) => {
   try {
-    // If there is no user session, continue the request cycle
+    
     if (!req.session.user) {
       return next();
     }
 
-    // Find the user by the ID stored in the session
+    /**
+     * @description Find the user by the ID stored in the session
+     */
     const user = await User.findById(req.session.user._id);
     
-    // If user exists, assign the user document to req.user
     if (user) {
       req.user = user;
     }
@@ -50,7 +56,9 @@ module.exports = async (req, res, next) => {
     console.log(error);
   }
 
-  // Continue to the next middleware or route handler
+  /**
+   * @description The middleware will call next() to continue the request cycle
+   */
   next();
 };
 

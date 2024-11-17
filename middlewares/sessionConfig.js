@@ -1,9 +1,15 @@
+/**
+ * @module middlewares/sessionConfig
+ * @description Exporting the session middleware with the configured settings
+ * @requires express-session
+ * @requires connect-mongodb-session
+ */
+
+
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 /**
- * @module sessionConfig
- * 
  * @description Middleware that configures the session management for the application using `express-session` 
  * and `connect-mongodb-session`. It stores session data in MongoDB, ensuring persistence across server restarts.
  * 

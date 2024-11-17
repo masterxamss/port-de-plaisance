@@ -1,4 +1,9 @@
 /**
+ * @module middlewares/setLocals
+ * @description Middleware that sets authentication status, user data, and CSRF token to `res.locals`.
+ */
+
+/**
  * 
  * @description Middleware that sets authentication status, user data, and CSRF token to `res.locals`.
  * 

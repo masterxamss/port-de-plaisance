@@ -19,26 +19,26 @@
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <header class="header-form">
             <img src="/images/helm32x32.png" alt="logo">
-            <h2>Ajouter un utilisateur</h2>
+            <h2>Add a user</h2>
           </header>
           <div class="body-form">
             <aside class="body-form__aside">
               <button type="submit" class="button-md w-75">
                 <img src="/images/check.png" alt="check">
-                Sauver
+                Save
               </button>
               <button type="reset" class="button-md w-75">
                 <img src="/images/cancel.png" alt="cancel">
-                Annuler
+                Cancel
               </button>
               <a href="/users/list-users" class="button-md w-75">
                 <img src="/images/exit.png" alt="exit">
-                Retour
+                Back
               </a>
             </aside>
             <div class="body-form__data">
               <div class="mb-3">
-                <label for="name">Nom</label>
+                <label for="name">Name</label>
                 <input class="form-control" type="text" name="name" id="name" value="<% if (editMode) { %><%= user.name %><% } %>">
               </div>
               <div class="mb3">
@@ -46,11 +46,11 @@
                 <input class="form-control" type="email" name="email" id="email" value="<% if (editMode) { %><%= user.email %><% } %>">
               </div>
               <div class="mb3">
-                <label for="password">Mot de passe</label>
+                <label for="password">Password</label>
                 <input class="form-control" type="password" name="password" id="password">
               </div>
               <div class="mb3">
-                <label for="password">Confirmation du mot de passe</label>
+                <label for="password">Password confirmation</label>
                 <input class="form-control" type="password" name="passwordConfirm" id="passwordConfirm">
               </div>
             </div> 
