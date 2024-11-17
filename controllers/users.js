@@ -98,7 +98,7 @@ exports.createUser = async (req, res) => {
 
   try {
     const userDoc = await User.findOne({ email: email });
-    if (!userDoc) {
+    if (userDoc) {
       req.flash("error", "The data provided is invalid");
       return res.redirect("/users/add-user");
     }
