@@ -58,6 +58,12 @@ app.use('/auth', authRoutes);             // Handles authentication-related rout
 
 app.use(errorController.get404);          // Handles 404 page
 
+app.use((req, res, next) => {
+  console.log('User authenticated:', req.isAuthenticated ? req.isAuthenticated() : 'No isAuthenticated method');
+  console.log('Authenticated user:', req.user);
+  next();
+});
+
 module.exports = app;
 
 
