@@ -47,72 +47,17 @@ exports.getLogin = (req, res) => {
  * // The credentials (email and password) will be validated, and upon success, the user will be logged in.
  * app.post('/login', postLogin);
  */
-// exports.postLogin = async (req, res) => {
-//   const { email, password } = req.body;
-//   const SECRET_KEY = process.env.JWT_SECRET;
-//   try {
-//     let user = await User.findOne(
-//       { email: email },
-//       "-__v -createdAt -updatedAt"
-//     );
-//     if (user) {
-//       bcrypt.compare(password, user.password, function (err, response) {
-//         if (err) {
-//           throw new Error(err);
-//         }
-//         if (response) {
-//           delete user._doc.password;
-
-//           const expireIn = 24 * 60 * 60;
-//           const token = jwt.sign({ user: user }, SECRET_KEY, {
-//             expiresIn: expireIn
-//           });
-
-//           res.cookie("token", token, {
-//             httpOnly: true,
-//             secure: process.env.NODE_ENV === "production",
-//             sameSite: "Strict",
-//             maxAge: expireIn * 1000
-//           });
-
-//           req.session.isLoggedIn = true;
-//           req.session.user = user;
-
-//           return req.session.save((err) => {
-//             if (err) {
-//               console.log(err);
-//               res.redirect("/");
-//             }
-//             return res.redirect("/dashboard");
-//           });
-//         }
-
-//         req.flash("error","The information provided is invalid");
-//         return res.redirect("/auth/login");
-//       });
-//     } else {
-//       req.flash("error", "The information provided is invalid");
-//       return res.redirect("/auth/login");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).send("Internal Server Error");
-//   }
-// };
-
 exports.postLogin = async (req, res) => {
   const { email, password } = req.body;
   const SECRET_KEY = process.env.JWT_SECRET;
 
   try {
-    // Busca o utilizador
     const user = await User.findOne({ email: email }, "-__v -createdAt -updatedAt");
     if (!user) {
       req.flash("error", "The information provided is invalid");
       return res.redirect("/auth/login");
     }
 
-    // Compara a password
     bcrypt.compare(password, user.password, (err, response) => {
       if (err) {
         console.error(err);
@@ -125,14 +70,12 @@ exports.postLogin = async (req, res) => {
         return res.redirect("/auth/login");
       }
 
-      // Gera o token JWT
       const userObject = user.toObject();
       delete userObject.password;
 
       const expireIn = 24 * 60 * 60;
       const token = jwt.sign({ user: userObject }, SECRET_KEY, { expiresIn: expireIn });
 
-      // Define o cookie do token
       res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -140,7 +83,6 @@ exports.postLogin = async (req, res) => {
         maxAge: expireIn * 1000,
       });
 
-      // Configura a sessão
       req.session.isLoggedIn = true;
       req.session.user = userObject;
 
@@ -150,7 +92,7 @@ exports.postLogin = async (req, res) => {
           req.flash("error", "Could not log in. Please try again.");
           return res.redirect("/");
         }
-        console.log("Session saved successfully:", req.session);
+        //console.log("Session saved successfully:", req.session);
         return res.redirect("/dashboard");
       });
     });

@@ -322,17 +322,30 @@ exports.deleteCatway = async (req, res) => {
       catwayNumber: req.params.id
     });
 
-    if (reservations.length > 0 && reservations[0].checkOut > new Date()) {
-      req.flash("error", "This Catway contains active reservations");
-      return res.redirect("/catways/" + req.params.id);
+    for (let i = 0; i < reservations.length; i++) {
+      if (reservations.length > 0 && reservations[i].checkOut > new Date()) {
+        req.flash("error", "This Catway contains active reservations");
+        return res.redirect("/catways/" + req.params.id);
+      }
     }
 
     const deletedCatway = await Catway.findOneAndDelete({
       catwayNumber: req.params.id
     });
+
     if (!deletedCatway) {
       req.flash("error", "This Catway doesn't exist");
       return res.redirect("/catways");
+    }
+
+    const deletedReservations = await Reservations.find({
+      catwayNumber: req.params.id
+    });
+
+    if (deletedReservations) {
+      await Reservations.deleteMany({
+        catwayNumber: req.params.id
+      })
     }
 
     req.flash("success", "Catway successfully deleted");
