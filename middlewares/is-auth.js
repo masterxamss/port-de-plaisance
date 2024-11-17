@@ -4,8 +4,6 @@
  * @requires jsonwebtoken
  * 
  */
-
-
 const jwt = require("jsonwebtoken");
 /**
  * @constant SECRET_KEY - A secret key used to sign and verify JWT tokens.
@@ -34,20 +32,15 @@ module.exports = async (req, res, next) => {
   let token = req.cookies.token;
   
   if (token) {
-    // Verify the JWT token
-    jwt.verify(token, SECRET_KEY, (err, decoded) => {
-      if (err) {
-        // Token is invalid
+    jwt.verify(token, SECRET_KEY, (err, decoded) => {                     // Verify the JWT token
+      if (err) {                                                          // Token is invalid
         return res.status(401).json({ message: "Invalid token" });
       } else {
-        // Token is valid, set the decoded user information
-        req.decoded = decoded;
+        req.decoded = decoded;                                            // Token is valid, set the decoded user information
 
-        // Define the expiration time for the new token (24 hours)
-        const expireIn = 24 * 60 * 60;
+        const expireIn = 24 * 60 * 60;                                    // Define the expiration time for the new token (24 hours)
 
-        // Create a new JWT token with the user information from the decoded token
-        const newToken = jwt.sign(
+        const newToken = jwt.sign(                                        // Create a new JWT token with the user information from the decoded token
           {
             user: decoded.user
           },
@@ -57,21 +50,18 @@ module.exports = async (req, res, next) => {
           }
         );
 
-        // Set the new token in the cookies for the client
-        res.cookie("token", newToken, {
-          httpOnly: true, // Ensure the cookie is accessible only via HTTP (not client-side JavaScript)
-          secure: process.env.NODE_ENV === "production", // Only set the cookie securely in production
-          sameSite: "Strict", // Prevent the cookie from being sent in cross-origin requests
-          maxAge: expireIn * 1000 // Expiration time for the cookie in milliseconds
+        res.cookie("token", newToken, {                                   // Set the new token in the cookies for the client
+          httpOnly: true,                                                 // Ensure the cookie is accessible only via HTTP (not client-side JavaScript)
+          secure: process.env.NODE_ENV === "production",                  // Only set the cookie securely in production
+          sameSite: "Strict",                                             // Prevent the cookie from being sent in cross-origin requests
+          maxAge: expireIn * 1000                                         // Expiration time for the cookie in milliseconds
         });
 
-        // Proceed to the next middleware or route handler
-        next();
+        next();                                                           // Proceed to the next middleware                          
       }
     });
   } else {
-    // If no token is found, redirect to the login page
-    return res.redirect("/auth/login");
+    return res.redirect("/auth/login");                                   // If no token is found, redirect to the login page
   }
 };
 
