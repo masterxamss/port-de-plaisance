@@ -39,14 +39,10 @@ const User = require('../models/user');
  */
 module.exports = async (req, res, next) => {
   try {
-    
     if (!req.session.user) {
       return next();
     }
 
-    /**
-     * @description Find the user by the ID stored in the session
-     */
     const user = await User.findById(req.session.user._id);
     
     if (user) {
@@ -55,10 +51,7 @@ module.exports = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-
-  /**
-   * @description The middleware will call next() to continue the request cycle
-   */
+  
   next();
 };
 

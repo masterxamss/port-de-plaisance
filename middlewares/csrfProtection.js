@@ -3,8 +3,6 @@
  * @description This module exports a middleware function that adds CSRF (Cross-Site Request Forgery) protection to the application.
  * @requires csurf
  */
-
-
 const csrf = require("csurf");
 
 /**
@@ -37,9 +35,9 @@ const csrf = require("csurf");
  */
 const csrfProtection = csrf({
   cookie: {
-    httpOnly: true, // Ensures the cookie cannot be accessed via JavaScript
-    secure: process.env.NODE_ENV === "production", // Ensures the cookie is only sent over HTTPS in production
-    sameSite: "Strict" // Ensures the cookie is sent only in first-party contexts
+    httpOnly: true,                                   // Ensures the cookie cannot be accessed via JavaScript
+    secure: process.env.NODE_ENV === "production",    // Ensures the cookie is only sent over HTTPS in production
+    sameSite: "Strict"                                // Ensures the cookie is sent only in first-party contexts
   }
 });
 
