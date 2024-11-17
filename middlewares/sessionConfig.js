@@ -4,8 +4,6 @@
  * @requires express-session
  * @requires connect-mongodb-session
  */
-
-
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -32,20 +30,21 @@ const MongoDBStore = require('connect-mongodb-session')(session);
  * const sessionConfig = require('./middlewares/sessionConfig');
  * app.use(sessionConfig);
  */
+
 const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
-  collection: 'sessions'  // Store session data in the 'sessions' collection
+  collection: 'sessions'                                  // Store session data in the 'sessions' collection
 });
 
-// Exporting the session middleware with the configured settings
 module.exports = session({
-  secret: process.env.JWT_SECRET, // Secret key to sign the session ID
-  resave: false, // Do not save the session if it is unmodified
-  saveUninitialized: false, // Do not save an uninitialized session
-  store: store, // Using MongoDBStore to store session data in MongoDB
+  secret: process.env.JWT_SECRET,                         // Secret key to sign the session ID
+  resave: false,                                          // Do not save the session if it is unmodified
+  saveUninitialized: true,                                // Do not save an uninitialized session
+  store: store,                                           // Using MongoDBStore to store session data in MongoDB
   cookie: {
-    httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
-    secure: process.env.NODE_ENV === 'production', // Ensures cookies are sent securely in production
-    maxAge: 1000 * 24 * 60 * 60 // Set the session cookie to expire after 24 hours
+    httpOnly: true,                                       // Prevents client-side JavaScript from accessing the cookie
+    secure: process.env.NODE_ENV === 'production',        // Ensures cookies are sent securely in production
+    maxAge: 1000 * 24 * 60 * 60                           // Set the session cookie to expire after 24 hours
   }
 });
+

@@ -20,6 +20,8 @@ const reservationRoutes = require('./routes/reservations');
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 const homeRoutes = require('./routes/home');
+
+// Import 404 page not found controller
 const errorController = require('./controllers/error');
 
 // Create an Express application
@@ -60,15 +62,7 @@ app.use('/auth', authRoutes);             // Handles authentication-related rout
 
 app.use(errorController.get404);          // Handles 404 page
 
-app.use((req, res, next) => {
-  console.log('User authenticated:', req.isAuthenticated ? req.isAuthenticated() : 'No isAuthenticated method');
-  console.log('Authenticated user:', req.user);
-  next();
-});
-
 module.exports = app;
-
-
 
 /**
  * @global
