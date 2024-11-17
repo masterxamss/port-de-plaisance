@@ -26,11 +26,11 @@
             <aside class="body-content__aside">
               <a href="/catways/<%= catway.catwayNumber %>/reservations" class="button-md">
                 <img src="/images/calendar-color.png" alt="reservations">
-                Réservations
+                Reservations
               </a>
               <a href="/catways/get-edit/<%= catway._id %>?edit=true" class="button-md">
                 <img src="/images/edit.png" alt="edit">
-                Modifier
+                Edit
               </a>
               <div class="modal fade" id="ModalToggle" aria-hidden="true" aria-labelledby="ModalToggleLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -40,7 +40,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body bg-light">
-                      <p class="mb-0">Êtes-vous sûr de vouloir supprimer cet catway ?</p>
+                      <p class="mb-0">Are you sure you want to delete this catway ?</p>
                     </div>
                     <div class="modal-footer bg-light">
                       <form action="/catways/<%= catway.catwayNumber %>?_method=DELETE" method="post">
@@ -49,7 +49,7 @@
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
                           </svg>
-                          Continuer
+                          Continue
                         </button>
                       </form>
                     </div>
@@ -58,11 +58,11 @@
               </div>
               <a class="button-md" data-bs-toggle="modal" href="#ModalToggle" role="button">
                 <img src="/images/delete.png" alt="delete">
-                Supprimer
+                Delete
               </a>
               <a href="/catways" class="button-md">
                 <img src="/images/exit.png" alt="exit">
-                Retour
+                Back
               </a>
             </aside>
 
@@ -75,7 +75,7 @@
 
               <div>
                 <p class="mb-2 bg-secondary p-1 text-body bg-light border"><strong>Type : </strong><%= catway.type %></p>
-                <p class="mb-2 bg-secondary p-1 text-body bg-light border"><strong>État : </strong></p>
+                <p class="mb-2 bg-secondary p-1 text-body bg-light border"><strong>State : </strong></p>
                 <form action="/catways/<%= catway.catwayNumber %>?_method=PATCH" method="POST" class="d-flex flex-column justify-content-end">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                   <textarea 
@@ -88,7 +88,7 @@
                   </textarea>
                   <button type="submit" class="button-md w-100 mt-2">
                     <img src="/images/edit.png" alt="edit">
-                    Modifier état  
+                    Edit state  
                   </button>
                 </form>
               </div>
@@ -109,7 +109,7 @@
       </div>
       <div>
         <p>
-          Total Réserves : [<%= reservations.length %>]
+          Total Reservations : [<%= reservations.length %>]
         </p>
       </div>
       <div>

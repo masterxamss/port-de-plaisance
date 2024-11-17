@@ -20,7 +20,7 @@
           <a href="/catways/get-add" class="add-catway card text-white  mb-3" style="max-width: 18rem;">
             <div >
               <header class="card-header">
-                <p>Ajouter catway</p>
+                <p>Add a catway</p>
               </header>
               <div class="card-body">
                 <img src="/images/plus.png" alt="">
@@ -45,7 +45,7 @@
               <div class="card-body">
                 <div class="d-flex flex-row justify-content-between">
                   <a href="/catways/<%= catway.catwayNumber %>" class="text-light card-details">
-                    Détails
+                    Details
                   </a>
                   <% if(catway.type === 'long') {%>
                     <img src="/images/tag-long.png" alt="tag">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-options d-flex flex-column mt-2">
                   <a href="/catways/<%= catway.catwayNumber %>/reservations/get-add" class="btn btn-light btn-sm">
-                    Réserver
+                    Book now
                   </a>
                 </div>
               </div>
@@ -67,11 +67,11 @@
         <div>
           <span></span>
           <p class="m-0">
-            Catways avec réserves actives
+            Catways with active reserves
           </p>
           <span></span>
           <p class="m-0">
-            Catways sans réserves actives
+            Catways without active reserves
           </p>
         </div>
         <div>
@@ -79,7 +79,7 @@
             Total Catways : [<%= catways.length %>]
           </p>
           <p>
-            Total Réserves : [<%= reservations.length %>]
+            Total Reservations : [<%= reservations.length %>]
           </p>
         </div>
         <div>

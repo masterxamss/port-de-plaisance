@@ -18,23 +18,23 @@
         <div class="body-content__data">
           <header class="body-content__header">
             <img src="/images/helm32x32.png" alt="logo">
-            <h2>Réserves Catway <%= catwayNumber %></h2>
+            <h2>Catways reserves <%= catwayNumber %></h2>
           </header>
           <div class="body-content__body">
             <aside>
               <a href="/catways/<%= catwayNumber %>" class="button-md">
                 <img src="/images/exit.png" alt="exit">
-                Retour
+                Back
               </a>
             </aside>
             <div>
               <table class="table table-hover">
                 <thead class="text-light table-dark ">
                   <tr>
-                    <th scope="col">Nom client</th>
-                    <th scope="col">Nom bateau</th>
-                    <th scope="col">Date de check-in</th>
-                    <th scope="col">Date de check-out</th>
+                    <th scope="col">Client name</th>
+                    <th scope="col">Boat name</th>
+                    <th scope="col">Check-in date</th>
+                    <th scope="col">Check-out date</th>
                     <th scope="col" class="text-center">Options</th>
                   </tr>
                 </thead>
@@ -68,7 +68,7 @@
       <div></div>
       <div>
         <p>
-          Total Réserves : [<%= reservations.length %>]
+          Total Reservations : [<%= reservations.length %>]
         </p>
       </div>
       <div>

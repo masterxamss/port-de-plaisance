@@ -1,13 +1,15 @@
 /**
- * @module Dashboard-Controller
+ * @module controllers/dashboard
  * @description Controller responsible for operations related to the admin dashboard, including occupancy calculation, reservations, and data visualization.
+ * @requires models/catway
+ * @requires models/reservations
+ * @requires models/user
  */
 
 const Catway = require("../models/catway");
 const Reservations = require("../models/reservations");
 const User = require("../models/user");
 const moment = require("moment");
-const path = require('path');
 
 /**
  * Calculates the occupancy percentage of Catways.
@@ -271,15 +273,15 @@ exports.getDashboard = async (req, res) => {
       await getCatwaysBookedAndAvailable();
 
     if (catways.length === 0) {
-      req.flash("catwayError", "Données non trouvées");
+      req.flash("catwayError", "Data not found");
     }
 
     if (reservations.length === 0) {
-      req.flash("reservationError", "Données non trouvées");
+      req.flash("reservationError", "Data not found");
     }
 
     if (users.length === 0) {
-      req.flash("usersError", "Données non trouvées");
+      req.flash("usersError", "Data not found");
     }
 
     return res.render("dashboard", {
@@ -305,13 +307,9 @@ exports.getDashboard = async (req, res) => {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de l'obtention des informations"
+      "An error occurred while obtaining information"
     );
     return res.redirect("/dashboard");
   }
 };
 
-exports.getDocumentation = (req, res, html) => {
-  console.log(path.basename(__dirname ));
-  res.sendFile(path.join(__dirname, '../docs', 'index.html'));
-};

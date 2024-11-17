@@ -98,21 +98,26 @@
 
         
             
-<h4 class="name" id="csrfProtection"><span class="type-signature">(constant) </span>csrfProtection<span class="type-signature"></span></h4>
+<h4 class="name" id="DEFAULT_PORT"><span class="type-signature">(constant) </span>DEFAULT_PORT<span class="type-signature"> :number</span></h4>
 
 
 
 
 <div class="description">
-    <p>Middleware function that adds CSRF (Cross-Site Request Forgery) protection to the application.</p>
-<p>This middleware protects against CSRF attacks by generating a token that is unique to the user's session.
-It sets a secure, HTTP-only cookie with the CSRF token, which must be included in the headers or body of any
-state-changing HTTP request (e.g., POST, PUT, DELETE). This prevents malicious requests from being made by
-an attacker on behalf of an authenticated user.</p>
-<p>The token can be validated using the CSRF token included in the request by using the middleware on relevant routes.</p>
+    <p>Starts the server on the specified port.</p>
 </div>
 
 
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
 
 
 
@@ -147,7 +152,7 @@ an attacker on behalf of an authenticated user.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="middlewares_csrfProtection.js.html">middlewares/csrfProtection.js</a>, <a href="middlewares_csrfProtection.js.html#line31">line 31</a>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -160,18 +165,6 @@ an attacker on behalf of an authenticated user.</p>
 
 
 
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>// Usage example:
-const csrfProtection = require('./middlewares/csrfProtection');
-
-// Apply CSRF protection to a POST route
-app.post('/submit-form', csrfProtection, (req, res) => {
-  // Handle form submission
-  res.send('Form submitted');
-});</code></pre>
 
 
 
@@ -187,7 +180,7 @@ app.post('/submit-form', csrfProtection, (req, res) => {
     
 
     
-    <h4 class="name" id="authUser"><span class="type-signature"></span>authUser<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="module:middlewares/authUser"><span class="type-signature"></span>module:middlewares/authUser<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -340,7 +333,7 @@ It may have a <code>session</code> property that stores the user's session data.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="middlewares_authUser.js.html">middlewares/authUser.js</a>, <a href="middlewares_authUser.js.html#line3">line 3</a>
+        <a href="middlewares_authUser.js.html">middlewares/authUser.js</a>, <a href="middlewares_authUser.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -414,7 +407,7 @@ app.use('/dashboard', authUser, (req, res) => {
     
 
     
-    <h4 class="name" id="basicMiddlewares"><span class="type-signature"></span>basicMiddlewares<span class="signature">(app)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="module:middlewares/basicMiddlewares"><span class="type-signature"></span>module:middlewares/basicMiddlewares<span class="signature">(app)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -522,7 +515,7 @@ method overriding, and static file serving.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="middlewares_basicMiddlewares.js.html">middlewares/basicMiddlewares.js</a>, <a href="middlewares_basicMiddlewares.js.html#line6">line 6</a>
+        <a href="middlewares_basicMiddlewares.js.html">middlewares/basicMiddlewares.js</a>, <a href="middlewares_basicMiddlewares.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -589,162 +582,7 @@ require('./middlewares')(app);</code></pre>
     
 
     
-    <h4 class="name" id="connectDB"><span class="type-signature">(async) </span>connectDB<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>This function establishes a connection to MongoDB using Mongoose.
-It reads the MongoDB URI from environment variables and attempts to connect to the database.
-If the connection is successful, it logs a success message to the console.
-If the connection fails, it logs an error message with the details of the failure.</p>
-<p>This function should be called at the start of the application to ensure that your application
-can communicate with the MongoDB database.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="config_database.js.html">config/database.js</a>, <a href="config_database.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        <ul>
-<li>If the connection to MongoDB fails, an error is thrown and logged to the console.</li>
-</ul>
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>A promise that resolves when the connection is successfully established.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;void></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>// Usage example
-const connectDB = require('./connectDB');
-connectDB();</code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="is-auth"><span class="type-signature"></span>is-auth<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="module:middlewares/is-auth"><span class="type-signature"></span>module:middlewares/is-auth<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -894,7 +732,7 @@ If the token is invalid or missing, it redirects the user to the login page.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="middlewares_is-auth.js.html">middlewares/is-auth.js</a>, <a href="middlewares_is-auth.js.html#line4">line 4</a>
+        <a href="middlewares_is-auth.js.html">middlewares/is-auth.js</a>, <a href="middlewares_is-auth.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -960,7 +798,7 @@ app.use('/dashboard', isAuth);</code></pre>
     
 
     
-    <h4 class="name" id="sessionConfig"><span class="type-signature"></span>sessionConfig<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="module:middlewares/setLocals"><span class="type-signature"></span>module:middlewares/setLocals<span class="signature">(req, res, next)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -968,12 +806,14 @@ app.use('/dashboard', isAuth);</code></pre>
 
 
 <div class="description">
-    <p>Middleware that configures the session management for the application using <code>express-session</code>
-and <code>connect-mongodb-session</code>. It stores session data in MongoDB, ensuring persistence across server restarts.</p>
-<p>This middleware uses a MongoDB database to store session data. The session will be secured using the <code>JWT_SECRET</code>
-environment variable and will set cookies with appropriate security settings for production and development environments.</p>
-<p>The session cookie will have a <code>httpOnly</code> flag for security, ensuring it can't be accessed by JavaScript, and a
-<code>maxAge</code> of 24 hours.</p>
+    <p>Middleware that sets authentication status, user data, and CSRF token to <code>res.locals</code>.</p>
+<p>This middleware is responsible for setting the following local variables in the response object:</p>
+<ul>
+<li><code>isAuthenticated</code>: A boolean indicating if the user is logged in, based on the session.</li>
+<li><code>user</code>: The authenticated user's data, retrieved from the <code>req.user</code> object.</li>
+<li><code>csrfToken</code>: The CSRF token, which is generated by the <code>req.csrfToken()</code> method, if available.</li>
+</ul>
+<p>These local variables can then be used in the views (e.g., in EJS templates) to customize the UI based on the user's authentication status or to include the CSRF token in forms.</p>
 </div>
 
 
@@ -1025,7 +865,7 @@ environment variable and will set cookies with appropriate security settings for
 
             
 
-            <td class="description last"><p>The request object, which will be enhanced with session data.</p></td>
+            <td class="description last"><p>The request object containing the incoming HTTP request. It may include session and user data.</p></td>
         </tr>
 
     
@@ -1048,7 +888,7 @@ environment variable and will set cookies with appropriate security settings for
 
             
 
-            <td class="description last"><p>The response object, which will send the session cookie to the client.</p></td>
+            <td class="description last"><p>The response object used to send a response back to the client. This middleware sets local variables on it.</p></td>
         </tr>
 
     
@@ -1071,7 +911,7 @@ environment variable and will set cookies with appropriate security settings for
 
             
 
-            <td class="description last"><p>The next middleware function in the chain to be called after session setup.</p></td>
+            <td class="description last"><p>The next middleware function to call after the current one completes.</p></td>
         </tr>
 
     
@@ -1112,7 +952,7 @@ environment variable and will set cookies with appropriate security settings for
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="middlewares_sessionConfig.js.html">middlewares/sessionConfig.js</a>, <a href="middlewares_sessionConfig.js.html#line4">line 4</a>
+        <a href="middlewares_setLocals.js.html">middlewares/setLocals.js</a>, <a href="middlewares_setLocals.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -1142,7 +982,7 @@ environment variable and will set cookies with appropriate security settings for
         
 <div class="param-desc">
     <ul>
-<li>This function does not return anything. It configures the session and allows the request cycle to continue.</li>
+<li>This function does not return anything but modifies the response object for use in views.</li>
 </ul>
 </div>
 
@@ -1168,9 +1008,11 @@ environment variable and will set cookies with appropriate security settings for
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>// Usage example:
-// This middleware should be used in your Express application to manage user sessions.
-const sessionConfig = require('./middlewares/sessionConfig');
-app.use(sessionConfig);</code></pre>
+app.use(setLocals);
+
+// In EJS templates, we can access these variables:
+// &lt;%= isAuthenticated ? 'Logged in' : 'Not logged in' %>
+// &lt;input type="hidden" name="_csrf" value="&lt;%= csrfToken %>"></code></pre>
 
 
 
@@ -1190,13 +1032,13 @@ app.use(sessionConfig);</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Authentication-controller.html">Authentication-controller</a></li><li><a href="module-Dashboard-Controller.html">Dashboard-Controller</a></li><li><a href="module-Page-404.html">Page-404</a></li><li><a href="module-Reservations-controller.html">Reservations-controller</a></li><li><a href="module-Users-controller.html">Users-controller</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authUser">authUser</a></li><li><a href="global.html#basicMiddlewares">basicMiddlewares</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#csrfProtection">csrfProtection</a></li><li><a href="global.html#is-auth">is-auth</a></li><li><a href="global.html#sessionConfig">sessionConfig</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Nov 13 2024 22:51:29 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 16 2024 23:29:31 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

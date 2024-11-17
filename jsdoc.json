@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["middlewares","controllers","config","models"],
+    "include": ["middlewares","controllers","config","models","tests","./app.js"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
@@ -11,6 +11,9 @@
   },
   "opts": {
     "destination": "./docs",
-    "recurse": true
+    "recurse": true,
+    "readme": "./README.md",
+    "tutorials": "./docs/tutorials",
+    "title": "Port de la Plaisance"
   }
 }

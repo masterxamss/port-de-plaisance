@@ -1,6 +1,7 @@
 /**
- * @module Reservations-controller
+ * @module controllers/reservations
  * @description Controller for managing reservations. Handles operations like viewing, adding, and deleting reservations.
+ * @requires models/reservations
  */
 
 const moment = require("moment");
@@ -38,7 +39,7 @@ exports.getAllReservations = async (req, res) => {
     console.error(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de l'obtention des reservations"
+      "An error occurred while obtaining reservations"
     );
     return res.redirect("/dashboard");
   }
@@ -66,7 +67,7 @@ exports.getReservationsByCatway = async (req, res) => {
   try {
     const reservations = await Reservation.find({ catwayNumber: id });
     if (!reservations.length) {
-      req.flash("error", "Aucunne reservation pour ce catway");
+      req.flash("error", "No reservation for this catway");
       return res.redirect("/catways/" + id);
     }
     return res.render("reservations/reservation-by-catway", {
@@ -80,7 +81,7 @@ exports.getReservationsByCatway = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    req.flash("error", "Erreur dans l'obtention des réservations");
+    req.flash("error", "Error in obtaining reservations");
     return res.redirect("/catways/" + id);
   }
 };
@@ -106,7 +107,7 @@ exports.getAddReservation = async (req, res) => {
   const reservations = await Reservation.find();
   try {
     res.render("reservations/add-reservation", {
-      pageTitle: "Ajout réservation",
+      pageTitle: "Add reservation",
       path: "/reservations",
       error: error,
       success: success,
@@ -118,7 +119,7 @@ exports.getAddReservation = async (req, res) => {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de l'ajout de la reservation"
+      "An error occurred when adding the reservation"
     );
     return res.redirect("/catways");
   }
@@ -150,7 +151,7 @@ exports.addReservation = async (req, res) => {
       !check_in ||
       !check_out
     ) {
-      req.flash("error", "Veuillez renseigner tous les champs");
+      req.flash("error", "Please fill in all fields");
       return res.redirect(
         "/catways/" + catway_number + "/reservations/get-add"
       );
@@ -160,7 +161,7 @@ exports.addReservation = async (req, res) => {
     const checkOutDate = new Date(check_out);
 
     if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
-      req.flash("error", "Dates invalides.");
+      req.flash("error", "Invalid dates");
       return res.redirect(
         "/catways/" + catway_number + "/reservations/get-add"
       );
@@ -177,7 +178,7 @@ exports.addReservation = async (req, res) => {
     });
 
     if (existingReservation) {
-      req.flash("error", "Une réservation existe déjà pour cette période.");
+      req.flash("error", "A reservation already exists for this period");
       return res.redirect(
         "/catways/" + catway_number + "/reservations/get-add"
       );
@@ -192,13 +193,13 @@ exports.addReservation = async (req, res) => {
     });
 
     await reservation.save();
-    req.flash("success", "Reservation ajoute avec succès");
+    req.flash("success", "Reservation added successfully");
     return res.redirect("/catways");
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de l'ajout de la reservation"
+      "An error occurred while adding the reservation"
     );
     return res.redirect("/catways");
   }
@@ -227,22 +228,22 @@ exports.deleteReservation = async (req, res) => {
       idReservation
     );
     if (!deletedReservation) {
-      req.flash("error", "Cette reservation n'existe pas");
+      req.flash("error", "This reservation does not exist");
       return res.redirect("/catways/" + catwayNumber + "/reservations");
     }
 
     const reservations = await Reservation.find({ catwayNumber: catwayNumber });
     if (!reservations.length) {
-      req.flash("success", "Réservation supprimé avec succès");
+      req.flash("success", "Reservation successfully deleted");
       return res.redirect("/reservations");
     } else {
-      req.flash("success", "Reservation supprimé avec succès");
+      req.flash("success", "Reservation successfully deleted");
       return res.redirect("/catways/" + catwayNumber + "/reservations");
     }
   } catch (error) {
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la suppression de la reservation"
+      "An error occurred when deleting the reservation"
     );
     return res.redirect("/catways/" + catwayNumber + "/reservations");
   }
@@ -271,196 +272,21 @@ exports.getReservationById = async (req, res) => {
       _id: idReservation
     });
     if (!reservation) {
-      req.flash("error", "Cette reservation n'existe pas");
+      req.flash("error", "This reservation does not exist");
       return res.redirect("/catways/" + id + "/reservations");
     }
     return res.render("reservations/reservation", {
       reservation: reservation,
       path: "/reservations",
-      pageTitle: "Details de la reservation",
+      pageTitle: "Reservation details",
       moment: moment
     });
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Erreur lors de l'obtention des détails de la reservation"
+      "Error obtaining booking details"
     );
     return res.redirect("/catways/" + id + "/reservations");
   }
 };
-
-// const moment = require('moment');
-
-// const Reservation = require('../models/reservations');
-
-// exports.getAllReservations = async (req, res) => {
-//   try {
-//     const reservations = await Reservation.find();
-//     const error = req.flash('error');
-//     const success = req.flash('success');
-
-//     return res.render('reservations/reservations-list', {
-//       reservations: reservations,
-//       path: '/reservations',
-//       pageTitle: 'Reservations',
-//       moment: moment,
-//       error: error,
-//       success: success
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     req.flash('error', 'Une erreur s\'est produite lors de l\'obtention des reservations');
-//     return res.redirect('/dashboard');
-//   }
-// };
-
-// exports.getReservationsByCatway = async (req, res) => {
-//   const { id } = req.params;
-//   const error = req.flash('error');
-//   const success = req.flash('success');
-
-//   try {
-//     const reservations = await Reservation.find({ catwayNumber: id});
-//     if (!reservations.length) {
-//       req.flash('error', 'Aucunne reservation pour ce catway');
-//       return res.redirect('/catways/' + id);
-//     }
-//     return res.render('reservations/reservation-by-catway', {
-//       reservations: reservations,
-//       path: '/reservations',
-//       pageTitle: 'Reservations',
-//       moment: moment,
-//       catwayNumber: id,
-//       error: error,
-//       success: success
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     req.flash('error', 'Erreur dans l\'obtention des réservations');
-//     return res.redirect('/catways/' + id);
-//   }
-// };
-
-// exports.getAddReservation = async (req, res) => {
-//   const error = req.flash('error');
-//   const success = req.flash('success');
-//   const catwayNumber = req.params.id;
-//   const reservations = await Reservation.find();
-//   try {
-//     res.render('reservations/add-reservation', {
-//       pageTitle: 'Ajout réservation',
-//       path: '/reservations',
-//       error: error,
-//       success: success,
-//       catwayNumber: catwayNumber,
-//       reservations: reservations,
-//       moment: moment
-//     })
-//   }
-//   catch(error){
-//     console.log(error);
-//     req.flash('error', 'Une erreur s\'est produite lors de l\'ajout de la reservation');
-//     return res.redirect('/catways');
-//   }
-// };
-
-// exports.addReservation = async (req, res) => {
-//   const { client_name, boat_name, check_in, check_out } = req.body;
-//   const catway_number = req.params.id;
-
-//   try {
-//     if (!catway_number || !client_name || !boat_name || !check_in || !check_out) {
-//       req.flash('error', 'Veuillez renseigner tous les champs');
-//       return res.redirect('/catways/' + catway_number + '/reservations/get-add');
-//     }
-
-//     const checkInDate = new Date(check_in);
-//     const checkOutDate = new Date(check_out);
-
-//     if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
-//       req.flash('error', 'Dates invalides.');
-//       return res.redirect('/catways/' + catway_number + '/reservations/get-add');
-//     }
-
-//     const existingReservation = await Reservation.findOne({
-//       catwayNumber: catway_number,
-//       $or: [
-//         {
-//           checkIn: { $lt: checkOutDate },
-//           checkOut: { $gt: checkInDate }
-//         }
-//       ]
-//     });
-
-//     if (existingReservation) {
-//       req.flash('error', 'Une réservation existe déjà pour cette période.');
-//       return res.redirect('/catways/' + catway_number + '/reservations/get-add');
-//     }
-
-//     const reservation = new Reservation({
-//       catwayNumber: catway_number,
-//       clientName: client_name,
-//       boatName: boat_name,
-//       checkIn: checkInDate,
-//       checkOut: checkOutDate
-//     });
-
-//     await reservation.save();
-//     req.flash('success', 'Reservation ajoute avec succès');
-//     return res.redirect('/catways');
-//   } catch (error) {
-//     console.log(error);
-//     req.flash('error', 'Une erreur s\'est produite lors de l\'ajout de la reservation');
-//     return res.redirect('/catways');
-//   }
-// };
-
-// exports.deleteReservation = async (req, res) => {
-//   const catwayNumber = req.params.id;
-//   const idReservation = req.params.idReservation;
-
-//   try {
-//     const deletedReservation = await Reservation.findByIdAndDelete(idReservation);
-//     if (!deletedReservation) {
-//       req.flash('error', 'Cette reservation n\'existe pas');
-//       return res.redirect('/catways/'+ catwayNumber + '/reservations');
-//     }
-
-//     const reservations = await Reservation.find({ catwayNumber: catwayNumber });
-//     if (!reservations.length) {
-//       req.flash('success', 'Réservation supprimé avec succès');
-//       return res.redirect('/reservations');
-//     } else {
-//       req.flash('success', 'Reservation supprimé avec succès');
-//       return res.redirect('/catways/'+ catwayNumber + '/reservations');
-//     }
-
-//   } catch (error) {
-//       req.flash('error', 'Une erreur s\'est produite lors de la suppression de la reservation');
-//       return res.redirect('/catways/'+ catwayNumber + '/reservations');
-//   }
-// };
-
-// exports.getReservationById = async (req, res) => {
-//   const { id, idReservation } = req.params;
-
-//   try{
-//     const reservation = await Reservation.findOne({ catwayNumber: id, _id: idReservation });
-//     if (!reservation) {
-//       req.flash('error', 'Cette reservation n\'existe pas');
-//       return res.redirect('/catways/'+ id + '/reservations');
-//     }
-//     return res.render('reservations/reservation', {
-//       reservation: reservation,
-//       path: '/reservations',
-//       pageTitle: 'Reservation',
-//       moment: moment
-//     });
-//   }
-//   catch(error){
-//     console.log(error);
-//     req.flash('error', 'Une erreur s\'est produite lors de l\'obtention de la reservation');
-//     return res.redirect('/catways/'+ id + '/reservations');
-//   }
-// }

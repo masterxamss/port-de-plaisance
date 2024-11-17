@@ -1,5 +1,5 @@
 /**
- * @module Page-404
+ * @module controllers/error
  * @description Renders the 404 error page.
  *
  */

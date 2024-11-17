@@ -7,6 +7,4 @@ router.get('/', dashboardController.getHome);
 
 router.get('/dashboard', isAuth, dashboardController.getDashboard);
 
-router.get('/documentation', dashboardController.getDocumentation);
-
 module.exports = router;

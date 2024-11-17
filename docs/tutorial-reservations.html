@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Tutorial: reservations</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Tutorial: reservations</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>reservations</h2>
+</header>
+
+<article>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservatins</title>
+  <link rel="stylesheet" href="/docs/styles/main.css">
+</head>
+<body>
+  <p>
+    The purpose of this tutorial is to show you how to handle reservations and perform operations such as 
+    <a href="#add">adding</a>,
+    <a href="#read">reading</a>,
+    <a href="#delete">deleting</a>
+  </p>
+
+  <br>
+
+  <article>
+    <header class="titles">
+      <img src="/public/images/add.png" alt="icon add">
+      <h3 id="add">Create a new reservation</h3>
+    </header>
+    <section>
+      <div>
+        <header>
+          <h4>1 : Reservations are made according to a catway. To make a reservation, click on the <strong>Book now</strong> button on the card of the desired catway. </h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/book-now.webp" alt="book-now">
+      </div>
+      <div>
+        <header>
+          <h4>2 : Fill in the form and click <strong>Add</strong> </h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/add-reservation.webp" alt="add-reservation">
+      </div>
+      <div>
+        <header>
+          <h4>3 : If you try to make a reservation on a date that is already booked, an error message will be displayed.</h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/error-reservation.webp" alt="error-reservation">
+      </div>
+      <div>
+        <header>
+          <h4>4 : Once the booking has been successful, you will be redirected to the list of catways, and you will see that the color of the catway in question has changed, indicating that there is an active booking.</h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/success-reservation.webp" alt="success-reservation">
+      </div>
+  </article>
+
+  <article>
+    <header class="titles">
+      <img src="/images/checklist.png" alt="icon list">
+      <h3 id="read">List of reservations</h3>
+    </header>
+
+    <section>
+      <div>
+        <header>
+          <h4>1 : To access the list of all reservations, in the left side menu of the dashboard select the <strong>reservations</strong> option </h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/dashboard-reservations.webp" alt="reservations">
+      </div>
+      <div>
+        <header>
+          <h4>2 : The list of reservations will be displayed. To select a particular reservation, click on the green table icon in the options column.</h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/list-reservations.webp" alt="list-reservations">
+      </div>
+      <div>
+        <header>
+          <h4>3 : The details of the reservation will be displayed</h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/reservation.webp" alt="reservation">
+      </div>
+      <div>
+        <header>
+          <h4>4 : To list all reservations for a particular catway, select the <strong>reservations</strong> option in the catway details, then all reservations for that catway will be listed. </h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/catway-reservations.webp" alt="catway-reservations">
+      </div>
+    </section>
+  </article>
+
+  <article>
+    <header class="titles">
+      <img src="/public/images/delete.png" alt="icon delete">
+      <h3 id="delete">Delete reservation</h3>
+    </header>
+    <section>
+      <div>
+        <header>
+          <h4>1 : To delete a reservation, click on the <strong>delete</strong> button in the sidebar of the menu and then confirm.</h4>  
+        </header>
+        <img src="/docs/tutorials/images/reservations/delete-reservation.webp" alt="delete-reservation">
+      </div>
+    </section>
+  </article>
+</body>
+</html>
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 16 2024 23:29:31 GMT+0100 (Hora padrão da Europa Central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

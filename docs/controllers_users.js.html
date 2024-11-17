@@ -27,8 +27,9 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module Users-controller
+ * @module controllers/users
  * @description Controller for managing users. Handles operations like listing, adding, and editing users.
+ * @requires models/user
  */
 
 const bcrypt = require("bcryptjs");
@@ -63,7 +64,7 @@ exports.getUsers = async (req, res) => {
     console.log(error);
     req.flash(
       "error",
-      "La liste des utilisateurs n'a pas pu être téléchargée."
+      "The user list could not be downloaded."
     );
     res.render("users/users-list", {
       pageTitle: "Users list",
@@ -94,7 +95,7 @@ exports.getAddUser = async (req, res) => {
 
   try {
     res.render("users/add-user", {
-      pageTitle: "Ajout d'un utilisateur",
+      pageTitle: "Add a user",
       path: "/users",
       users: users,
       error: error,
@@ -125,18 +126,18 @@ exports.createUser = async (req, res) => {
 
   try {
     const userDoc = await User.findOne({ email: email });
-    if (userDoc) {
-      req.flash("error", "Les données fournies sont invalides");
+    if (!userDoc) {
+      req.flash("error", "The data provided is invalid");
       return res.redirect("/users/add-user");
     }
 
     if (password !== passwordConfirm) {
-      req.flash("error", "Les mots passe ne sont pas identiques");
+      req.flash("error", "Passwords are not identical");
       return res.redirect("/users/add-user");
     }
 
     if (password.length &lt; 8) {
-      req.flash("error", "Le mot passe doit contenir au moins 8 caractères");
+      req.flash("error", "The password must contain at least 8 characters");
       return res.redirect("/users/add-user");
     }
 
@@ -148,13 +149,13 @@ exports.createUser = async (req, res) => {
     });
 
     await user.save();
-    req.flash("success", "Utilisateur créé avec succès");
+    req.flash("success", "User successfully created");
     return res.redirect("/users/list-users");
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la création de l'utilisateur"
+      "An error has occurred while creating the user"
     );
     return res.redirect("/users/add-user");
   }
@@ -189,7 +190,7 @@ exports.getEditUser = async (req, res) => {
       return res.redirect("/");
     }
     res.render("users/add-user", {
-      pageTitle: "Editer un utilisateur",
+      pageTitle: "Edit a user",
       path: "/users",
       editMode: editMode,
       user: user,
@@ -224,18 +225,18 @@ exports.updateUser = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      req.flash("error", "Cet utilisateur n'existe pas");
+      req.flash("error", "This user does not exist");
       return res.redirect("/users/list-users");
     }
 
     if (password !== passwordConfirm) {
-      req.flash("error", "Les mots passe ne sont pas identiques");
+      req.flash("error", "Passwords are not identical");
       return res.redirect("/users/edit-user/" + userId + "?edit=true");
     }
 
     const existingUser = await User.findOne({ email: email });
     if (existingUser &amp;&amp; existingUser._id.toString() !== userId) {
-      req.flash("error", "Adresse électronique invalide");
+      req.flash("error", "Invalid e-mail address");
       return res.redirect("/users/edit-user/" + userId + "?edit=true");
     }
 
@@ -246,13 +247,13 @@ exports.updateUser = async (req, res) => {
 
     await user.save();
 
-    req.flash("success", "Utilisateur mis à jour avec succès");
+    req.flash("success", "User successfully updated");
     return res.redirect("/users/list-users");
   } catch (error) {
     console.log(error);
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la mise à jour de l'utilisateur"
+      "An error occurred while updating the user"
     );
     return res.redirect("/users/edit-user/" + userId);
   }
@@ -275,15 +276,15 @@ exports.deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
-      req.flash("error", "Cet utilisateur n'existe pas");
+      req.flash("error", "This user does not exist");
       return res.redirect("/users/list-users");
     }
-    req.flash("success", "Utilisateur supprimé avec succès");
+    req.flash("success", "User successfully deleted");
     return res.redirect("/users/list-users");
   } catch (error) {
     req.flash(
       "error",
-      "Une erreur s'est produite lors de la suppression de l'utilisateur"
+      "An error occurred while deleting the user"
     );
     return res.redirect("/users/list-users");
   }
@@ -298,13 +299,13 @@ exports.deleteUser = async (req, res) => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Authentication-controller.html">Authentication-controller</a></li><li><a href="module-Dashboard-Controller.html">Dashboard-Controller</a></li><li><a href="module-Page-404.html">Page-404</a></li><li><a href="module-Reservations-controller.html">Reservations-controller</a></li><li><a href="module-Users-controller.html">Users-controller</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authUser">authUser</a></li><li><a href="global.html#basicMiddlewares">basicMiddlewares</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#csrfProtection">csrfProtection</a></li><li><a href="global.html#is-auth">is-auth</a></li><li><a href="global.html#sessionConfig">sessionConfig</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Nov 13 2024 22:51:29 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Nov 16 2024 23:29:31 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

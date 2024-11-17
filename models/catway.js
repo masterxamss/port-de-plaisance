@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 /**
  * The Catway schema represents a catway in the system.
  *
+ * @namespace Models
  * @module models/catway
  * @model Catway
  * @description This model stores the details of a catway including its number, type, and state.

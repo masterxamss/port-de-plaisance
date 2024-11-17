@@ -19,42 +19,42 @@
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <header class="header-from">
             <img src="/images/helm32x32.png" alt="logo">
-            <h2>Ajouter une reservation</h2>
+            <h2>Add a reservation</h2>
           </header>
           <div class="body-form">
             <aside class="body-form__aside p-3">
               <button type="submit" class="button-md w-75">
                 <img src="/images/add.png" alt="adding">
-                Ajouter
+                Add
               </button>
               <button type="reset" class="button-md w-75">
                 <img src="/images/cancel.png" alt="cancel">
-                Annuler
+                Cancel
               </button>
               <a href="/catways" class="button-md w-75">
                 <img src="/images/exit.png" alt="exit">
-                Retour
+                Back
               </a>
             </aside>
             <div class="body-form__data">
               <div class="mb-3">
-                <label for="catway_number" class="form-label">Numéro Catway</label>
+                <label for="catway_number" class="form-label">Number Catway</label>
                 <input type="number" class="form-control" name="catway_number" id="catway_number" readonly value="<%= catwayNumber %>">
               </div>
               <div class="mb3">
-                <label for="client_name" class="form-label">Nom client</label>
+                <label for="client_name" class="form-label">Name client</label>
                 <input type="text" class="form-control" name="client_name" id="client_name">
               </div>
               <div class="mb3">
-                <label for="boat_name" class="form-label">Nom bateau</label>
+                <label for="boat_name" class="form-label">Name boat</label>
                 <input type="text" class="form-control" name="boat_name" id="boat_name">
               </div>
               <div class="mb3">
-                <label for="check_in" class="form-label">Date de check-in</label>
+                <label for="check_in" class="form-label">Check-in date</label>
                 <input type="date" class="form-control" name="check_in" id="check_in">
               </div>
               <div class="mb3">
-                <label for="check_out" class="form-label">Date de check-out</label>
+                <label for="check_out" class="form-label">Check-out date</label>
                 <input type="date" class="form-control" name="check_out" id="check_out">
               </div>
             </div>  
@@ -70,7 +70,7 @@
       </div>
       <div>
         <p>
-          Total Réserves : [<%= reservations.length %>]
+          Total Reservations : [<%= reservations.length %>]
         </p>
       </div>
       <div>

@@ -28,20 +28,20 @@
               <a class="nav-link<% if (path === '/catways') { %> active <% } %>" href="/catways">Catways</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <% if (path === '/reservations') { %> active <% } %>" href="/reservations">Réservations</a>
+              <a class="nav-link <% if (path === '/reservations') { %> active <% } %>" href="/reservations">Reservations</a>
             </li>
             <li class="nav-item">
               <a class="nav-link<% if (path === '/users') { %> active <% } %>" href="/users/list-users">Users</a>
             </li>
           <% } %>
           <li class="nav-item">
-            <a class="nav-link" href="/documentation">DOCs</a>
+            <a class="nav-link" href="/docs/index.html">DOCs</a>
           </li>
         </ul>
       </div>
       <% if (isAuthenticated) { %>
         <div class="d-flex flex-row align-items-center">
-          <span class="me-2">Bonjour <%= user.name %></span>
+          <span class="me-2">Welcome <%= user.name %></span>
         </div>
       <% } %>
     </div>

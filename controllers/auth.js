@@ -1,5 +1,5 @@
 /**
- * @module Authentication-controller
+ * @module controllers/auth
  * @description Module for handling user authentication and authorization.
  */
 
@@ -87,11 +87,11 @@ exports.postLogin = async (req, res) => {
           });
         }
 
-        req.flash("error", "Les informations fournies sont invalides");
+        req.flash("error","The information provided is invalid");
         return res.redirect("/auth/login");
       });
     } else {
-      req.flash("error", "Les informations fournies sont invalides");
+      req.flash("error", "The information provided is invalid");
       return res.redirect("/auth/login");
     }
   } catch (error) {
