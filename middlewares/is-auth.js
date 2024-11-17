@@ -1,23 +1,11 @@
 /**
  * @module middlewares/is-auth
- * @description This module exports a middleware function that verifies the JWT token from the cookies, and refreshes it if valid.
- * @requires jsonwebtoken
- * 
- */
-const jwt = require("jsonwebtoken");
-/**
- * @constant SECRET_KEY - A secret key used to sign and verify JWT tokens.
- */
-const SECRET_KEY = process.env.JWT_SECRET;
-
-/**
- * 
  * @description Middleware function that verifies the JWT token from the cookies, and refreshes it if valid.
  * 
  * This middleware checks if a token is present in the cookies. If the token is valid, it decodes it and 
  * generates a new token with the same user data, setting it as a cookie in the response.
  * If the token is invalid or missing, it redirects the user to the login page.
- * @function
+ * 
  * @param {Object} req - The request object containing the incoming HTTP request.
  * @param {Object} res - The response object used to send a response back to the client.
  * @param {Function} next - The next middleware function to call after the current one completes.
@@ -28,6 +16,12 @@ const SECRET_KEY = process.env.JWT_SECRET;
  * // This middleware can be used to protect routes that require authentication.
  * app.use('/dashboard', isAuth);
  */
+const jwt = require("jsonwebtoken");
+/**
+ * @constant SECRET_KEY - A secret key used to sign and verify JWT tokens.
+ */
+const SECRET_KEY = process.env.JWT_SECRET;
+
 module.exports = async (req, res, next) => {
   let token = req.cookies.token;
   if (token) {

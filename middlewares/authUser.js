@@ -1,13 +1,6 @@
 /**
  * @module middlewares/authUser
- * @description This module exports a middleware function that verifies user authentication and populates the req.user property with the authenticated user's data.
  * @requires models/user
- */
-
-const User = require('../models/user');
-
-/**
- * 
  * @description Middleware function that verifies the user session and sets the req.user property.
  * 
  * This middleware checks if the user is logged in by verifying the session. If the session is valid, 
@@ -17,7 +10,6 @@ const User = require('../models/user');
  * 
  * This middleware is useful for routes that require user authentication and access to user data.
  * 
- * @function
  * @param {Object} req - The request object containing the incoming HTTP request. 
  * It may have a `session` property that stores the user's session data.
  * @param {Object} res - The response object used to send a response back to the client.
@@ -29,6 +21,7 @@ const User = require('../models/user');
  * // Usage example
  * // This middleware can be used to ensure that the user is authenticated
  * // before accessing a protected route like a dashboard.
+ * 
  * app.use('/dashboard', authUser, (req, res) => {
  *   if (req.user) {
  *     res.render('dashboard', { user: req.user });
@@ -37,21 +30,23 @@ const User = require('../models/user');
  *   }
  * });
  */
+const User = require('../models/user');                         // Import the User model
+
 module.exports = async (req, res, next) => {
   try {
-    if (!req.session.user) {
-      return next();
+    if (!req.session.user) {                                    // Check if the user is not logged in (session does not contain user data)
+      return next();                                            // Proceed to the next middleware if no user is found in session
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.session.user._id);     // Attempt to find the user in the database using the user ID stored in the session
     
-    if (user) {
+    if (user) {                                                 // If the user is found, attach the user data to the request object
       req.user = user;
     }
   } catch (error) {
-    console.log(error);
+    console.log(error);                                         // Log any errors encountered during the database query
   }
   
-  next();
+  next();                                                       // Proceed to the next middleware or route handler
 };
 

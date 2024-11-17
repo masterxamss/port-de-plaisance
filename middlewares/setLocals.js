@@ -1,11 +1,6 @@
 /**
  * @module middlewares/setLocals
  * @description Middleware that sets authentication status, user data, and CSRF token to `res.locals`.
- */
-
-/**
- * 
- * @description Middleware that sets authentication status, user data, and CSRF token to `res.locals`.
  * 
  * This middleware is responsible for setting the following local variables in the response object:
  * - `isAuthenticated`: A boolean indicating if the user is logged in, based on the session.
@@ -24,9 +19,6 @@
  * // Usage example:
  * app.use(setLocals);
  * 
- * // In EJS templates, we can access these variables:
- * // <%= isAuthenticated ? 'Logged in' : 'Not logged in' %>
- * // <input type="hidden" name="_csrf" value="<%= csrfToken %>">
  */
 module.exports = (req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;  // Set the authentication status

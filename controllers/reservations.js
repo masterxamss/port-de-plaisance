@@ -127,6 +127,8 @@ exports.getAddReservation = async (req, res) => {
 
 /**
  * Adds a new reservation for a specific catway.
+ * This function handles the process of adding a reservation, including validation of input fields and
+ * checking for existing reservations during the specified period.
  *
  * @function addReservation
  * @async
@@ -144,6 +146,7 @@ exports.addReservation = async (req, res) => {
   const catway_number = req.params.id;
 
   try {
+    // Check if all required fields are provided
     if (
       !catway_number ||
       !client_name ||
@@ -157,6 +160,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Ensure check-in is before check-out
     if (check_in > check_out || check_in === check_out) {
       req.flash("error", "Check-in date must be before check-out date");
       return res.redirect(
@@ -167,6 +171,7 @@ exports.addReservation = async (req, res) => {
     const checkInDate = new Date(check_in);
     const checkOutDate = new Date(check_out);
 
+    // Validate the dates
     if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
       req.flash("error", "Invalid dates");
       return res.redirect(
@@ -174,6 +179,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Check if check-in date is at least one day after today
     if (checkInDate < new Date()) {
       req.flash(
         "error",
@@ -184,6 +190,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Check if there is an existing reservation during the selected period
     const existingReservation = await Reservation.findOne({
       catwayNumber: catway_number,
       $or: [
@@ -194,6 +201,7 @@ exports.addReservation = async (req, res) => {
       ]
     });
 
+    // If an existing reservation is found, notify the user
     if (existingReservation) {
       req.flash("error", "A reservation already exists for this period");
       return res.redirect(
@@ -201,6 +209,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Create a new reservation object
     const reservation = new Reservation({
       catwayNumber: catway_number,
       clientName: client_name,
@@ -209,6 +218,7 @@ exports.addReservation = async (req, res) => {
       checkOut: checkOutDate
     });
 
+    // Save the new reservation
     await reservation.save();
     req.flash("success", "Reservation added successfully");
     return res.redirect("/catways");

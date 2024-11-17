@@ -10,7 +10,6 @@ A Node.js API project for managing catways and reservations at the Port de la Pl
 - [API Documentation](#api-documentation)
 - [Testing](#testing)
 - [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -55,7 +54,7 @@ The following features can be accessed directly in the production deployment:
         Delete reservations (requires authentication).
 
     3. User Authentication:
-        Register new accounts.
+        Register, edit or delete accounts (requires authentication).
         Log in to access protected endpoints.
         Token-based authentication ensures secure access.
 
@@ -76,7 +75,7 @@ Feel free to explore these features by interacting with the live API.
   git clone https://github.com/masterxamss/port-de-plaisance.git
   cd port-de-plaisance
   ```
-  
+
 2. Install dependencies:
    **npm install**
 
@@ -89,9 +88,9 @@ Feel free to explore these features by interacting with the live API.
 
 4. Create a file named `.env.tests.local` in the `env` folder and configure the following variables:
   ```
-   PORT=3000
    MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>_tests?retryWrites=true&w=majority&appName=<appName>
-   JWT_SECRET=your_test_secret_key
+
+   MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details. Ensure you use a separate database (e.g., <dbName>_tests) to avoid interfering with production data.
   ```
 
 5. Start the development server:

@@ -93,7 +93,7 @@
     Delete reservations (requires authentication).
 
 3. User Authentication:
-    Register new accounts.
+    Register, edit or delete accounts (requires authentication).
     Log in to access protected endpoints.
     Token-based authentication ensures secure access.
 </code></pre>
@@ -129,9 +129,9 @@ cd port-de-plaisance
 <ol start="4">
 <li>Create a file named <code>.env.tests.local</code> in the <code>env</code> folder and configure the following variables:</li>
 </ol>
-<pre class="prettyprint source"><code> PORT=3000
- MONGO_URI=mongodb+srv://&lt;username>:&lt;password>@&lt;cluster>.tefdl.mongodb.net/&lt;dbName>_tests?retryWrites=true&w=majority&appName=&lt;appName>
- JWT_SECRET=your_test_secret_key
+<pre class="prettyprint source"><code> MONGO_URI=mongodb+srv://&lt;username>:&lt;password>@&lt;cluster>.tefdl.mongodb.net/&lt;dbName>_tests?retryWrites=true&w=majority&appName=&lt;appName>
+
+ MONGO_URI: Replace &lt;username>, &lt;password>, &lt;cluster>, &lt;dbName>, and &lt;appName> with the appropriate details. Ensure you use a separate database (e.g., &lt;dbName>_tests) to avoid interfering with production data.
 </code></pre>
 <ol start="5">
 <li>
@@ -194,111 +194,16 @@ cd port-de-plaisance
 
 
 
-
-
-
-<section>
-
-<header>
-    
-        <h2>app.js</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Main entry point for the application.
-Sets up middleware and routes.
-Connects to the database and configures view engine.</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app.js.html">app.js</a>, <a href="app.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 17:29:37 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 21:06:48 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

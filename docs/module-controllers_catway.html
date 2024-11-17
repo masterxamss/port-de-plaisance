@@ -152,7 +152,7 @@
     
 
     
-    <h4 class="name" id="~createCatway"><span class="type-signature">(async, inner) </span>createCatway<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createCatway"><span class="type-signature">(async, inner) </span>createCatway<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -160,7 +160,10 @@
 
 
 <div class="description">
-    <p>Creates a new catway.</p>
+    <p>Creates a new Catway by saving the provided data (catway number, type, and state) into the database.
+It first checks if all required fields are filled out. If not, an error message is shown, and the user is redirected to the Catway creation page.
+It also checks if a Catway with the same catway number already exists. If it does, an error message is shown, and the user is redirected.
+If the Catway is successfully created, a success message is shown, and the user is redirected to the Catways list.</p>
 </div>
 
 
@@ -212,7 +215,7 @@
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object containing the Catway details (catway number, type, and state) in the request body.</p></td>
         </tr>
 
     
@@ -235,7 +238,7 @@
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object used to send the result of the operation (redirecting or rendering).</p></td>
         </tr>
 
     
@@ -276,7 +279,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line134">line 134</a>
+        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line166">line 166</a>
     </li></ul></dd>
     
 
@@ -306,7 +309,9 @@
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while creating the catway.</p>
+        <ul>
+<li>Logs any errors that occur during the Catway creation process, but does not stop the user from being redirected.</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -330,6 +335,30 @@
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Redirects the user to the Catways list if the Catway is created successfully or back to the creation page if there is an error.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -347,7 +376,7 @@ app.post('/catways', catwayController.createCatway);</code></pre>
     
 
     
-    <h4 class="name" id="~deleteCatway"><span class="type-signature">(async, inner) </span>deleteCatway<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~deleteCatway"><span class="type-signature">(async, inner) </span>deleteCatway<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -355,7 +384,10 @@ app.post('/catways', catwayController.createCatway);</code></pre>
 
 
 <div class="description">
-    <p>Deletes a catway by its ID.</p>
+    <p>Deletes a Catway and its associated reservations if no active reservations are found.
+If the Catway has active reservations (i.e., with a check-out date in the future),
+it will not be deleted, and an error message will be displayed.
+After successfully deleting the Catway, it also deletes any reservations associated with it.</p>
 </div>
 
 
@@ -407,7 +439,7 @@ app.post('/catways', catwayController.createCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object containing the catway's ID in the parameters.</p></td>
         </tr>
 
     
@@ -430,7 +462,7 @@ app.post('/catways', catwayController.createCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object.</p></td>
         </tr>
 
     
@@ -471,7 +503,7 @@ app.post('/catways', catwayController.createCatway);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line307">line 307</a>
+        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line392">line 392</a>
     </li></ul></dd>
     
 
@@ -501,7 +533,9 @@ app.post('/catways', catwayController.createCatway);</code></pre>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while deleting the catway.</p>
+        <ul>
+<li>Catches any errors during the deletion process (e.g., issues with database operations).</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -525,6 +559,30 @@ app.post('/catways', catwayController.createCatway);</code></pre>
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Redirects back to the Catways page with a success or error message.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -542,7 +600,7 @@ app.post('/catways/:id', catwayController.deleteCatway);</code></pre>
     
 
     
-    <h4 class="name" id="~getAddCatway"><span class="type-signature">(async, inner) </span>getAddCatway<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~getAddCatway"><span class="type-signature">(async, inner) </span>getAddCatway<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -550,7 +608,11 @@ app.post('/catways/:id', catwayController.deleteCatway);</code></pre>
 
 
 <div class="description">
-    <p>Renders the page to add a new catway.</p>
+    <p>Renders the page for adding a new Catway.
+It retrieves the current Catways and Reservations from the database, calculates the next Catway number,
+and passes this data to the template for rendering.
+If there is any error during the data retrieval or rendering process, an error message is set,
+and the user is redirected to the Catways list page.</p>
 </div>
 
 
@@ -602,7 +664,7 @@ app.post('/catways/:id', catwayController.deleteCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object, which is used to retrieve any flash messages and handle errors.</p></td>
         </tr>
 
     
@@ -625,7 +687,7 @@ app.post('/catways/:id', catwayController.deleteCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object, which is used to render the page or handle redirects.</p></td>
         </tr>
 
     
@@ -666,7 +728,7 @@ app.post('/catways/:id', catwayController.deleteCatway);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line93">line 93</a>
+        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -696,7 +758,11 @@ app.post('/catways/:id', catwayController.deleteCatway);</code></pre>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while fetching catways or reservations.</p>
+        <ul>
+<li>Logs any errors that occur during the process, and redirects the user with an error message.
+// Example usage:
+app.get('/catways/get-add', catwayController.getAddCatway);</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -720,14 +786,32 @@ app.post('/catways/:id', catwayController.deleteCatway);</code></pre>
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Renders the &quot;add-catway&quot; view with the necessary data or redirects the user in case of an error.</li>
+</ul>
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
 
-    <h5>Example</h5>
+
+    </dd>
+</dl>
+
     
-    <pre class="prettyprint"><code>// Example usage:
-app.get('/catways/get-add', catwayController.getAddCatway);</code></pre>
+
+
 
 
 
@@ -737,7 +821,7 @@ app.get('/catways/get-add', catwayController.getAddCatway);</code></pre>
     
 
     
-    <h4 class="name" id="~getCatways"><span class="type-signature">(async, inner) </span>getCatways<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~getCatways"><span class="type-signature">(async, inner) </span>getCatways<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -746,6 +830,9 @@ app.get('/catways/get-add', catwayController.getAddCatway);</code></pre>
 
 <div class="description">
     <p>Retrieves all catways and reservations and displays the catways listing page.</p>
+<p>Renders the list page for all Catways.
+It retrieves all Catways from the database, along with their associated Reservations.
+If an error occurs while fetching the data, an error message is displayed.</p>
 </div>
 
 
@@ -797,7 +884,7 @@ app.get('/catways/get-add', catwayController.getAddCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object used to handle the request and any flash messages.</p></td>
         </tr>
 
     
@@ -820,7 +907,7 @@ app.get('/catways/get-add', catwayController.getAddCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object used to render the page or return an error message.</p></td>
         </tr>
 
     
@@ -891,7 +978,9 @@ app.get('/catways/get-add', catwayController.getAddCatway);</code></pre>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while fetching the catways or reservations.</p>
+        <ul>
+<li>Catches any errors during the database queries and logs the error while rendering the list page with an appropriate error message.</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -915,6 +1004,30 @@ app.get('/catways/get-add', catwayController.getAddCatway);</code></pre>
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Renders the &quot;catways-list&quot; view with the list of Catways and their associated reservations, or redirects with an error message if the data cannot be fetched.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -932,7 +1045,7 @@ app.get('/catways', catwayController.getCatways);</code></pre>
     
 
     
-    <h4 class="name" id="~getEditCatway"><span class="type-signature">(async, inner) </span>getEditCatway<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~getEditCatway"><span class="type-signature">(async, inner) </span>getEditCatway<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -940,7 +1053,10 @@ app.get('/catways', catwayController.getCatways);</code></pre>
 
 
 <div class="description">
-    <p>Retrieves the edit page for a catway.</p>
+    <p>Retrieves the edit page for a specific Catway.
+It checks if the Catway exists based on the provided ID. If not, an error message is displayed, and the user is redirected to the Catways list.
+If the Catway exists, the page is rendered with the necessary data, including the current Catway details, all Catways, and all Reservations.
+Additionally, any flash messages for errors or successes are included in the render.</p>
 </div>
 
 
@@ -992,7 +1108,7 @@ app.get('/catways', catwayController.getCatways);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object containing the Catway ID in the parameters and the query string (edit mode flag).</p></td>
         </tr>
 
     
@@ -1015,7 +1131,7 @@ app.get('/catways', catwayController.getCatways);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object used to render the edit page.</p></td>
         </tr>
 
     
@@ -1056,7 +1172,7 @@ app.get('/catways', catwayController.getCatways);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line177">line 177</a>
+        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line221">line 221</a>
     </li></ul></dd>
     
 
@@ -1086,7 +1202,9 @@ app.get('/catways', catwayController.getCatways);</code></pre>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while fetching the catway details.</p>
+        <ul>
+<li>Logs any errors that occur during the process, though it does not currently send a response if an error is thrown.</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -1110,14 +1228,32 @@ app.get('/catways', catwayController.getCatways);</code></pre>
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Renders the edit page with the current data, flash messages, and other relevant information.</li>
+</ul>
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
 
-    <h5>Example</h5>
+
+    </dd>
+</dl>
+
     
-    <pre class="prettyprint"><code>// Example usage:
-app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
+
+
 
 
 
@@ -1127,7 +1263,7 @@ app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
     
 
     
-    <h4 class="name" id="~getOneCatway"><span class="type-signature">(async, inner) </span>getOneCatway<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~getOneCatway"><span class="type-signature">(async, inner) </span>getOneCatway<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -1135,7 +1271,9 @@ app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
 
 
 <div class="description">
-    <p>Retrieves the details of a single catway and its associated reservations.</p>
+    <p>Renders the detail page for a specific Catway.
+It retrieves the Catway and its associated Reservations based on the Catway number passed in the request parameter.
+If the Catway doesn't exist, an error message is displayed and the user is redirected to the Catways list page.</p>
 </div>
 
 
@@ -1187,7 +1325,7 @@ app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object containing the Catway number in the URL parameters.</p></td>
         </tr>
 
     
@@ -1210,7 +1348,7 @@ app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object used to render the page or handle redirects.</p></td>
         </tr>
 
     
@@ -1251,7 +1389,7 @@ app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line54">line 54</a>
+        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -1281,7 +1419,9 @@ app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while fetching the catway or reservations.</p>
+        <ul>
+<li>Logs any errors that occur during the process and redirects the user with an error message.</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -1305,6 +1445,30 @@ app.get('/catways/get-edit/:id', catwayController.getEditCatway);</code></pre>
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Renders the &quot;catway-detail&quot; view with the Catway's details and its reservations or redirects the user in case of an error.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1322,7 +1486,7 @@ app.get('/catways/:id', catwayController.getOneCatway);</code></pre>
     
 
     
-    <h4 class="name" id="~replaceCatway"><span class="type-signature">(async, inner) </span>replaceCatway<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~replaceCatway"><span class="type-signature">(async, inner) </span>replaceCatway<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -1330,7 +1494,11 @@ app.get('/catways/:id', catwayController.getOneCatway);</code></pre>
 
 
 <div class="description">
-    <p>Replaces an existing catway with new data.</p>
+    <p>Replaces the details of an existing Catway identified by its ID.
+It checks if the necessary fields (catway_number, type, and catway_state) are provided.
+If any of the fields are missing, an error message is displayed, and the user is redirected to the edit page.
+If the Catway is not found, an error message is shown, and the user is redirected to the list of Catways.
+If the update is successful, a success message is displayed, and the user is redirected to the edit page for the modified Catway.</p>
 </div>
 
 
@@ -1382,7 +1550,7 @@ app.get('/catways/:id', catwayController.getOneCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object containing the new Catway details (catway_number, type, catway_state) in the body and the Catway ID in the parameters.</p></td>
         </tr>
 
     
@@ -1405,7 +1573,7 @@ app.get('/catways/:id', catwayController.getOneCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object.</p></td>
         </tr>
 
     
@@ -1446,7 +1614,7 @@ app.get('/catways/:id', catwayController.getOneCatway);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line217">line 217</a>
+        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line274">line 274</a>
     </li></ul></dd>
     
 
@@ -1476,7 +1644,11 @@ app.get('/catways/:id', catwayController.getOneCatway);</code></pre>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while replacing the catway.</p>
+        <ul>
+<li>Catches any errors that may occur during the Catway modification process.
+// Example usage:
+app.put('/catways/:id', catwayController.replaceCatway);</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -1500,14 +1672,32 @@ app.get('/catways/:id', catwayController.getOneCatway);</code></pre>
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Redirects to the appropriate page based on success or failure.</li>
+</ul>
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
 
-    <h5>Example</h5>
+
+    </dd>
+</dl>
+
     
-    <pre class="prettyprint"><code>// Example usage:
-app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
+
+
 
 
 
@@ -1517,7 +1707,7 @@ app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
     
 
     
-    <h4 class="name" id="~updateCatway"><span class="type-signature">(async, inner) </span>updateCatway<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~updateCatway"><span class="type-signature">(async, inner) </span>updateCatway<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -1525,7 +1715,11 @@ app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
 
 
 <div class="description">
-    <p>Updates the state of an existing catway.</p>
+    <p>Updates the state of a specific Catway identified by its catwayNumber.
+The Catway's state is updated only if a valid state is provided.
+If the state is empty, an error message is shown and the user is redirected back to the Catway page.
+If the Catway is not found, an error message is displayed.
+After updating, a success message is shown, and the user is redirected to the updated Catway page.</p>
 </div>
 
 
@@ -1577,7 +1771,7 @@ app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP request.</p></td>
+            <td class="description last"><p>The request object containing the Catway ID in the parameters and the new state in the body.</p></td>
         </tr>
 
     
@@ -1600,7 +1794,7 @@ app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
 
             
 
-            <td class="description last"><p>The HTTP response.</p></td>
+            <td class="description last"><p>The response object.</p></td>
         </tr>
 
     
@@ -1641,7 +1835,7 @@ app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line265">line 265</a>
+        <a href="controllers_catway.js.html">controllers/catway.js</a>, <a href="controllers_catway.js.html#line335">line 335</a>
     </li></ul></dd>
     
 
@@ -1671,7 +1865,9 @@ app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
 <dl>
     <dt>
         <div class="param-desc">
-        <p>If an error occurs while updating the catway's state.</p>
+        <ul>
+<li>Catches any errors that may occur during the Catway update process.</li>
+</ul>
         </div>
     </dt>
     <dd></dd>
@@ -1695,6 +1891,30 @@ app.put('/catways/:id', catwayController.replaceCatway);</code></pre>
     
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Redirects back to the Catway page with a success or error message.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1722,13 +1942,13 @@ app.patch('/catways/:id', catwayController.updateCatway);</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 17:29:37 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 21:06:48 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>
