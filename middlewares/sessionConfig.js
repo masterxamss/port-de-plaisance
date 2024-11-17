@@ -36,8 +36,6 @@ const store = new MongoDBStore({
   collection: 'sessions'                                  // Store session data in the 'sessions' collection
 });
 
-console.log('sessionConfig');
-
 module.exports = session({
   secret: process.env.JWT_SECRET,                         // Secret key to sign the session ID
   resave: false,                                          // Do not save the session if it is unmodified

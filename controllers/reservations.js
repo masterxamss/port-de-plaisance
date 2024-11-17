@@ -157,11 +157,28 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    if (check_in > check_out || check_in === check_out) {
+      req.flash("error", "Check-in date must be before check-out date");
+      return res.redirect(
+        "/catways/" + catway_number + "/reservations/get-add"
+      );
+    }
+
     const checkInDate = new Date(check_in);
     const checkOutDate = new Date(check_out);
 
     if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
       req.flash("error", "Invalid dates");
+      return res.redirect(
+        "/catways/" + catway_number + "/reservations/get-add"
+      );
+    }
+
+    if (checkInDate < new Date()) {
+      req.flash(
+        "error",
+        "Check-in date must be at least one day after today"
+      );
       return res.redirect(
         "/catways/" + catway_number + "/reservations/get-add"
       );

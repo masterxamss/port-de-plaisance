@@ -43,8 +43,150 @@
 
 
     <section>
-        <article><h1>port-de-plaisance</h1>
-<p>Create e API to the Port de Plaisance Russell</p></article>
+        <article><h1>Port de la Plaisance de Russell</h1>
+<p>A Node.js API project for managing catways and reservations at the Port de la Plaisance de Russell. This project is part of a school assignment and includes a backend implementation with MongoDB, user authentication, and comprehensive testing.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#technologies-used">Technologies Used</a></li>
+<li><a href="#setup-and-installation">Setup and Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#api-documentation">API Documentation</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<hr>
+<h2>Features</h2>
+<ul>
+<li><strong>Catway Management</strong>: Create, update, delete, and list catways.</li>
+<li><strong>Reservation Management</strong>: Handle reservations for catways.</li>
+<li><strong>Authentication</strong>: Secure endpoints with user authentication.</li>
+<li><strong>Error Handling</strong>: Includes secure error messages that avoid exposing sensitive data.</li>
+<li><strong>Testing</strong>: Unit tests written in Mocha and Chai.</li>
+<li><strong>Documentation</strong>: Automatically generated with JSDoc.</li>
+</ul>
+<hr>
+<h2>Technologies Used</h2>
+<ul>
+<li><strong>Node.js</strong>: JavaScript runtime environment.</li>
+<li><strong>Express</strong>: Web application framework.</li>
+<li><strong>MongoDB</strong>: Database for storing catways and reservations.</li>
+<li><strong>Mongoose</strong>: ODM for MongoDB.</li>
+<li><strong>Mocha</strong>: Testing framework.</li>
+<li><strong>Chai</strong>: Assertion library for testing.</li>
+<li><strong>JSDoc</strong>: For API documentation.</li>
+</ul>
+<hr>
+<h2>Deployment</h2>
+<p>The API is live and can be accessed at:</p>
+<p><strong><a href="https://port-de-plaisance.onrender.com/">https://port-de-plaisance.onrender.com/</a></strong></p>
+<p>Accessible Features</p>
+<p>The following features can be accessed directly in the production deployment:</p>
+<pre><code>1. Catway Management:
+    View available catways.
+    List, Add, edit, or delete catways (requires authentication).
+
+2. Reservation Management:
+    View active reservations for specific catways.
+    Create a new reservation (requires authentication).
+    Delete reservations (requires authentication).
+
+3. User Authentication:
+    Register new accounts.
+    Log in to access protected endpoints.
+    Token-based authentication ensures secure access.
+</code></pre>
+<p>Feel free to explore these features by interacting with the live API.</p>
+<hr>
+<h2>Setup and Installation</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js (v16 or higher)</li>
+<li>MongoDB (local or remote)</li>
+<li>Git</li>
+</ul>
+<h3>Installation Steps</h3>
+<ol>
+<li>Clone the repository:</li>
+</ol>
+<pre class="prettyprint source"><code>git clone https://github.com/masterxamss/port-de-plaisance.git
+cd port-de-plaisance
+</code></pre>
+<ol start="2">
+<li>
+<p>Install dependencies:
+<strong>npm install</strong></p>
+</li>
+<li>
+<p>Create a folder <code>env</code> in the root directory and inside the file <code>.env</code>, configure the following variables:</p>
+</li>
+</ol>
+<pre class="prettyprint source"><code> PORT=3000  
+ MONGO_URI=mongodb+srv://&lt;username>:&lt;password>@&lt;cluster>.tefdl.mongodb.net/&lt;dbName>?retryWrites=true&w=majority&appName=&lt;appName>
+ JWT_SECRET=your_secret_key
+</code></pre>
+<ol start="4">
+<li>Create a file named <code>.env.tests.local</code> in the <code>env</code> folder and configure the following variables:</li>
+</ol>
+<pre class="prettyprint source"><code> PORT=3000
+ MONGO_URI=mongodb+srv://&lt;username>:&lt;password>@&lt;cluster>.tefdl.mongodb.net/&lt;dbName>_tests?retryWrites=true&w=majority&appName=&lt;appName>
+ JWT_SECRET=your_test_secret_key
+</code></pre>
+<ol start="5">
+<li>
+<p>Start the development server:
+<strong>npm start</strong></p>
+</li>
+<li>
+<p>Access the application locally at http://localhost:3000.</p>
+</li>
+</ol>
+<h2>Usage</h2>
+<h3>Available Scripts</h3>
+<p>Start the server</p>
+<pre class="prettyprint source"><code>  npm start
+</code></pre>
+<p>Development mode: Runs the application using nodemon for automatic restarts during development and show result tests in the console.</p>
+<pre class="prettyprint source"><code>  npm run dev
+</code></pre>
+<p>Run tests</p>
+<pre class="prettyprint source"><code>  npm test  
+</code></pre>
+<p>Generate documentation</p>
+<pre class="prettyprint source"><code>  npm run doc 
+</code></pre>
+<h2>API Documentation</h2>
+<h3>The API documentation is generated using JSDoc and can be found in the docs folder.</h3>
+<h3>To regenerate the documentation:</h3>
+<pre class="prettyprint source"><code>  npm run doc 
+</code></pre>
+<h2>Testing</h2>
+<h3>This project includes unit tests written with Mocha and Chai.</h3>
+<h3>To run the tests:</h3>
+<pre class="prettyprint source"><code>  npm test 
+</code></pre>
+<h2>Contributing</h2>
+<h3>We welcome contributions! Follow these steps:</h3>
+<ol>
+<li>Fork the repository.</li>
+<li>Create a new branch:</li>
+</ol>
+<pre class="prettyprint source"><code>  git checkout -b feature/your-feature-name
+</code></pre>
+<ol start="3">
+<li>Commit your changes:</li>
+</ol>
+<pre class="prettyprint source"><code>  git commit -m &quot;Add your message here&quot;
+</code></pre>
+<ol start="4">
+<li>Push the branch:</li>
+</ol>
+<pre class="prettyprint source"><code>  git push origin feature/your-feature-name
+</code></pre>
+<ol start="5">
+<li>Submit a pull request.</li>
+</ol></article>
     </section>
 
 
@@ -156,7 +298,7 @@ Connects to the database and configures view engine.</p></div>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 15:05:56 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 17:29:37 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

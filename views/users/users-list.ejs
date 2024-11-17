@@ -55,11 +55,11 @@
                           <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                               <div class="modal-header bg-light">
-                                <h1 class="modal-title fs-5" id="ModalToggleLabel<%= user._id %>">Delete Reservation ?</h1>
+                                <h1 class="modal-title fs-5" id="ModalToggleLabel<%= user._id %>">Delete User</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body bg-light">
-                                <p class="mb-0">Are you sure you want to delete this reservation? ?</p>
+                                <p class="mb-0">Are you sure you want to delete this user ?</p>
                               </div>
                               <div class="modal-footer bg-light">
                                 <form action="/users/delete-user/<%= user._id %>?_method=DELETE" method="post">
