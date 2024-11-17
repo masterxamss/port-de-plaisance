@@ -66,6 +66,7 @@ async function calculateOccupancyPercentage() {
  */
 async function getTotalActiveReserves() {
   try {
+    // Count all reservations where the check-out date is greater than the current date (active reservations)
     const totalActives = await Reservations.countDocuments({
       checkOut: { $gt: new Date() }
     });
@@ -97,11 +98,12 @@ async function getTotalActiveReserves() {
  */
 async function getNextReservationToExpire() {
   try {
+    // Find the reservation with the earliest check-out date that is still in the future
     const nextReservation = await Reservations.findOne({
-      checkOut: { $gt: new Date() }
+      checkOut: { $gt: new Date() } // Only consider reservations with check-out after the current date
     })
-      .sort({ checkOut: 1 })
-      .exec();
+      .sort({ checkOut: 1 })        // Sort by check-out date in ascending order
+      .exec();                      // Execute the query
 
     if (!nextReservation) {
       return null;
@@ -132,6 +134,7 @@ async function getNextReservationToExpire() {
  */
 async function getRecentBookings(limit = 1) {
   try {
+    // Retrieve the most recent reservations, sorted by creation date in descending order, and limited by the provided 'limit'
     const recentBookings = await Reservations.find()
       .sort({ createdAt: -1 })
       .limit(limit)
@@ -145,9 +148,9 @@ async function getRecentBookings(limit = 1) {
 }
 
 /**
- * Calculates the average booking duration.
- *
- * The duration is calculated as the difference between checkOut and checkIn dates for each reservation, averaged across all reservations.
+ * Calculates the average duration of bookings.
+ * This function queries the reservations collection, calculates the duration of each reservation,
+ * and computes the average duration of all bookings in days.
  *
  * @async
  * @function calculateAverageBookingDuration
@@ -161,16 +164,19 @@ async function getRecentBookings(limit = 1) {
  */
 async function calculateAverageBookingDuration() {
   try {
+    // Retrieve all reservations from the database
     const reservations = await Reservations.find();
+
+    // Calculate the total duration of all bookings in days
     const totalDays = reservations.reduce((acc, reserve) => {
       const duration =
         (new Date(reserve.checkOut) - new Date(reserve.checkIn)) /
-        (1000 * 60 * 60 * 24);
-      return acc + duration;
+        (1000 * 60 * 60 * 24);                                        // Convert the duration from milliseconds to days
+      return acc + duration;                                          // Accumulate the total duration
     }, 0);
 
-    const averageDays = totalDays / reservations.length;
-    return averageDays.toFixed(2);
+    const averageDays = totalDays / reservations.length;              // Calculate the average duration by dividing the total duration by the number of reservations
+    return averageDays.toFixed(2);                                    // Return the average duration rounded to 2 decimal places
   } catch (error) {
     console.error(
       "Error when calculating the average duration of bookings:",

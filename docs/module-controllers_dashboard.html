@@ -278,7 +278,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line228">line 228</a>
+        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line234">line 234</a>
     </li></ul></dd>
     
 
@@ -322,8 +322,9 @@
 
 
 <div class="description">
-    <p>Calculates the average booking duration.</p>
-<p>The duration is calculated as the difference between checkOut and checkIn dates for each reservation, averaged across all reservations.</p>
+    <p>Calculates the average duration of bookings.
+This function queries the reservations collection, calculates the duration of each reservation,
+and computes the average duration of all bookings in days.</p>
 </div>
 
 
@@ -367,7 +368,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line147">line 147</a>
+        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line150">line 150</a>
     </li></ul></dd>
     
 
@@ -669,7 +670,7 @@ console.log(occupancy); // Output: "45.23" (if 45.23% of catways are occupied)</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line183">line 183</a>
+        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line189">line 189</a>
     </li></ul></dd>
     
 
@@ -893,7 +894,7 @@ console.log(availableCatways); // Output: 10 (if 10 catways are available)</code
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line235">line 235</a>
+        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line241">line 241</a>
     </li></ul></dd>
     
 
@@ -1025,7 +1026,7 @@ app.get("/dashboard", async (req, res) => {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line79">line 79</a>
+        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -1249,7 +1250,7 @@ if (nextExpire) {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line117">line 117</a>
+        <a href="controllers_dashboard.js.html">controllers/dashboard.js</a>, <a href="controllers_dashboard.js.html#line119">line 119</a>
     </li></ul></dd>
     
 
@@ -1508,13 +1509,13 @@ console.log(totalActive); // Output: 12 (if there are 12 active reservations)</c
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 17:29:37 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 21:06:48 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

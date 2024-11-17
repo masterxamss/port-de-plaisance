@@ -27,9 +27,35 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file Main entry point for the application.
- * Sets up middleware and routes.
- * Connects to the database and configures view engine.
+ * @file Main entry point for the "Port de la plaisance Russell" application.
+ * This file sets up the middleware, routes, and connects to the database.
+ * It also configures the view engine and starts the Express server.
+ * 
+ * @module app
+ * 
+ * @requires express
+ * @requires cookie-parser
+ * @requires connectDB
+ * @requires session
+ * @requires csrfProtection
+ * @requires authUser
+ * @requires locals
+ * @requires basicMiddlewares
+ * @requires catwayRoutes
+ * @requires reservationRoutes
+ * @requires usersRoutes
+ * @requires authRoutes
+ * @requires homeRoutes
+ * @requires errorController
+ * 
+ * @global
+ * @constant {number} DEFAULT_PORT
+ * Port where the application will run.
+ * If `process.env.PORT` is not set, it defaults to 10000.
+ * 
+ * @example
+ * // To run the app locally
+ * node app.js
  */
 
 // Import dependencies
@@ -52,18 +78,14 @@ const homeRoutes = require('./routes/home');
 // Import 404 page not found controller
 const errorController = require('./controllers/error');
 
-// Create an Express application
-const app = express();
+const app = express();                    // Create an Express application
 
-/**
- * Connects to the database.
- */
-connectDB();
+connectDB();                              // Connects to the database
 
 /**
  * Sets the view engine and views directory for the application.
  */
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');            
 app.set('views', 'views');
 app.set('trust proxy', 1);
 
@@ -98,128 +120,7 @@ module.exports = app;
  * Starts the server on the specified port.
  */
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const path = require('path');
-// const express = require('express');
-// const connectDB = require('./config/database');
-// const bodyParser = require('body-parser');
-// const flash = require('connect-flash');
-// const session = require('express-session');
-// const MongoDBStore = require('connect-mongodb-session')(session);
-// const methodOverride = require('method-override');
-
-// const catwayRoutes = require('./routes/catway');
-// const reservationRoutes = require('./routes/reservations');
-// const usersRoutes = require('./routes/users');
-// const authRoutes = require('./routes/auth');
-// const homeRoutes = require('./routes/home');
-
-// const User = require('./models/user');
-// const errorController = require('./controllers/error');
-
-// const app = express();
-// const store = new MongoDBStore({
-//   uri: process.env.MONGO_URI,
-//   collection: 'sessions'
-// });
-
-// connectDB();
-
-// app.use(express.json());
-
-// app.set('view engine', 'ejs');
-// app.set('views', 'views');
-
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(methodOverride('_method'));
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(
-//   session({
-//     secret: process.env.JWT_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: store,
-//     cookie: {
-//       maxAge: 1000 * 60 * 60 * 2
-//     }
-//   })
-// );
-// app.use(flash());
-// app.use(async (req, res, next) => {
-//   try{
-//     if (!req.session.user) {
-//       return next();
-//     }
-
-//     const user = await User.findById(req.session.user._id);
-//     if (user){
-//       req.user = user;
-      
-//     }
-//   } catch(error){
-//     console.log(error);
-//   }
-//   next();
-// });
-
-// app.use((req, res, next) => {
-//   res.locals.isAuthenticated = req.session.isLoggedIn;
-//   res.locals.user = req.user;
-//   //res.locals.csrfToken = req.csrfToken();
-//   next();
-// });
-
-
-// app.use(homeRoutes);
-// app.use(catwayRoutes);
-// app.use(reservationRoutes);
-// app.use('/users', usersRoutes);
-// app.use('/auth', authRoutes);
-
-// app.use(errorController.get404);
-
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-</code></pre>
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));</code></pre>
         </article>
     </section>
 
@@ -229,13 +130,13 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 17:29:37 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 21:06:48 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

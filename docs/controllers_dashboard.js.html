@@ -94,6 +94,7 @@ async function calculateOccupancyPercentage() {
  */
 async function getTotalActiveReserves() {
   try {
+    // Count all reservations where the check-out date is greater than the current date (active reservations)
     const totalActives = await Reservations.countDocuments({
       checkOut: { $gt: new Date() }
     });
@@ -125,11 +126,12 @@ async function getTotalActiveReserves() {
  */
 async function getNextReservationToExpire() {
   try {
+    // Find the reservation with the earliest check-out date that is still in the future
     const nextReservation = await Reservations.findOne({
-      checkOut: { $gt: new Date() }
+      checkOut: { $gt: new Date() } // Only consider reservations with check-out after the current date
     })
-      .sort({ checkOut: 1 })
-      .exec();
+      .sort({ checkOut: 1 })        // Sort by check-out date in ascending order
+      .exec();                      // Execute the query
 
     if (!nextReservation) {
       return null;
@@ -160,6 +162,7 @@ async function getNextReservationToExpire() {
  */
 async function getRecentBookings(limit = 1) {
   try {
+    // Retrieve the most recent reservations, sorted by creation date in descending order, and limited by the provided 'limit'
     const recentBookings = await Reservations.find()
       .sort({ createdAt: -1 })
       .limit(limit)
@@ -173,9 +176,9 @@ async function getRecentBookings(limit = 1) {
 }
 
 /**
- * Calculates the average booking duration.
- *
- * The duration is calculated as the difference between checkOut and checkIn dates for each reservation, averaged across all reservations.
+ * Calculates the average duration of bookings.
+ * This function queries the reservations collection, calculates the duration of each reservation,
+ * and computes the average duration of all bookings in days.
  *
  * @async
  * @function calculateAverageBookingDuration
@@ -189,16 +192,19 @@ async function getRecentBookings(limit = 1) {
  */
 async function calculateAverageBookingDuration() {
   try {
+    // Retrieve all reservations from the database
     const reservations = await Reservations.find();
+
+    // Calculate the total duration of all bookings in days
     const totalDays = reservations.reduce((acc, reserve) => {
       const duration =
         (new Date(reserve.checkOut) - new Date(reserve.checkIn)) /
-        (1000 * 60 * 60 * 24);
-      return acc + duration;
+        (1000 * 60 * 60 * 24);                                        // Convert the duration from milliseconds to days
+      return acc + duration;                                          // Accumulate the total duration
     }, 0);
 
-    const averageDays = totalDays / reservations.length;
-    return averageDays.toFixed(2);
+    const averageDays = totalDays / reservations.length;              // Calculate the average duration by dividing the total duration by the number of reservations
+    return averageDays.toFixed(2);                                    // Return the average duration rounded to 2 decimal places
   } catch (error) {
     console.error(
       "Error when calculating the average duration of bookings:",
@@ -351,13 +357,13 @@ exports.getDashboard = async (req, res) => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 17:29:37 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 21:06:48 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,12 +1,6 @@
 /**
  * @module middlewares/csrfProtection
- * @description This module exports a middleware function that adds CSRF (Cross-Site Request Forgery) protection to the application.
  * @requires csurf
- */
-const csrf = require("csurf");
-
-/**
- * 
  * @description Middleware function that adds CSRF (Cross-Site Request Forgery) protection to the application.
  * 
  * This middleware protects against CSRF attacks by generating a token that is unique to the user's session.
@@ -26,13 +20,14 @@ const csrf = require("csurf");
  * @example
  * // Usage example:
  * const csrfProtection = require('./middlewares/csrfProtection');
+ * app.use(csrfProtection); 
  * 
- * // Apply CSRF protection to a POST route
- * app.post('/submit-form', csrfProtection, (req, res) => {
- *   // Handle form submission
- *   res.send('Form submitted');
- * });
+ * // In EJS templates, we can use a input tag like this:
+ * <input type="hidden" name="_csrf" value="<%= csrfToken %>">
  */
+
+const csrf = require("csurf");
+
 const csrfProtection = csrf({
   cookie: {
     httpOnly: true,                                   // Ensures the cookie cannot be accessed via JavaScript

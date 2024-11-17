@@ -52,40 +52,50 @@ exports.postLogin = async (req, res) => {
   const SECRET_KEY = process.env.JWT_SECRET;
 
   try {
+    // Attempt to find the user by email in the database
     const user = await User.findOne({ email: email }, "-__v -createdAt -updatedAt");
-    if (!user) {
+
+    // If no user is found, show an error message and redirect back to login page
+    if (!user) {                                                                                    
       req.flash("error", "The information provided is invalid");
       return res.redirect("/auth/login");
     }
 
-    bcrypt.compare(password, user.password, (err, response) => {
+    // Compare the entered password with the stored password hash using bcrypt
+    bcrypt.compare(password, user.password, (err, response) => {                                    
       if (err) {
         console.error(err);
         req.flash("error", "Something went wrong. Please try again.");
         return res.redirect("/auth/login");
       }
 
-      if (!response) {
+      // If the passwords don't match, show an error message and redirect
+      if (!response) {                                                                              
         req.flash("error", "The information provided is invalid");
         return res.redirect("/auth/login");
       }
 
+      // If login is successful, remove the password from the user object
       const userObject = user.toObject();
       delete userObject.password;
 
+      // If login is successful, remove the password from the user object
       const expireIn = 24 * 60 * 60;
       const token = jwt.sign({ user: userObject }, SECRET_KEY, { expiresIn: expireIn });
 
+      // Generate the JWT token
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Strict",
-        maxAge: expireIn * 1000,
+        secure: process.env.NODE_ENV === "production",    // Use secure cookies in production
+        sameSite: "Strict",                               // Prevents CSRF attacks
+        maxAge: expireIn * 1000,                          // Set expiration time for the cookie
       });
 
+      // Set the session to mark the user as logged in
       req.session.isLoggedIn = true;
       req.session.user = userObject;
 
+      // Save the session and redirect to the dashboard
       req.session.save((err) => {
         if (err) {
           console.error("Session save error:", err);
@@ -97,6 +107,7 @@ exports.postLogin = async (req, res) => {
       });
     });
   } catch (error) {
+    // Catch any errors during the login process
     console.error("Error in postLogin:", error);
     res.status(500).send("Internal Server Errorssss");
   }
@@ -115,17 +126,20 @@ exports.postLogin = async (req, res) => {
  * @returns {void} - Redirects the user to the homepage after logging out.
  */
 exports.postLogout = (req, res) => {
+  // Destroy the session to log the user out
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
     }
 
+    // Clear the JWT token cookie from the client's browser
     res.clearCookie("token", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict"
     });
 
+    // Redirect the user to the homepage after logging out
     res.redirect("/");
   });
 };

@@ -155,6 +155,8 @@ exports.getAddReservation = async (req, res) => {
 
 /**
  * Adds a new reservation for a specific catway.
+ * This function handles the process of adding a reservation, including validation of input fields and
+ * checking for existing reservations during the specified period.
  *
  * @function addReservation
  * @async
@@ -172,6 +174,7 @@ exports.addReservation = async (req, res) => {
   const catway_number = req.params.id;
 
   try {
+    // Check if all required fields are provided
     if (
       !catway_number ||
       !client_name ||
@@ -185,6 +188,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Ensure check-in is before check-out
     if (check_in > check_out || check_in === check_out) {
       req.flash("error", "Check-in date must be before check-out date");
       return res.redirect(
@@ -195,6 +199,7 @@ exports.addReservation = async (req, res) => {
     const checkInDate = new Date(check_in);
     const checkOutDate = new Date(check_out);
 
+    // Validate the dates
     if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
       req.flash("error", "Invalid dates");
       return res.redirect(
@@ -202,6 +207,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Check if check-in date is at least one day after today
     if (checkInDate &lt; new Date()) {
       req.flash(
         "error",
@@ -212,6 +218,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Check if there is an existing reservation during the selected period
     const existingReservation = await Reservation.findOne({
       catwayNumber: catway_number,
       $or: [
@@ -222,6 +229,7 @@ exports.addReservation = async (req, res) => {
       ]
     });
 
+    // If an existing reservation is found, notify the user
     if (existingReservation) {
       req.flash("error", "A reservation already exists for this period");
       return res.redirect(
@@ -229,6 +237,7 @@ exports.addReservation = async (req, res) => {
       );
     }
 
+    // Create a new reservation object
     const reservation = new Reservation({
       catwayNumber: catway_number,
       clientName: client_name,
@@ -237,6 +246,7 @@ exports.addReservation = async (req, res) => {
       checkOut: checkOutDate
     });
 
+    // Save the new reservation
     await reservation.save();
     req.flash("success", "Reservation added successfully");
     return res.redirect("/catways");
@@ -344,13 +354,13 @@ exports.getReservationById = async (req, res) => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-login.html">Login</a></li><li><a href="tutorial-reservations.html">reservations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 17:29:37 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 17 2024 21:06:48 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>
