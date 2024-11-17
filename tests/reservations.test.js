@@ -19,7 +19,7 @@ describe('Reservations Tests', function () {
    * @async
    */
   before(async function () {
-    const dbURI = process.env.MONGO_URI;
+    const dbURI = process.env.MONGO_URI_TESTS;
     await mongoose.connect(dbURI, {
       serverSelectionTimeoutMS: 10000,
     });
