@@ -322,7 +322,7 @@ exports.deleteCatway = async (req, res) => {
       catwayNumber: req.params.id
     });
 
-    if (reservations[0].checkOut > new Date()) {
+    if (reservations.length > 0 && reservations[0].checkOut > new Date()) {
       req.flash("error", "This Catway contains active reservations");
       return res.redirect("/catways/" + req.params.id);
     }
