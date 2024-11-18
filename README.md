@@ -79,15 +79,35 @@ Feel free to explore these features by interacting with the live API.
 2. Install dependencies:
    **npm install**
 
-3. Create a folder `env` in the root directory and inside the file `.env`, configure the following variables:
-  ```  
-   PORT=3000  
-   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>?retryWrites=true&w=majority&appName=<appName>
+3. Create a folder `env` in the root directory and inside the file `.env.development`, configure the following variables:
+  ```
+   NODE_ENV=development
+   APP_NAME=port-de-plaisance
+   API_URL=127.0.0.1  
+   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>_dev?retryWrites=true&w=majority&appName=<appName>
    JWT_SECRET=your_secret_key
+   PORT=3000
+
+   MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details. Ensure you use a separate database (e.g., <dbName>_dev) to avoid interfering with production data.  
   ```
 
-4. Create a file named `.env.tests.local` in the `env` folder and configure the following variables:
+4. In the same folder `env` in the root directory and inside the file `.env.production`, configure the following variables:
   ```
+   NODE_ENV=production
+   APP_NAME=port-de-plaisance
+   API_URL=127.0.0.1  
+   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>_prod?retryWrites=true&w=majority&appName=<appName>
+   JWT_SECRET=your_secret_key
+   PORT=3000
+
+   MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details.  
+  ```
+
+5. Create a file named `.env.test.local` in the `env` folder and configure the following variables:
+  ```
+   NODE_ENV=test
+   APP_NAME=port-de-plaisance
+   API_URL=127.0.0.1 
    MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>_tests?retryWrites=true&w=majority&appName=<appName>
 
    MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details. Ensure you use a separate database (e.g., <dbName>_tests) to avoid interfering with production data.
@@ -96,21 +116,21 @@ Feel free to explore these features by interacting with the live API.
 5. Start the development server:
    **npm start**
 
-6. Access the application locally at http://localhost:3000.
+7. Access the application locally at http://localhost:3000.
 
 
 ## Usage
 
 ### Available Scripts
 
-Start the server
-```
-  npm start
-```
-
 Development mode: Runs the application using nodemon for automatic restarts during development and show result tests in the console.
 ```
   npm run dev
+```
+
+Production mode: Runs the application using nodemon for automatic restarts.
+```
+  npm run prod
 ```
 
 Run tests
