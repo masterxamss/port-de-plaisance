@@ -36,6 +36,7 @@ const csrfProtection = require('./middlewares/csrfProtection');
 const authUser = require('./middlewares/authUser');
 const locals = require('./middlewares/setLocals');
 const basicMiddlewares = require('./middlewares/basicMiddlewares');
+require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 
 // Import route handlers
 const catwayRoutes = require('./routes/catway');
