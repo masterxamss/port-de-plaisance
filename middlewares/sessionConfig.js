@@ -39,11 +39,12 @@ const store = new MongoDBStore({
 module.exports = session({
   secret: process.env.JWT_SECRET,                         // Secret key to sign the session ID
   resave: false,                                          // Do not save the session if it is unmodified
-  saveUninitialized: true,                                // Do not save an uninitialized session
+  saveUninitialized: false,                               // Do not save an uninitialized session
   store: store,                                           // Using MongoDBStore to store session data in MongoDB
   cookie: {
     httpOnly: true,                                       // Prevents client-side JavaScript from accessing the cookie
-    secure: process.env.NODE_ENV === 'production',        // Ensures cookies are sent securely in production
+    secure: process.env.NODE_ENV === 'production' && 
+      process.env.IS_LOCAL !== 'true',                    // Ensures cookies are sent securely in production
     maxAge: 1000 * 24 * 60 * 60                           // Set the session cookie to expire after 24 hours
   }
 });
