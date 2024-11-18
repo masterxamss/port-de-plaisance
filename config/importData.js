@@ -25,9 +25,10 @@ const reservationsPath = './data/reservations.json';
 
 
 module.exports = async () => {
+  console.log(process.env.NODE_ENV)
   try {
-    
-    const reservationsCount = await Reservations.countDocuments();
+    if (process.env.NODE_ENV === "development") {
+      const reservationsCount = await Reservations.countDocuments();
     if (reservationsCount === 0) {
       const reservationsData = JSON.parse(fs.readFileSync(reservationsPath, 'utf-8'));
       await Reservations.insertMany(reservationsData);
@@ -57,6 +58,7 @@ module.exports = async () => {
       console.log('User created successfully');
     } else {
       console.log('User data already exists');
+    }
     }
 
   } catch (error) {
