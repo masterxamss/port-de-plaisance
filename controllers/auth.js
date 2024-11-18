@@ -5,7 +5,7 @@
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-//require("dotenv").config();
+require("dotenv").config();
 
 const User = require("../models/user");
 
@@ -94,6 +94,7 @@ exports.postLogin = async (req, res) => {
       // Set the session to mark the user as logged in
       req.session.isLoggedIn = true;
       req.session.user = userObject;
+      console.log(req.session.user);
 
       // Save the session and redirect to the dashboard
       req.session.save((err) => {
