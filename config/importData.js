@@ -12,6 +12,7 @@
  * @returns {Promise<void>} - A promise that resolves when the data has been
  *   successfully imported.
  */
+require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
@@ -25,6 +26,7 @@ const reservationsPath = "./data/reservations.json";
 
 module.exports = async () => {
   try {
+    console.log("NODE_ENV:", process.env.NODE_ENV);
     if (process.env.NODE_ENV === "development") {
       const reservationsCount = await Reservations.countDocuments();
       if (reservationsCount === 0) {

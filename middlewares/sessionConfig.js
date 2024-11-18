@@ -4,8 +4,11 @@
  * @requires express-session
  * @requires connect-mongodb-session
  */
+require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
+
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+
 
 /**
  * @description Middleware that configures the session management for the application using `express-session` 
