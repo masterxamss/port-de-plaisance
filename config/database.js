@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 // Load environment variables from the .env file
-require('dotenv').config({ path: './env/.env' });
-dotenv.config();
+//require('dotenv').config({ path: './env/.env' });
+//dotenv.config();
 
 /**
  * @description This function establishes a connection to MongoDB using Mongoose. 

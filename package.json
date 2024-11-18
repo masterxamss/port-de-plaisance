@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "dev": "concurrently \"npm run start\" \"npm run test\"",
-    "test": "cross-env NODE_ENV=test mocha tests/**/*.test.js",
+    "dev": "env-cmd -f ./env/.env.development concurrently \"npm run start\" \"npm run test\"",
+    "prod": "env-cmd -f ./env/.env.production concurrently \"npm run start\"",
+    "test": "env-cmd -f ./env/.env.test.local mocha tests/**/*.test.js",
     "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],

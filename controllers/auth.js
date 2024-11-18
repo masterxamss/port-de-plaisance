@@ -94,7 +94,6 @@ exports.postLogin = async (req, res) => {
       // Set the session to mark the user as logged in
       req.session.isLoggedIn = true;
       req.session.user = userObject;
-      console.log(req.session.user);
 
       // Save the session and redirect to the dashboard
       req.session.save((err) => {
@@ -131,6 +130,7 @@ exports.postLogout = (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
+      return res.status(500).send("Error destroying session");
     }
 
     // Clear the JWT token cookie from the client's browser

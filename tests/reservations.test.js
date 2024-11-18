@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { expect } = require('chai');
 const Reservation = require('../models/reservations');
-require('dotenv').config({ path: './env/.env.test.local' });
+//require('dotenv').config({ path: './env/.env.test.local' });
 
 /**
  * Test suite for the Reservation model.

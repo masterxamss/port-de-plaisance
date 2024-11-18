@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { expect } = require('chai');
 const Catway = require('../models/catway');
 
-require('dotenv').config({ path: './env/.env.test.local' });
+//require('dotenv').config({ path: './env/.env.test.local' });
 
 /**
  * Test suite for the Catway model.
