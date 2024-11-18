@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: config/database.js</title>
+    <title>JSDoc: Source: config/importData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: config/database.js</h1>
+    <h1 class="page-title">Source: config/importData.js</h1>
 
     
 
@@ -27,52 +27,51 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @module config/database
- * @description Module for connecting to MongoDB using Mongoose.
- * @see {@link https://mongoosejs.com/docs/connections.html}
- * @requires mongoose
- * @requires dotenv
- */
-
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-
-// Load environment variables from the .env file
-require('dotenv').config({ path: './env/.env' });
-dotenv.config();
-
-/**
- * @description This function establishes a connection to MongoDB using Mongoose. 
- * It reads the MongoDB URI from environment variables and attempts to connect to the database.
- * If the connection is successful, it logs a success message to the console.
- * If the connection fails, it logs an error message with the details of the failure.
- * 
- * This function should be called at the start of the application to ensure that your application 
- * can communicate with the MongoDB database.
- * 
+ * @module config/importData
+ * @requires models/user
+ * @requires models/reservations
+ * @description Import catways and reservations data from JSON files.
+ *
+ * This function imports the catways and reservations data from the JSON files
+ * specified by the `catwaysPath` and `reservationsPath` constants, respectively.
+ * If the data already exists in the database, it will not be overwritten.
+ *
  * @async
- * @function connectDB
- * @returns {Promise&lt;void>} - A promise that resolves when the connection is successfully established.
- * 
- * @throws {Error} - If the connection to MongoDB fails, an error is thrown and logged to the console.
- * 
- * @example
- * // Usage example
- * const connectDB = require('./connectDB');
- * connectDB();
+ * @returns {Promise&lt;void>} - A promise that resolves when the data has been
+ *   successfully imported.
  */
-const connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-      console.log('Connected to MongoDB successfully');
-    })
-    .catch((error) => {
-      console.error('Error connecting to MongoDB:', error);
-    });
-};
 
-module.exports = connectDB;
-</code></pre>
+const fs = require('fs');
+
+const Reservations = require('../models/reservations');
+const Catways = require('../models/catway');
+
+const catwaysPath = './data/catways.json';
+const reservationsPath = './data/reservations.json';
+
+module.exports = async () => {
+  try {
+    const reservationsCount = await Reservations.countDocuments();
+    if (reservationsCount === 0) {
+      const reservationsData = JSON.parse(fs.readFileSync(reservationsPath, 'utf-8'));
+      await Reservations.insertMany(reservationsData);
+      console.log('Reservations data imported successfully');
+    } else {
+      console.log('Reservations data already exists');
+    }
+
+    const catwaysCount = await Catways.countDocuments();
+    if (catwaysCount === 0) {
+      const catwaysData = JSON.parse(fs.readFileSync(catwaysPath, 'utf-8'));
+      await Catways.insertMany(catwaysData);
+      console.log('Catways data imported successfully');
+    } else {
+      console.log('Catways data already exists');
+    }
+  } catch (error) {
+    console.error('Error importing data:', error);
+  }
+};</code></pre>
         </article>
     </section>
 
