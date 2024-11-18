@@ -1,9 +1,10 @@
 /**
- * @file Main entry point for the "Port de la plaisance Russell" application.
+ * @global
+ * @name App
+ * @description Main entry point for the "Port de la plaisance Russell" application.
  * This file sets up the middleware, routes, and connects to the database.
  * It also configures the view engine and starts the Express server.
  * 
- * @module app
  * 
  * @requires express
  * @requires cookie-parser
@@ -20,11 +21,6 @@
  * @requires homeRoutes
  * @requires errorController
  * 
- * @global
- * @constant {number} DEFAULT_PORT
- * Port where the application will run.
- * If `process.env.PORT` is not set, it defaults to 10000.
- * 
  * @example
  * // To run the app locally
  * node app.js
@@ -34,6 +30,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/database');
+const importData = require('./config/importData');
 const session = require('./middlewares/sessionConfig');
 const csrfProtection = require('./middlewares/csrfProtection');
 const authUser = require('./middlewares/authUser');
@@ -53,6 +50,7 @@ const errorController = require('./controllers/error');
 const app = express();                    // Create an Express application
 
 connectDB();                              // Connects to the database
+importData();                             // Imports data
 
 /**
  * Sets the view engine and views directory for the application.
@@ -87,9 +85,9 @@ app.use(errorController.get404);          // Handles 404 page
 module.exports = app;
 
 /**
- * @global
  * @constant {number} DEFAULT_PORT
- * Starts the server on the specified port.
+ * Port where the application will run.
+ * If `process.env.PORT` is not set, it defaults to 10000.
  */
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

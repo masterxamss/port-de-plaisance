@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: config/database.js</title>
+    <title>JSDoc: Module: config/importData</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,64 +17,168 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: config/database.js</h1>
+    <h1 class="page-title">Module: config/importData</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @module config/database
- * @description Module for connecting to MongoDB using Mongoose.
- * @see {@link https://mongoosejs.com/docs/connections.html}
- * @requires mongoose
- * @requires dotenv
- */
+        
+            
+        
+    
+</header>
 
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Import catways and reservations data from JSON files.</p>
+<p>This function imports the catways and reservations data from the JSON files
+specified by the <code>catwaysPath</code> and <code>reservationsPath</code> constants, respectively.
+If the data already exists in the database, it will not be overwritten.</p></div>
+        
 
-// Load environment variables from the .env file
-require('dotenv').config({ path: './env/.env' });
-dotenv.config();
+        
+            
 
-/**
- * @description This function establishes a connection to MongoDB using Mongoose. 
- * It reads the MongoDB URI from environment variables and attempts to connect to the database.
- * If the connection is successful, it logs a success message to the console.
- * If the connection fails, it logs an error message with the details of the failure.
- * 
- * This function should be called at the start of the application to ensure that your application 
- * can communicate with the MongoDB database.
- * 
- * @async
- * @function connectDB
- * @returns {Promise&lt;void>} - A promise that resolves when the connection is successfully established.
- * 
- * @throws {Error} - If the connection to MongoDB fails, an error is thrown and logged to the console.
- * 
- * @example
- * // Usage example
- * const connectDB = require('./connectDB');
- * connectDB();
- */
-const connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-      console.log('Connected to MongoDB successfully');
-    })
-    .catch((error) => {
-      console.error('Error connecting to MongoDB:', error);
-    });
-};
 
-module.exports = connectDB;
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="config_importData.js.html">config/importData.js</a>, <a href="config_importData.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>A promise that resolves when the data has been
+successfully imported.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li><a href="module-models_user.html">module:models/user</a></li>
+        
+            <li><a href="module-models_reservations.html">module:models/reservations</a></li>
+        </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
