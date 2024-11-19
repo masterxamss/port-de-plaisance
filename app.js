@@ -36,6 +36,7 @@ const csrfProtection = require('./middlewares/csrfProtection');
 const authUser = require('./middlewares/authUser');
 const locals = require('./middlewares/setLocals');
 const basicMiddlewares = require('./middlewares/basicMiddlewares');
+const validateInput = require('./middlewares/validateInput');
 require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 
 // Import route handlers
@@ -71,6 +72,7 @@ app.use(csrfProtection);                  // Adds CSRF protection
 app.use(require('connect-flash')());      // Enables flash messages
 app.use(authUser);                        // Authenticates the user
 app.use(locals);                          // Sets local variables
+app.use(validateInput);
 
 /**
  * Mounts route handlers.

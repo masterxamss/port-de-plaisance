@@ -108,27 +108,6 @@
       </div>
     </footer>
   </section>
-  <% if (success && success.length > 0) { %>
-    <div id="flash-message" class="flash-message flash-message-success">
-      <div class="flash-message-header">
-        <h3>Success</h3>
-        <span></span>
-      </div>
-      <div class="flash-message-body">
-        <p><%= success[0] %></p>
-      </div>
-    </div>
-  <% } %>
-  <% if (error && error.length > 0) { %>
-    <div id="flash-message" class="flash-message flash-message-error">
-      <div class="flash-message-header">
-        <h3>Error</h3>
-        <span></span>
-      </div>
-      <div class="flash-message-body">
-        <p><%= error[0] %></p>
-      </div>
-    </div>
-  <% } %>
+  <%- include('../includes/error-message.ejs') %>
 </main>
 <%- include('../includes/end.ejs') %>

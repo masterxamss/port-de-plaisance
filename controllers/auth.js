@@ -21,11 +21,13 @@ const User = require("../models/user");
  */
 exports.getLogin = (req, res) => {
   const error = req.flash("error");
+  const invalidChar = req.flash("invalidChar");
   res.render("auth/login", {
     pageTitle: "Connexion",
     path: "/login",
     error: error,
-    success: req.flash("success")
+    success: req.flash("success"),
+    invalidChar: invalidChar
   });
 };
 
@@ -48,12 +50,12 @@ exports.getLogin = (req, res) => {
  * app.post('/login', postLogin);
  */
 exports.postLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { emailLogin, passwordLogin } = req.body;
   const SECRET_KEY = process.env.JWT_SECRET;
 
   try {
     // Attempt to find the user by email in the database
-    const user = await User.findOne({ email: email }, "-__v -createdAt -updatedAt");
+    const user = await User.findOne({ email: emailLogin }, "-__v -createdAt -updatedAt");
 
     // If no user is found, show an error message and redirect back to login page
     if (!user) {                                                                                    
@@ -62,7 +64,7 @@ exports.postLogin = async (req, res) => {
     }
 
     // Compare the entered password with the stored password hash using bcrypt
-    bcrypt.compare(password, user.password, (err, response) => {                                    
+    bcrypt.compare(passwordLogin, user.password, (err, response) => {                                    
       if (err) {
         console.error(err);
         req.flash("error", "Something went wrong. Please try again.");

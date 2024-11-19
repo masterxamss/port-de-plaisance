@@ -113,8 +113,14 @@ Feel free to explore these features by interacting with the live API.
    MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details. Ensure you use a separate database (e.g., <dbName>_tests) to avoid interfering with production data.
   ```
 
-5. Start the development server:
-   **npm start**
+6. Start the development server:
+   **npm run dev**
+  ```
+   Note: When running the development server with this script, test data is automatically seeded into the database, including a default user with the following credentials:
+
+    Email: john.doe@mail.com
+    Password: Admin
+  ``` 
 
 7. Access the application locally at http://localhost:3000.
 

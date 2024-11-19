@@ -33,7 +33,7 @@ exports.getAllReservations = async (req, res) => {
       pageTitle: "Reservations",
       moment: moment,
       error: error,
-      success: success
+      success: success,
     });
   } catch (error) {
     console.error(error);
@@ -77,7 +77,7 @@ exports.getReservationsByCatway = async (req, res) => {
       moment: moment,
       catwayNumber: id,
       error: error,
-      success: success
+      success: success,
     });
   } catch (error) {
     console.error(error);

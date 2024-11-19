@@ -30,7 +30,8 @@ exports.getUsers = async (req, res) => {
       path: "/users",
       moment: moment,
       error: req.flash("error"),
-      success: req.flash("success")
+      success: req.flash("success"),
+      invalidChar: req.flash("invalidChar")
     });
   } catch (error) {
     console.log(error);
@@ -63,6 +64,7 @@ exports.getUsers = async (req, res) => {
 exports.getAddUser = async (req, res) => {
   const error = req.flash("error");
   const success = req.flash("success");
+  const invalidChar = req.flash("invalidChar")
   const users = await User.find();
 
   try {
@@ -73,7 +75,8 @@ exports.getAddUser = async (req, res) => {
       error: error,
       editMode: false,
       moment: moment,
-      success: success
+      success: success,
+      invalidChar: invalidChar
     });
   } catch (error) {
     console.log(error);
@@ -97,6 +100,12 @@ exports.createUser = async (req, res) => {
   const { name, email, password, passwordConfirm } = req.body;
 
   try {
+
+    if (!name || !email || !password || !passwordConfirm) {
+      req.flash("error", "All fields are required");
+      return res.redirect("/users/add-user");
+    }
+
     const userDoc = await User.findOne({ email: email });
     if (userDoc) {
       req.flash("error", "The data provided is invalid");
@@ -104,12 +113,7 @@ exports.createUser = async (req, res) => {
     }
 
     if (password !== passwordConfirm) {
-      req.flash("error", "Passwords are not identical");
-      return res.redirect("/users/add-user");
-    }
-
-    if (password.length < 8) {
-      req.flash("error", "The password must contain at least 8 characters");
+      req.flash("error", "Passwords are not identicals");
       return res.redirect("/users/add-user");
     }
 
@@ -149,6 +153,7 @@ exports.getEditUser = async (req, res) => {
   const editMode = req.query.edit;
   const error = req.flash("error");
   const success = req.flash("success");
+  const invalidChar = req.flash("invalidChar")
   const userId = req.params.id;
   const users = await User.find();
 
@@ -169,7 +174,8 @@ exports.getEditUser = async (req, res) => {
       users: users,
       moment: moment,
       error: error,
-      success: success
+      success: success,
+      invalidChar: invalidChar
     });
   } catch (error) {
     console.log(error);
