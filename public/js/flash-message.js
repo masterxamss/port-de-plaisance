@@ -5,4 +5,4 @@ setTimeout(() => {
     flashMessage.style.opacity = '0';
     setTimeout(() => flashMessage.remove(), 500); // Remove o elemento após a transição
   }
-}, 4000); // 4000 ms = 4 segundos
+}, 10000); // 10000 ms = 10 segundos

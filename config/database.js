@@ -7,11 +7,7 @@
  */
 
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 
-// Load environment variables from the .env file
-//require('dotenv').config({ path: './env/.env' });
-//dotenv.config();
 require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
 
 /**
@@ -35,7 +31,10 @@ require('dotenv').config({ path: `./env/.env.${process.env.NODE_ENV}` });
  * connectDB();
  */
 const connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URI)
+  await mongoose.connect(process.env.MONGO_URI, {
+    socketTimeoutMS: 30000, 
+    connectTimeoutMS: 30000, 
+  })
     .then(() => {
       console.log('Connected to MongoDB successfully');
     })

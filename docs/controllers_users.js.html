@@ -58,7 +58,8 @@ exports.getUsers = async (req, res) => {
       path: "/users",
       moment: moment,
       error: req.flash("error"),
-      success: req.flash("success")
+      success: req.flash("success"),
+      invalidChar: req.flash("invalidChar")
     });
   } catch (error) {
     console.log(error);
@@ -91,6 +92,7 @@ exports.getUsers = async (req, res) => {
 exports.getAddUser = async (req, res) => {
   const error = req.flash("error");
   const success = req.flash("success");
+  const invalidChar = req.flash("invalidChar")
   const users = await User.find();
 
   try {
@@ -101,7 +103,8 @@ exports.getAddUser = async (req, res) => {
       error: error,
       editMode: false,
       moment: moment,
-      success: success
+      success: success,
+      invalidChar: invalidChar
     });
   } catch (error) {
     console.log(error);
@@ -125,6 +128,12 @@ exports.createUser = async (req, res) => {
   const { name, email, password, passwordConfirm } = req.body;
 
   try {
+
+    if (!name || !email || !password || !passwordConfirm) {
+      req.flash("error", "All fields are required");
+      return res.redirect("/users/add-user");
+    }
+
     const userDoc = await User.findOne({ email: email });
     if (userDoc) {
       req.flash("error", "The data provided is invalid");
@@ -132,12 +141,7 @@ exports.createUser = async (req, res) => {
     }
 
     if (password !== passwordConfirm) {
-      req.flash("error", "Passwords are not identical");
-      return res.redirect("/users/add-user");
-    }
-
-    if (password.length &lt; 8) {
-      req.flash("error", "The password must contain at least 8 characters");
+      req.flash("error", "Passwords are not identicals");
       return res.redirect("/users/add-user");
     }
 
@@ -177,6 +181,7 @@ exports.getEditUser = async (req, res) => {
   const editMode = req.query.edit;
   const error = req.flash("error");
   const success = req.flash("success");
+  const invalidChar = req.flash("invalidChar")
   const userId = req.params.id;
   const users = await User.find();
 
@@ -197,7 +202,8 @@ exports.getEditUser = async (req, res) => {
       users: users,
       moment: moment,
       error: error,
-      success: success
+      success: success,
+      invalidChar: invalidChar
     });
   } catch (error) {
     console.log(error);
@@ -299,13 +305,13 @@ exports.deleteUser = async (req, res) => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-config_importData.html">config/importData</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-config_importData.html">config/importData</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-middlewares_validateInputs.html">middlewares/validateInputs</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Nov 18 2024 23:47:55 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 19 2024 23:12:31 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

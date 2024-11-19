@@ -48,7 +48,7 @@ exports.getCatways = async (req, res) => {
       path: "/catways",
       error: error,
       success: success,
-      moment: moment
+      moment: moment,
     });
   } catch (error) {
     console.log(error);
@@ -100,7 +100,6 @@ exports.getOneCatway = async (req, res) => {
       req.flash("error", "This Catway doesn't exist");
       return res.redirect("/catways");
     }
-
     // Render the detail page for the Catway, passing the necessary data
     res.status(200).render("catways/catway-detail", {
       pageTitle: "Detail du Catway",
@@ -109,7 +108,7 @@ exports.getOneCatway = async (req, res) => {
       moment: moment,
       path: "/catways",
       error: req.flash("error"),
-      success: req.flash("success")
+      success: req.flash("success"),
     });
   } catch (error) {
     console.log(error);
@@ -138,7 +137,7 @@ exports.getOneCatway = async (req, res) => {
  */
 exports.getAddCatway = async (req, res) => {
   const error = req.flash("error");                     
-  const success = req.flash("success");                 
+  const success = req.flash("success");            
   const catways = await Catway.find();                  
   const reservations = await Reservations.find();       
   const nextCatway = catways.length + 1;                
@@ -149,11 +148,11 @@ exports.getAddCatway = async (req, res) => {
       pageTitle: "Adding a Catway",                     
       path: "/catways",                                 
       error: error,                                     
-      success: success,                                 
+      success: success,                              
       editMode: false,                                  
       nextCatway: nextCatway,                           
       catways: catways,                                 
-      reservations: reservations,                       
+      reservations: reservations,                   
       moment: moment                                    
     });
   } catch (error) {
@@ -183,10 +182,10 @@ exports.getAddCatway = async (req, res) => {
  */
 exports.createCatway = async (req, res) => {
   // Retrieve the Catway details from the request body
-  const { catway_number, type, catway_state } = req.body;                     
+  const { catway_number, type, catwayState } = req.body;                     
 
-  // Check if all required fields are filled in, if not, show an error and redirect
-  if (!catway_number || !type || !catway_state) {
+  //Check if all required fields are filled in, if not, show an error and redirect
+  if (!catway_number || !type || !catwayState) {
     req.flash("error", "Please fill in all fields");                          
     return res.redirect("/catways/get-add");                                  
   }
@@ -203,7 +202,7 @@ exports.createCatway = async (req, res) => {
     const catway = new Catway({
       catwayNumber: catway_number,
       type,
-      catwayState: catway_state
+      catwayState: catwayState.trim()
     });
     await catway.save();                                                      
 
@@ -246,7 +245,7 @@ exports.getEditCatway = async (req, res) => {
 
     // Get any flash messages
     const error = req.flash("error");                           
-    const success = req.flash("success");                       
+    const success = req.flash("success");                    
 
     // If the Catway does not exist, show an error message and redirect
     if (!catway) {
@@ -262,7 +261,7 @@ exports.getEditCatway = async (req, res) => {
       catway: catway,                                           
       error: error,                                             
       moment: moment,                                           
-      success: success,                                         
+      success: success,                                        
       catways: catways,                                         
       reservations: reservations                                
     });
@@ -291,11 +290,11 @@ exports.getEditCatway = async (req, res) => {
  */
 exports.replaceCatway = async (req, res) => {
   // Extract the Catway details from the request body
-  const { catway_number, type, catway_state } = req.body;                                     
+  const { catway_number, type, catwayState } = req.body;                                     
 
   try {
     // Check if all required fields are provided
-    if (!catway_number || !type.trim() || !catway_state.trim()) {
+    if (!catway_number || !type.trim() || !catwayState.trim()) {
       req.flash("error", "Please fill in all fields");
       return res.status(400).redirect("/catways/get-edit/" + req.params.id + "?edit=true");   
     }
@@ -314,7 +313,7 @@ exports.replaceCatway = async (req, res) => {
     const update = {
       catwayNumber: catway_number,
       type: type,
-      catwayState: catway_state
+      catwayState: catwayState
     };
 
     // Update the Catway document

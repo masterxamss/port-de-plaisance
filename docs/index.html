@@ -152,21 +152,24 @@ cd port-de-plaisance
 
  MONGO_URI: Replace &lt;username>, &lt;password>, &lt;cluster>, &lt;dbName>, and &lt;appName> with the appropriate details. Ensure you use a separate database (e.g., &lt;dbName>_tests) to avoid interfering with production data.
 </code></pre>
-<ol start="5">
-<li>
-<p>Start the development server:
-<strong>npm start</strong></p>
-</li>
-<li>
-<p>Access the application locally at http://localhost:3000.</p>
-</li>
+<ol start="6">
+<li>Start the development server:
+<strong>npm run dev</strong></li>
+</ol>
+<pre class="prettyprint source"><code> Note: When running the development server with this script, test data is automatically seeded into the database, including a default user with the following credentials:
+
+  Email: john.doe@mail.com
+  Password: Admin
+</code></pre>
+<ol start="7">
+<li>Access the application locally at http://localhost:3000.</li>
 </ol>
 <h2>Usage</h2>
 <h3>Available Scripts</h3>
 <p>Development mode: Runs the application using nodemon for automatic restarts during development and show result tests in the console.</p>
 <pre class="prettyprint source"><code>  npm run dev
 </code></pre>
-<p>Production mode: Runs the application using nodemon for automatic restarts during.</p>
+<p>Production mode: Runs the application using nodemon for automatic restarts.</p>
 <pre class="prettyprint source"><code>  npm run prod
 </code></pre>
 <p>Run tests</p>
@@ -216,13 +219,13 @@ cd port-de-plaisance
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-config_importData.html">config/importData</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-config_database.html">config/database</a></li><li><a href="module-config_importData.html">config/importData</a></li><li><a href="module-controllers_auth.html">controllers/auth</a></li><li><a href="module-controllers_catway.html">controllers/catway</a></li><li><a href="module-controllers_dashboard.html">controllers/dashboard</a></li><li><a href="module-controllers_error.html">controllers/error</a></li><li><a href="module-controllers_reservations.html">controllers/reservations</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-middlewares_authUser.html">middlewares/authUser</a></li><li><a href="module-middlewares_basicMiddlewares.html">middlewares/basicMiddlewares</a></li><li><a href="module-middlewares_csrfProtection.html">middlewares/csrfProtection</a></li><li><a href="module-middlewares_is-auth.html">middlewares/is-auth</a></li><li><a href="module-middlewares_sessionConfig.html">middlewares/sessionConfig</a></li><li><a href="module-middlewares_setLocals.html">middlewares/setLocals</a></li><li><a href="module-middlewares_validateInputs.html">middlewares/validateInputs</a></li><li><a href="module-models_catway.html">models/catway</a></li><li><a href="module-models_reservations.html">models/reservations</a></li><li><a href="module-models_user.html">models/user</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Catways.html">Catways</a></li><li><a href="tutorial-Reservations.html">Reservations</a></li><li><a href="tutorial-Users.html">Users</a></li><li><a href="tutorial-login.html">Login</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#DEFAULT_PORT">DEFAULT_PORT</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Nov 18 2024 23:47:55 GMT+0100 (Hora padrão da Europa Central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Nov 19 2024 23:12:31 GMT+0100 (Hora padrão da Europa Central)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -24,7 +24,7 @@ const Users = require("../models/user");
 const catwaysPath = "./data/catways.json";
 const reservationsPath = "./data/reservations.json";
 
-module.exports = async () => {
+const importData = async () => {
   try {
     console.log("NODE_ENV:", process.env.NODE_ENV);
     if (process.env.NODE_ENV === "development") {
@@ -66,3 +66,5 @@ module.exports = async () => {
     console.error("Error importing data:", error);
   }
 };
+
+module.exports = importData;
