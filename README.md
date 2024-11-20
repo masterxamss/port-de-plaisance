@@ -129,6 +129,11 @@ Feel free to explore these features by interacting with the live API.
 
 ### Available Scripts
 
+Start server:
+```
+  npm start
+```
+
 Development mode: Runs the application using nodemon for automatic restarts during development and show result tests in the console.
 ```
   npm run dev
