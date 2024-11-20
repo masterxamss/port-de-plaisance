@@ -84,7 +84,7 @@ Feel free to explore these features by interacting with the live API.
    NODE_ENV=development
    APP_NAME=port-de-plaisance
    API_URL=127.0.0.1  
-   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>_dev?retryWrites=true&w=majority&appName=<appName>
+   MONGO_URI=your_production_database_connection_string
    JWT_SECRET=your_secret_key
    PORT=3000
 
@@ -112,9 +112,9 @@ Feel free to explore these features by interacting with the live API.
   ```
 
 6. Start the development server:
-   **npm run dev**
+   **npm start**
   ```
-   Note: When running the development server with this script, test data is automatically seeded into the database, including a default user with the following credentials:
+   Note: When running the development server, test data is automatically seeded into the database, including a default user with the following credentials:
 
     Email: john.doe@mail.com
     Password: Admin
