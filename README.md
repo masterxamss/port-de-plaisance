@@ -88,7 +88,7 @@ Feel free to explore these features by interacting with the live API.
    JWT_SECRET=your_secret_key
    PORT=3000
 
-   MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details. Ensure you use a separate database (e.g., <dbName>_dev) to avoid interfering with production data.  
+   Ensure you use a separate database (e.g., <dbName>_dev) to avoid interfering with production data. 
   ```
 
 4. In the same folder `env` in the root directory and inside the file `.env.production`, configure the following variables:
@@ -96,11 +96,9 @@ Feel free to explore these features by interacting with the live API.
    NODE_ENV=production
    APP_NAME=port-de-plaisance
    API_URL=127.0.0.1  
-   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>_prod?retryWrites=true&w=majority&appName=<appName>
+   MONGO_URI=your_production_database_connection_string
    JWT_SECRET=your_secret_key
-   PORT=3000
-
-   MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details.  
+   PORT=3000 
   ```
 
 5. Create a file named `.env.test.local` in the `env` folder and configure the following variables:
@@ -108,9 +106,9 @@ Feel free to explore these features by interacting with the live API.
    NODE_ENV=test
    APP_NAME=port-de-plaisance
    API_URL=127.0.0.1 
-   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.tefdl.mongodb.net/<dbName>_tests?retryWrites=true&w=majority&appName=<appName>
+   MONGO_URI=your_production_database_connection_string
 
-   MONGO_URI: Replace <username>, <password>, <cluster>, <dbName>, and <appName> with the appropriate details. Ensure you use a separate database (e.g., <dbName>_tests) to avoid interfering with production data.
+   Ensure you use a separate database (e.g., <dbName>_tests) to avoid interfering with production data.
   ```
 
 6. Start the development server:
